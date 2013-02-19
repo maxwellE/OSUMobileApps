@@ -4,5 +4,7 @@
     <string name="app_name">MobileIndia</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    <string name="login_text_box">Login</string>
+    <string name="browse_button_text">Browse</string>
 
 </resources>
