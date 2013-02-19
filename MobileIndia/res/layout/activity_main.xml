@@ -17,7 +17,9 @@
             android:id="@+id/login"
             android:layout_width="202dp"
             android:layout_height="wrap_content"
-            android:text="@string/login_text_box" />
+            android:text="@string/login_text_box"
+            android:onClick="loginButton"
+             />
     </LinearLayout>
 
     <Button
@@ -28,6 +30,8 @@
         android:layout_alignRight="@+id/linearLayout1"
         android:layout_below="@+id/linearLayout1"
         android:layout_marginTop="20dp"
-        android:text="@string/browse_button_text" />
+        android:text="@string/browse_button_text"
+        android:onClick="browseButton" 
+        />
 
 </RelativeLayout>

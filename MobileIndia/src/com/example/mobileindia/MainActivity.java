@@ -2,7 +2,9 @@ package com.example.mobileindia;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 
 public class MainActivity extends Activity {
 
@@ -18,5 +20,10 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
-
+	 public void loginButton(View view) {
+	     Log.i("MOBILE INDIA LOGIN CLICK", "MOBILEINDIA");
+	 }
+	 public void browseButton(View view) {
+	     Log.i("MOBILE INDIA BROWSE CLICK", "MOBILEINDIA");
+	 }
 }
