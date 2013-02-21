@@ -6,5 +6,6 @@
     <string name="menu_settings">Settings</string>
     <string name="login_text_box">Login</string>
     <string name="browse_button_text">Browse</string>
+    <string name="title_activity_city_select">CitySelect</string>
 
 </resources>
