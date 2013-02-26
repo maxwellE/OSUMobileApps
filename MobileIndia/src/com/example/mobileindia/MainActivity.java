@@ -1,5 +1,8 @@
 package com.example.mobileindia;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+import com.parse.PushService;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +14,10 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+	    Parse.initialize(this, "dlhBQJUyZsOPxkFdp8Uf7MWXY7IpRWXXZipSyO8f", "sa5JGVnNQXEoWawJPxw5TKk1xLmFirXcGMr5P5JK"); 
+	    ParseObject testObject = new ParseObject("TestObject");
+	    testObject.put("foo", "bar");
+	    testObject.saveInBackground();
 		setContentView(R.layout.activity_main);
 	}
 
@@ -26,5 +33,9 @@ public class MainActivity extends Activity {
 	 public void browseButton(View view) {
 		 Intent i = new Intent(this, CategoriesActivity.class);
 		 startActivity(i); 
+	 }
+	 public void createUserActivity(View view){
+		 Intent i = new Intent(this, LoginActivity.class);
+		 startActivity(i);
 	 }
 }

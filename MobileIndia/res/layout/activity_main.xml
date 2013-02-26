@@ -34,4 +34,15 @@
         android:onClick="browseButton" 
         />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_alignRight="@+id/button1"
+        android:layout_centerVertical="true"
+        android:text="@string/create_user_button_text"
+        android:onClick="createUserActivity" 
+        />
+
 </RelativeLayout>
