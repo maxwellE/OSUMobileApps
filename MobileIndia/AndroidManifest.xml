@@ -23,8 +23,13 @@
             </intent-filter>
         </activity>
         <activity
+
             android:name="com.example.mobileindia.CitySelect"
             android:label="@string/title_activity_city_select" >
+
+            android:name="com.example.mobileindia.CategoriesActivity"
+            android:label="@string/title_activity_categories" >
+
         </activity>
     </application>
 

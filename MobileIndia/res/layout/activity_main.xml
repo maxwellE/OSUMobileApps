@@ -31,7 +31,17 @@
         android:layout_below="@+id/linearLayout1"
         android:layout_marginTop="20dp"
         android:text="@string/browse_button_text"
-        android:onClick="browseButton" 
+        android:onClick="cityBrowse" 
         />
+
+    <!-- <Button
+        android:id="@+id/cityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_alignRight="@+id/button1"
+        android:layout_centerVertical="true"
+        android:text="@string/City_button" 
+        android:onClick="cityBrowse"/> -->
 
 </RelativeLayout>

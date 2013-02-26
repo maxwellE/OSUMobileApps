@@ -2,7 +2,7 @@ package com.example.mobileindia;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 
@@ -21,9 +21,15 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	 public void loginButton(View view) {
-	     Log.i("MOBILE INDIA LOGIN CLICK", "MOBILEINDIA");
+	     
 	 }
 	 public void browseButton(View view) {
-	     Log.i("MOBILE INDIA BROWSE CLICK", "MOBILEINDIA");
+		 Intent i = new Intent(this, CategoriesActivity.class);
+		 startActivity(i); 
+	 }
+	 
+	 public void cityBrowse(View view){
+		 Intent i = new Intent(this, CitySelect.class);
+		 startActivity(i);
 	 }
 }

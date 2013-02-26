@@ -6,6 +6,18 @@
     <string name="menu_settings">Settings</string>
     <string name="login_text_box">Login</string>
     <string name="browse_button_text">Browse</string>
+
     <string name="title_activity_city_select">CitySelect</string>
+
+    <string name="title_activity_categories">Categories</string>
+    <string name="housing_button_description">Housing</string>
+    <string name="job_button_description">Jobs</string>
+    <string name="forsale_button_description">For Sale</string>
+    <string name="shopping_button_description">Shopping</string>
+    <string name="travel_button_description">Travel</string>
+    <string name="misc_button_description">Miscellaneous</string>
+    <string name="CityHeader">City</string>
+    <string name="City_button">City</string>
+
 
 </resources>
