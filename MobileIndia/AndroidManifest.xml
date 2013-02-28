@@ -26,18 +26,23 @@
             </intent-filter>
         </activity>
         <activity
-
             android:name="com.example.mobileindia.CitySelect"
             android:label="@string/title_activity_city_select" >
-
             android:name="com.example.mobileindia.CategoriesActivity"
             android:label="@string/title_activity_categories" >
-
         </activity>
         <activity
             android:name="com.example.mobileindia.LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
+        <activity
+            android:name="com.example.mobileindia.CreateUserActivity"
+            android:label="@string/title_activity_create_user"
+            android:parentActivityName="com.example.mobileindia.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.mobileindia.MainActivity" />
         </activity>
     </application>
 

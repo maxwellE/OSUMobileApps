@@ -1,8 +1,7 @@
 package com.example.mobileindia;
 
-import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.Menu;
 import android.widget.AbsListView.LayoutParams;
 import android.widget.Button;

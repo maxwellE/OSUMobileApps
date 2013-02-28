@@ -1,12 +1,6 @@
 package com.example.mobileindia;
 
 import com.parse.Parse;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
-import com.parse.PushService;
-import com.parse.SignUpCallback;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -44,8 +38,7 @@ public class MainActivity extends Activity {
 	 }
 
 	 public void createUserActivity(View view){
-		 Intent i = new Intent(this, LoginActivity.class);
-
+		 Intent i = new Intent(this, CreateUserActivity.class);
 		 startActivity(i);
 	 }
 }
