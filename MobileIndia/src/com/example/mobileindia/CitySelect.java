@@ -27,7 +27,7 @@ public class CitySelect extends Activity {
 	public void addCityButtons(){
 		int i = 0;
 		String[] cityName = new String[10];
-//		cityName = getCity();
+		cityName = getCity();
 		
 		cityName[0] = "BriansBurgh";
 		cityName[1] = "Home Town";
@@ -39,9 +39,9 @@ public class CitySelect extends Activity {
 		cityName[7] = "Cray Town";
 		cityName[8] = "Test";
 		cityName[9] = "ADKFailsVille";
-		Log.d("test", "bwb NOT in while citybutton add");
+		
 		while(i < 10){
-				Log.d("test", "bwb in while citybutton add");
+				
 				Button cityButton = new Button(this);
 				cityButton.setText(cityName[i]);
 
