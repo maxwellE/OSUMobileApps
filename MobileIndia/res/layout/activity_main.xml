@@ -31,7 +31,7 @@
         android:layout_below="@+id/linearLayout1"
         android:layout_marginTop="20dp"
         android:text="@string/browse_button_text"
-        android:onClick="browseButton" 
+        android:onClick="cityBrowse" 
         />
 
     <Button

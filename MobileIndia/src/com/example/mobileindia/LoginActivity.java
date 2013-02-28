@@ -237,6 +237,10 @@ public class LoginActivity extends Activity {
 
 			if (success) {
 				finish();
+				Context context = getApplicationContext();
+				int duration = Toast.LENGTH_LONG;
+				Toast toast = Toast.makeText(context, "Successfully Logged in!", duration);
+				toast.show();
 			} else {
 				switch (LoginActivity.loginErrorCode) {
 				case ParseException.OBJECT_NOT_FOUND:
