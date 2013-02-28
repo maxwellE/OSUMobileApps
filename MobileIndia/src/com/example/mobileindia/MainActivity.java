@@ -1,5 +1,12 @@
 package com.example.mobileindia;
 
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+import com.parse.PushService;
+import com.parse.SignUpCallback;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +18,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+	    Parse.initialize(this, "dlhBQJUyZsOPxkFdp8Uf7MWXY7IpRWXXZipSyO8f", "sa5JGVnNQXEoWawJPxw5TKk1xLmFirXcGMr5P5JK");
 		setContentView(R.layout.activity_main);
 	}
 
@@ -20,16 +28,24 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
-	 public void loginButton(View view) {
-	     
+	 public void loginUserActivity(View view) {
+		 Intent i = new Intent(this, LoginActivity.class);
+		 startActivity(i);
 	 }
 	 public void browseButton(View view) {
 		 Intent i = new Intent(this, CategoriesActivity.class);
 		 startActivity(i); 
 	 }
+
 	 
 	 public void cityBrowse(View view){
 		 Intent i = new Intent(this, CitySelect.class);
+		 startActivity(i);
+	 }
+
+	 public void createUserActivity(View view){
+		 Intent i = new Intent(this, LoginActivity.class);
+
 		 startActivity(i);
 	 }
 }

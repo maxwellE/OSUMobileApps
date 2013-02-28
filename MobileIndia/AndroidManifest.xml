@@ -8,6 +8,9 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -30,6 +33,11 @@
             android:name="com.example.mobileindia.CategoriesActivity"
             android:label="@string/title_activity_categories" >
 
+        </activity>
+        <activity
+            android:name="com.example.mobileindia.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
     </application>
 
