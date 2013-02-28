@@ -36,8 +36,16 @@ public class MainActivity extends Activity {
 		 Intent i = new Intent(this, CategoriesActivity.class);
 		 startActivity(i); 
 	 }
+
+	 
+	 public void cityBrowse(View view){
+		 Intent i = new Intent(this, CitySelect.class);
+		 startActivity(i);
+	 }
+
 	 public void createUserActivity(View view){
 		 Intent i = new Intent(this, LoginActivity.class);
+
 		 startActivity(i);
 	 }
 }
