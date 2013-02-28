@@ -210,22 +210,22 @@ public class LoginActivity extends Activity {
 			} catch (ParseException e) {
 				Log.d("PARSE","Signup FAILED");
 				Log.d("PARSE", "ERROR CODE: " + String.valueOf(e.getCode()));
-				CharSequence toastText = null;
+				
 				LoginActivity.loginErrorCode = e.getCode();
-				switch (e.getCode()) {
-				case ParseException.OBJECT_NOT_FOUND:
-					toastText = "No account found with those credentials, do you have an account?";
-					break;
-				default:
-					toastText = "Something went wrong, please try to log in again.";
-					break;
-				}
-				Context context = getApplicationContext();
-				int duration = Toast.LENGTH_LONG;
-				Toast toast = Toast.makeText(context, toastText, duration);
-				toast.show();
-				mUsernameView.setError("No account with this username found");
-				mUsernameView.requestFocus();
+//				switch (e.getCode()) {
+//				case ParseException.OBJECT_NOT_FOUND:
+//					toastText = "No account found with those credentials, do you have an account?";
+//					break;
+//				default:
+//					toastText = "Something went wrong, please try to log in again.";
+//					break;
+//				}
+//				Context context = getApplicationContext();
+//				int duration = Toast.LENGTH_LONG;
+//				Toast toast = Toast.makeText(context, toastText, duration);
+//				toast.show();
+//				mUsernameView.setError("No account with this username found");
+//				mUsernameView.requestFocus();
 			}
 			return LoginActivity.loginSuccess;
 		}
