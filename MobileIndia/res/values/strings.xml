@@ -13,6 +13,6 @@
     <string name="shopping_button_description">Shopping</string>
     <string name="travel_button_description">Travel</string>
     <string name="misc_button_description">Miscellaneous</string>
-    <string name="create_user_button_text">Create User</string>
+    <string name="create_user_button_text">Sign Up</string>
 
 </resources>

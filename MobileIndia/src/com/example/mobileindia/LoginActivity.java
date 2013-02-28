@@ -1,25 +1,35 @@
 package com.example.mobileindia;
 
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
 public class LoginActivity extends Activity {
+	private static boolean loginSuccess = false;
+	private static int loginErrorCode;
 	/**
 	 * A dummy authentication store containing known user names and passwords.
 	 * TODO: remove after connecting to a real authentication system.
@@ -194,25 +204,30 @@ public class LoginActivity extends Activity {
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			// TODO: attempt authentication against a network service.
-
 			try {
-				// Simulate network access.
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				return false;
-			}
-
-			for (String credential : DUMMY_CREDENTIALS) {
-				String[] pieces = credential.split(":");
-				if (pieces[0].equals(mUsername)) {
-					// Account exists, return true if the password matches.
-					return pieces[1].equals(mPassword);
+				ParseUser.logIn(mUsername, mPassword);
+				LoginActivity.loginSuccess = true;
+			} catch (ParseException e) {
+				Log.d("PARSE","Signup FAILED");
+				Log.d("PARSE", "ERROR CODE: " + String.valueOf(e.getCode()));
+				CharSequence toastText = null;
+				LoginActivity.loginErrorCode = e.getCode();
+				switch (e.getCode()) {
+				case ParseException.OBJECT_NOT_FOUND:
+					toastText = "No account found with those credentials, do you have an account?";
+					break;
+				default:
+					toastText = "Something went wrong, please try to log in again.";
+					break;
 				}
+				Context context = getApplicationContext();
+				int duration = Toast.LENGTH_LONG;
+				Toast toast = Toast.makeText(context, toastText, duration);
+				toast.show();
+				mUsernameView.setError("No account with this username found");
+				mUsernameView.requestFocus();
 			}
-
-			// TODO: register the new account here.
-			return true;
+			return LoginActivity.loginSuccess;
 		}
 
 		@Override
@@ -223,9 +238,18 @@ public class LoginActivity extends Activity {
 			if (success) {
 				finish();
 			} else {
-				mPasswordView
-						.setError(getString(R.string.error_incorrect_password));
-				mPasswordView.requestFocus();
+				switch (LoginActivity.loginErrorCode) {
+				case ParseException.OBJECT_NOT_FOUND:
+					mUsernameView.setError("No account with this username found");
+					mUsernameView.requestFocus();
+					break;
+				case ParseException.VALIDATION_ERROR:
+					mPasswordView.setError("Invalid password.");
+					mPasswordView.requestFocus();
+				default:
+					break;
+				}
+
 			}
 		}
 
