@@ -224,8 +224,6 @@ public class LoginActivity extends Activity {
 				int duration = Toast.LENGTH_LONG;
 				Toast toast = Toast.makeText(context, toastText, duration);
 				toast.show();
-				mUsernameView.setError("No account with this username found");
-				mUsernameView.requestFocus();
 			}
 			return LoginActivity.loginSuccess;
 		}
@@ -234,7 +232,6 @@ public class LoginActivity extends Activity {
 		protected void onPostExecute(final Boolean success) {
 			mAuthTask = null;
 			showProgress(false);
-
 			if (success) {
 				finish();
 				Context context = getApplicationContext();
@@ -253,7 +250,6 @@ public class LoginActivity extends Activity {
 				default:
 					break;
 				}
-
 			}
 		}
 
