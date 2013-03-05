@@ -18,5 +18,9 @@
     <string name="City_button">City</string>
     <string name="create_user_button_text">Sign Up</string>
     <string name="title_activity_create_user">CreateUserActivity</string>
-
+    <string name="SignUpButtonSubmitText">Sign Up</string>
+    <string name="PhoneFieldHint">Phone Number</string>
+    <string name="PasswordConfirmHint">Retype Password</string>
+    <string name="PasswordHint">Password</string>
+    <string name="EmailHint">Email</string>
 </resources>
