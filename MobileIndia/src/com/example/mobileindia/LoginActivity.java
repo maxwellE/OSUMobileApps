@@ -1,9 +1,5 @@
 package com.example.mobileindia;
 
-import com.parse.LogInCallback;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -14,7 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -23,6 +18,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseException;
+import com.parse.ParseUser;
+
 /**
  * Activity which displays a login screen to the user, offering registration as
  * well.
@@ -30,13 +28,7 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 	private static boolean loginSuccess = false;
 	private static int loginErrorCode;
-	/**
-	 * A dummy authentication store containing known user names and passwords.
-	 * TODO: remove after connecting to a real authentication system.
-	 */
-	private static final String[] DUMMY_CREDENTIALS = new String[] {
-			"test_user:hello", "bar@example.com:world" };
-
+    // CREDENTIALS: username: 'test_user', password: 'my pass'
 	/**
 	 * The default email to populate the email field with.
 	 */
@@ -210,6 +202,7 @@ public class LoginActivity extends Activity {
 			} catch (ParseException e) {
 				Log.d("PARSE","Signup FAILED");
 				Log.d("PARSE", "ERROR CODE: " + String.valueOf(e.getCode()));
+
 				
 				LoginActivity.loginErrorCode = e.getCode();
 //				switch (e.getCode()) {
@@ -226,6 +219,9 @@ public class LoginActivity extends Activity {
 //				toast.show();
 //				mUsernameView.setError("No account with this username found");
 //				mUsernameView.requestFocus();
+
+				LoginActivity.loginErrorCode = e.getCode();
+
 			}
 			return LoginActivity.loginSuccess;
 		}
@@ -234,13 +230,16 @@ public class LoginActivity extends Activity {
 		protected void onPostExecute(final Boolean success) {
 			mAuthTask = null;
 			showProgress(false);
-
 			if (success) {
 				finish();
+				Context context = getApplicationContext();
+				int duration = Toast.LENGTH_LONG;
+				Toast toast = Toast.makeText(context, "Successfully logged in!", duration);
+				toast.show();
 			} else {
 				switch (LoginActivity.loginErrorCode) {
 				case ParseException.OBJECT_NOT_FOUND:
-					mUsernameView.setError("No account with this username found");
+					mUsernameView.setError("No account with this username and password found");
 					mUsernameView.requestFocus();
 					break;
 				case ParseException.VALIDATION_ERROR:
@@ -249,7 +248,6 @@ public class LoginActivity extends Activity {
 				default:
 					break;
 				}
-
 			}
 		}
 

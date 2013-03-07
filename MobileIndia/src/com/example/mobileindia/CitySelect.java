@@ -2,8 +2,10 @@ package com.example.mobileindia;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.AbsListView.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -41,9 +43,16 @@ public class CitySelect extends Activity {
 		cityName[9] = "ADKFailsVille";
 		
 		while(i < 10){
-				
+				final String NameOfCity = cityName[i];
 				Button cityButton = new Button(this);
-				cityButton.setText(cityName[i]);
+				cityButton.setText(NameOfCity);
+				
+//				cityButton.setOnClickListener(new Button.OnClickListener() {
+//					
+//				    public void onClick(View v) {
+//				    	CatAct(v, NameOfCity);
+//				    }
+//				});
 
 				LinearLayout ll = (LinearLayout)findViewById(R.id.CityList);
 				LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -53,6 +62,12 @@ public class CitySelect extends Activity {
 		}
 		
 	}
+	
+	public void CatAct(View view, String cityName){
+		 Intent i = new Intent(this, CategoriesActivity.class);
+		 //i.putExtra("CityName", cityName);
+		 startActivity(i);
+	 }
 	
 	public String[] getCity(){
 		String[] city;
