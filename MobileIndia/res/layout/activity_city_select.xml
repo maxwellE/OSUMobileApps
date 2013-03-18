@@ -15,7 +15,7 @@
         android:text="@string/CityHeader"
         android:textSize="26sp" />
 
-    <LinearLayout
+    <!-- <LinearLayout
         android:id="@+id/CityList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,7 +24,27 @@
         android:layout_marginTop="35dp"
         android:orientation="vertical" >
 
+    </LinearLayout> -->
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="18dp"
+        android:layout_toRightOf="@+id/CityList" >
+
+        <LinearLayout
+        android:id="@+id/CityList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="35dp"
+        android:orientation="vertical" >
 
     </LinearLayout>
+        
+    </ScrollView>
 
 </RelativeLayout>
