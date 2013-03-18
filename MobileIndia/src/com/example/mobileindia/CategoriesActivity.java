@@ -2,7 +2,10 @@ package com.example.mobileindia;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.view.Menu;
+import android.widget.Toast;
+
 
 public class CategoriesActivity extends Activity {
 
@@ -10,6 +13,20 @@ public class CategoriesActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_categories);
+		
+//		Bundle extras = getIntent().getExtras();
+//		if (extras != null) {
+//		    String value = extras.getString("CityName");
+//		    
+//		    Context context = getApplicationContext();
+//		    CharSequence text = "You Clicked" + value;
+//		    int duration = Toast.LENGTH_SHORT;
+//
+//		    Toast toast = Toast.makeText(context, text, duration);
+//		    toast.show();
+//		    
+//		}
+		
 	}
 
 	@Override
