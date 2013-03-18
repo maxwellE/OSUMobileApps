@@ -1,17 +1,46 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context=".CreateUserActivity" >
-
-    <EditText
-        android:id="@+id/username"
+    
+    <LinearLayout
+        android:id="@+id/create_user_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:ems="10"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/create_user_status_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/create_user_progress_signing_in"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+    
+	<ScrollView
+        android:id="@+id/create_user_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            style="@style/createUserFormContainer"
+            android:orientation="vertical" >
+    <EditText
+        android:id="@+id/username"
+              android:layout_width="match_parent"
+                android:layout_height="wrap_content"
         android:inputType="text|textImeMultiLine"
         android:singleLine="true" 
         android:hint="@string/UsernameHint">
@@ -20,60 +49,42 @@
 
     <EditText
         android:id="@+id/password_create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/username"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:ems="10"
+              android:layout_width="match_parent"
+                android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="@string/PasswordHint"/>
 
     <EditText
         android:id="@+id/password_confirm_create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/password_create"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:ems="10"
+              android:layout_width="match_parent"
+                android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="@string/PasswordConfirmHint" 
         />
 
     <EditText
         android:id="@+id/phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/password_confirm_create"
-        android:layout_centerVertical="true"
-        android:ems="10"
+              android:layout_width="match_parent"
+                android:layout_height="wrap_content"
         android:inputType="phone"
         android:hint="@string/PhoneFieldHint" 
         />
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/phone"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:ems="10"
+              android:layout_width="match_parent"
+                android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:hint="@string/EmailHint"
          />
 
     <Button
         android:id="@+id/create_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/email"
-        android:layout_alignRight="@+id/email"
-        android:layout_below="@+id/email"
-        android:layout_marginTop="40dp"
+              android:layout_width="match_parent"
+                android:layout_height="wrap_content"
         android:text="@string/SignUpButtonSubmitText"
         android:onClick="attemptCreateUser" 
          />
-
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

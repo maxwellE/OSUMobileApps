@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -236,6 +237,8 @@ public class LoginActivity extends Activity {
 				int duration = Toast.LENGTH_LONG;
 				Toast toast = Toast.makeText(context, "Successfully logged in!", duration);
 				toast.show();
+				//Intent i = new Intent(context, CategoriesActivity.class);
+			//	startActivity(i); 
 			} else {
 				switch (LoginActivity.loginErrorCode) {
 				case ParseException.OBJECT_NOT_FOUND:
