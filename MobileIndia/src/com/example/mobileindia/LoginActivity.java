@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -29,7 +30,8 @@ import com.parse.ParseUser;
 public class LoginActivity extends Activity {
 	private static boolean loginSuccess = false;
 	private static int loginErrorCode;
-    // CREDENTIALS: username: 'test_user', password: 'my pass'
+	// USERNAME IS PHONE NUMBER
+    // CREDENTIALS: username: '1111111', password: 'my pass'
 	/**
 	 * The default email to populate the email field with.
 	 */
@@ -133,6 +135,10 @@ public class LoginActivity extends Activity {
 			mUsernameView.setError(getString(R.string.error_field_required));
 			focusView = mUsernameView;
 			cancel = true;
+		}else if(!PhoneNumberUtils.isGlobalPhoneNumber(mUsername)){
+			mUsernameView.setError("Not a valid phone number!");
+			focusView = mUsernameView;
+			cancel = true;
 		}
 
 		if (cancel) {
@@ -219,11 +225,11 @@ public class LoginActivity extends Activity {
 				Toast toast = Toast.makeText(context, "Successfully logged in!", duration);
 				toast.show();
 				//Intent i = new Intent(context, CategoriesActivity.class);
-			//	startActivity(i); 
+		        //startActivity(i); 
 			} else {
 				switch (LoginActivity.loginErrorCode) {
 				case ParseException.OBJECT_NOT_FOUND:
-					mUsernameView.setError("No account with this username and password found");
+					mUsernameView.setError("No account with this phone number and password found");
 					mUsernameView.requestFocus();
 					break;
 				case ParseException.VALIDATION_ERROR:
