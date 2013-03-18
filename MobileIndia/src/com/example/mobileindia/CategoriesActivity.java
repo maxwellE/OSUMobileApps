@@ -6,6 +6,7 @@ import android.content.Context;
 import android.view.Menu;
 import android.widget.Toast;
 
+
 public class CategoriesActivity extends Activity {
 
 	@Override
@@ -13,18 +14,18 @@ public class CategoriesActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_categories);
 		
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-		    String value = extras.getString("CityName");
-		    
-		    Context context = getApplicationContext();
-		    CharSequence text = "You Clicked" + value;
-		    int duration = Toast.LENGTH_SHORT;
-
-		    Toast toast = Toast.makeText(context, text, duration);
-		    toast.show();
-		    
-		}
+//		Bundle extras = getIntent().getExtras();
+//		if (extras != null) {
+//		    String value = extras.getString("CityName");
+//		    
+//		    Context context = getApplicationContext();
+//		    CharSequence text = "You Clicked" + value;
+//		    int duration = Toast.LENGTH_SHORT;
+//
+//		    Toast toast = Toast.makeText(context, text, duration);
+//		    toast.show();
+//		    
+//		}
 		
 	}
 

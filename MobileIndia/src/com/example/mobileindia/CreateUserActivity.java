@@ -40,7 +40,6 @@ public class CreateUserActivity extends Activity {
 		 mPhoneView = (EditText) findViewById(R.id.phone);
 		 boolean cancel = false;
 		 View focusView = null;
-		 View focusView2 = null;
 		 if (TextUtils.isEmpty(mUsernameView.getText().toString())){
 				mUsernameView.setError(getString(R.string.error_field_required));
 				focusView = mUsernameView;
