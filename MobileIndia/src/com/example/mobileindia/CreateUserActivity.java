@@ -83,6 +83,11 @@ public class CreateUserActivity extends Activity {
 		 mEmailView = (EditText) findViewById(R.id.email);
 		 boolean cancel = false;
 		 View focusView = null;
+
+		 if (TextUtils.isEmpty(mUsernameView.getText().toString())){
+				mUsernameView.setError(getString(R.string.error_field_required));
+				focusView = mUsernameView;
+
 		 if (TextUtils.isEmpty(mEmailView.getText().toString())) {
 				mEmailView.setError("An email is required");
 				focusView = mEmailView;
@@ -90,6 +95,7 @@ public class CreateUserActivity extends Activity {
 		 }else if(!isEmailValid(mEmailView.getText().toString())){
 			 	mEmailView.setError("A valid email is required");
 				focusView = mEmailView;
+
 				cancel = true;
 		 }
 		 if(TextUtils.isEmpty(mPhoneView.getText().toString())){
@@ -132,6 +138,7 @@ public class CreateUserActivity extends Activity {
 			    mAuthTask = new UserCreateTask();
 			    mAuthTask.execute((Void) null);
 			}
+		 }
 	 }
 
 	/**
