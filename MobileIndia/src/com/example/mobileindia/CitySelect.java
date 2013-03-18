@@ -52,9 +52,9 @@ public class CitySelect extends Activity {
 	}
 	
 	public void CatAct(View view, String cityName){
-		 Intent i = new Intent(this, Categories2.class);
-		 i.putExtra("CityName", cityName);
-		 startActivity(i);
+		// Intent i = new Intent(this, Categories2.class);
+		// i.putExtra("CityName", cityName);
+		// startActivity(i);
 	 }
 	
 	public String[] getCity(){

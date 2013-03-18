@@ -37,15 +37,17 @@
         <LinearLayout
             style="@style/createUserFormContainer"
             android:orientation="vertical" >
-    <EditText
-        android:id="@+id/username"
-              android:layout_width="match_parent"
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-        android:inputType="text|textImeMultiLine"
-        android:singleLine="true" 
-        android:hint="@string/UsernameHint">
-        <requestFocus />
-    </EditText>
+                android:ems="10"
+                android:hint="@string/PhoneFieldHint"
+                android:inputType="phone" >
+
+                <requestFocus />
+            </EditText>
 
     <EditText
         android:id="@+id/password_create"
@@ -61,22 +63,6 @@
         android:inputType="textPassword"
         android:hint="@string/PasswordConfirmHint" 
         />
-
-    <EditText
-        android:id="@+id/phone"
-              android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:hint="@string/PhoneFieldHint" 
-        />
-
-    <EditText
-        android:id="@+id/email"
-              android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="@string/EmailHint"
-         />
 
     <Button
         android:id="@+id/create_user"
