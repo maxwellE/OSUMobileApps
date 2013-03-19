@@ -15,6 +15,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -34,8 +35,8 @@ public class CreateUserActivity extends Activity {
 	private View mCreateUserStatusView;
 	private TextView mCreateUserStatusMessageView;
 	private UserCreateTask mAuthTask = null;
-	private static boolean loginSuccess;
-	public static int loginErrorCode;
+	private static boolean createUserSuccess;
+	public static int createUserErrorCode;
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -163,14 +164,17 @@ public class CreateUserActivity extends Activity {
 			@Override
 			protected Boolean doInBackground(Void... params) {
 				try {
-					ParseUser.logIn("test_user", "");
-					CreateUserActivity.loginSuccess = true;
+					ParseUser user = new ParseUser();
+					user.setUsername(mPhoneView.getText().toString());
+					user.setPassword(mPasswordView.getText().toString());
+					user.signUp();
+					CreateUserActivity.createUserSuccess = true;
 				} catch (ParseException e) {
 					Log.d("PARSE","Signup FAILED");
 					Log.d("PARSE", "ERROR CODE: " + String.valueOf(e.getCode()));
-					CreateUserActivity.loginErrorCode = e.getCode();
+					CreateUserActivity.createUserErrorCode = e.getCode();
 				}
-				return CreateUserActivity.loginSuccess;
+				return CreateUserActivity.createUserSuccess;
 			}
 
 			@Override
@@ -180,16 +184,17 @@ public class CreateUserActivity extends Activity {
 				if (success) {
 					finish();
 					Context context = getApplicationContext();
+					Intent i = new Intent(context, Categories2.class);
+			        startActivity(i); 
 					int duration = Toast.LENGTH_LONG;
-					Toast toast = Toast.makeText(context, "Successfully logged in!", duration);
+					Toast toast = Toast.makeText(context, "Successfully signed up!", duration);
 					toast.show();
 				} else {
-					switch (CreateUserActivity.loginErrorCode) {
-					case ParseException.OBJECT_NOT_FOUND:
+					switch (CreateUserActivity.createUserErrorCode) {
+					case ParseException.USERNAME_TAKEN:
+						mPhoneView.setError("An account with this phone number already exists!");
+						mPhoneView.requestFocus();
 						break;
-					case ParseException.VALIDATION_ERROR:
-						mPasswordView.setError("Invalid password.");
-						mPasswordView.requestFocus();
 					default:
 						break;
 					}

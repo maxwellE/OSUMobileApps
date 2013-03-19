@@ -217,11 +217,11 @@ public class LoginActivity extends Activity {
 			if (success) {
 				finish();
 				Context context = getApplicationContext();
+				Intent i = new Intent(context, Categories2.class);
+		        startActivity(i); 
 				int duration = Toast.LENGTH_LONG;
 				Toast toast = Toast.makeText(context, "Successfully logged in!", duration);
 				toast.show();
-				Intent i = new Intent(context, Categories2.class);
-		        startActivity(i); 
 			} else {
 				switch (LoginActivity.loginErrorCode) {
 				case ParseException.VALIDATION_ERROR:
