@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -29,7 +30,8 @@ import com.parse.ParseUser;
 public class LoginActivity extends Activity {
 	private static boolean loginSuccess = false;
 	private static int loginErrorCode;
-    // CREDENTIALS: username: 'test_user', password: 'my pass'
+	// USERNAME IS PHONE NUMBER
+    // CREDENTIALS: username: '1111111', password: 'my pass'
 	/**
 	 * The default email to populate the email field with.
 	 */
@@ -122,15 +124,15 @@ public class LoginActivity extends Activity {
 			mPasswordView.setError(getString(R.string.error_field_required));
 			focusView = mPasswordView;
 			cancel = true;
-		} else if (mPassword.length() < 4) {
-			mPasswordView.setError(getString(R.string.error_invalid_password));
-			focusView = mPasswordView;
-			cancel = true;
 		}
 
 		// Check for a valid email address.
 		if (TextUtils.isEmpty(mUsername)) {
 			mUsernameView.setError(getString(R.string.error_field_required));
+			focusView = mUsernameView;
+			cancel = true;
+		}else if(!PhoneNumberUtils.isGlobalPhoneNumber(mUsername)){
+			mUsernameView.setError("Not a valid phone number!");
 			focusView = mUsernameView;
 			cancel = true;
 		}
@@ -203,26 +205,7 @@ public class LoginActivity extends Activity {
 			} catch (ParseException e) {
 				Log.d("PARSE","Signup FAILED");
 				Log.d("PARSE", "ERROR CODE: " + String.valueOf(e.getCode()));
-
-				
 				LoginActivity.loginErrorCode = e.getCode();
-//				switch (e.getCode()) {
-//				case ParseException.OBJECT_NOT_FOUND:
-//					toastText = "No account found with those credentials, do you have an account?";
-//					break;
-//				default:
-//					toastText = "Something went wrong, please try to log in again.";
-//					break;
-//				}
-//				Context context = getApplicationContext();
-//				int duration = Toast.LENGTH_LONG;
-//				Toast toast = Toast.makeText(context, toastText, duration);
-//				toast.show();
-//				mUsernameView.setError("No account with this username found");
-//				mUsernameView.requestFocus();
-
-				LoginActivity.loginErrorCode = e.getCode();
-
 			}
 			return LoginActivity.loginSuccess;
 		}
@@ -237,17 +220,18 @@ public class LoginActivity extends Activity {
 				int duration = Toast.LENGTH_LONG;
 				Toast toast = Toast.makeText(context, "Successfully logged in!", duration);
 				toast.show();
-				//Intent i = new Intent(context, CategoriesActivity.class);
-			//	startActivity(i); 
+				Intent i = new Intent(context, Categories2.class);
+		        startActivity(i); 
 			} else {
 				switch (LoginActivity.loginErrorCode) {
-				case ParseException.OBJECT_NOT_FOUND:
-					mUsernameView.setError("No account with this username and password found");
-					mUsernameView.requestFocus();
-					break;
 				case ParseException.VALIDATION_ERROR:
 					mPasswordView.setError("Invalid password.");
 					mPasswordView.requestFocus();
+					break;
+				case ParseException.OBJECT_NOT_FOUND:
+					mUsernameView.setError("No account with this phone number and password found");
+					mUsernameView.requestFocus();
+					break;
 				default:
 					break;
 				}

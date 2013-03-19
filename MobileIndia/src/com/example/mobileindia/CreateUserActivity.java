@@ -27,11 +27,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class CreateUserActivity extends Activity {
-    private EditText mUsernameView;
     private EditText mPasswordView;
     private EditText mPasswordConfirmView;
     private EditText mPhoneView;
-    private EditText mEmailView;
 	private View mCreateUserFormView;
 	private View mCreateUserStatusView;
 	private TextView mCreateUserStatusMessageView;
@@ -44,7 +42,6 @@ public class CreateUserActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_user);
 		// Show the Up button in the action bar.
-		getActionBar().setDisplayHomeAsUpEnabled(true);
 		mCreateUserFormView = findViewById(R.id.create_user_form);
 		mCreateUserStatusView = findViewById(R.id.create_user_status);
 		mCreateUserStatusMessageView = (TextView) findViewById(R.id.create_user_status_message);
@@ -76,28 +73,11 @@ public class CreateUserActivity extends Activity {
 		return true;
 	}
 	 public void attemptCreateUser(View view){
-		 mUsernameView = (EditText) findViewById(R.id.username);
 		 mPasswordView = (EditText) findViewById(R.id.password_create);
 		 mPasswordConfirmView = (EditText) findViewById(R.id.password_confirm_create);
 		 mPhoneView = (EditText) findViewById(R.id.phone);
-		 mEmailView = (EditText) findViewById(R.id.email);
 		 boolean cancel = false;
 		 View focusView = null;
-
-		 if (TextUtils.isEmpty(mUsernameView.getText().toString())){
-				mUsernameView.setError(getString(R.string.error_field_required));
-				focusView = mUsernameView;
-
-		 if (TextUtils.isEmpty(mEmailView.getText().toString())) {
-				mEmailView.setError("An email is required");
-				focusView = mEmailView;
-				cancel = true;
-		 }else if(!isEmailValid(mEmailView.getText().toString())){
-			 	mEmailView.setError("A valid email is required");
-				focusView = mEmailView;
-
-				cancel = true;
-		 }
 		 if(TextUtils.isEmpty(mPhoneView.getText().toString())){
 				mPhoneView.setError("A phone number is required");
 				focusView = mPhoneView;
@@ -121,11 +101,6 @@ public class CreateUserActivity extends Activity {
 				focusView = mPasswordView;
 				cancel = true;
 		 }
-		 if (TextUtils.isEmpty(mUsernameView.getText().toString())){
-				mUsernameView.setError(getString(R.string.error_field_required));
-				focusView = mUsernameView;
-				cancel = true;
-		 }
 	     if (cancel) {
 			// There was an error; don't attempt login and focus the first
 			// form field with an error.
@@ -139,7 +114,6 @@ public class CreateUserActivity extends Activity {
 			    mAuthTask.execute((Void) null);
 			}
 		 }
-	 }
 
 	/**
 		 * Shows the progress UI and hides the login form.
@@ -212,8 +186,6 @@ public class CreateUserActivity extends Activity {
 				} else {
 					switch (CreateUserActivity.loginErrorCode) {
 					case ParseException.OBJECT_NOT_FOUND:
-						mUsernameView.setError("No account with this username and password found");
-						mUsernameView.requestFocus();
 						break;
 					case ParseException.VALIDATION_ERROR:
 						mPasswordView.setError("Invalid password.");
