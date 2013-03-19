@@ -124,10 +124,6 @@ public class LoginActivity extends Activity {
 			mPasswordView.setError(getString(R.string.error_field_required));
 			focusView = mPasswordView;
 			cancel = true;
-		} else if (mPassword.length() < 4) {
-			mPasswordView.setError(getString(R.string.error_invalid_password));
-			focusView = mPasswordView;
-			cancel = true;
 		}
 
 		// Check for a valid email address.
@@ -228,13 +224,14 @@ public class LoginActivity extends Activity {
 		        startActivity(i); 
 			} else {
 				switch (LoginActivity.loginErrorCode) {
+				case ParseException.VALIDATION_ERROR:
+					mPasswordView.setError("Invalid password.");
+					mPasswordView.requestFocus();
+					break;
 				case ParseException.OBJECT_NOT_FOUND:
 					mUsernameView.setError("No account with this phone number and password found");
 					mUsernameView.requestFocus();
 					break;
-				case ParseException.VALIDATION_ERROR:
-					mPasswordView.setError("Invalid password.");
-					mPasswordView.requestFocus();
 				default:
 					break;
 				}
