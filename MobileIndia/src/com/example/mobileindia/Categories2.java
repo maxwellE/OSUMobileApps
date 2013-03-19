@@ -76,9 +76,9 @@ public class Categories2 extends Activity {
 	
 	public void gotoPost(View v, String passVal){
 		//TODO uncomment this
-//		Intent i = new Intent(this, ListViewDemo.class);
+         Intent i = new Intent(this, ListViewCategory.class);
 //		 i.putExtra("passVal", passVal);
-//		 startActivity(i);
+		 startActivity(i);
 		
 	}
 	

@@ -28,8 +28,6 @@
         <activity
             android:name="com.example.mobileindia.CitySelect"
             android:label="@string/title_activity_city_select" >
-            android:name="com.example.mobileindia.CategoriesActivity"
-            android:label="@string/title_activity_categories" >
         </activity>
         <activity
             android:name="com.example.mobileindia.LoginActivity"
@@ -47,6 +45,18 @@
         <activity
             android:name="com.example.mobileindia.Categories2"
             android:label="@string/title_activity_categories2" >
+            android:name="com.example.mobileindia.CategoriesActivity"
+            android:label="@string/title_activity_categories" >
+        </activity>
+        <activity
+            android:name="com.example.mobileindia.ListViewCategory"
+            android:label="@string/title_activity_list_view_category"
+            android:parentActivityName="com.example.mobileindia.Categories2" >
+        </activity>
+        <activity
+            android:name="com.example.mobileindia.Add_Post"
+            android:label="@string/title_activity_add__post"
+            android:parentActivityName="com.example.mobileindia.ListViewCategory" >
         </activity>
     </application>
 
