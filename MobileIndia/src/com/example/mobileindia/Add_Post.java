@@ -50,11 +50,11 @@ public class Add_Post extends Activity {
 	public void AddPost(View view){
 		ArrayList<String> temp = new ArrayList<String>();
 		String add = "";
-		add = ((EditText) findViewById(R.id.editText2)).getText().toString();
+		add = ((EditText) findViewById(R.id.post_title_add)).getText().toString();
         temp.add(add);
-        add = ((EditText) findViewById(R.id.editText3)).getText().toString();
+        add = ((EditText) findViewById(R.id.post_summary_add)).getText().toString();
         temp.add(add);
-        add = ((EditText) findViewById(R.id.editText1)).getText().toString();
+        add = ((EditText) findViewById(R.id.post_author_add)).getText().toString();
         temp.add(add);
         ListViewCategory.listItems.add(temp);
         NavUtils.navigateUpFromSameTask(this);
