@@ -7,11 +7,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import com.parse.ParseObject;
+
 
 public class Add_Post extends Activity {
 
@@ -48,21 +51,34 @@ public class Add_Post extends Activity {
 	
 	
 	public void AddPost(View view){
+		ParseObject post = new ParseObject("Post");
 		ArrayList<String> temp = new ArrayList<String>();
 		String add = "";
-		add = ((EditText) findViewById(R.id.editText2)).getText().toString();
-        temp.add(add);
-        add = ((EditText) findViewById(R.id.editText3)).getText().toString();
-        temp.add(add);
-        add = ((EditText) findViewById(R.id.editText1)).getText().toString();
-        temp.add(add);
-        ListViewCategory.listItems.add(temp);
-        NavUtils.navigateUpFromSameTask(this);
+		add = ((EditText) findViewById(R.id.post_title_add)).getText().toString();
+        //temp.add(add);
+        post.put("title", add);
+        add = ((EditText) findViewById(R.id.post_summary_add)).getText().toString();
+       // temp.add(add);
+        post.put("summary", add);
+        add = ((EditText) findViewById(R.id.post_author_add)).getText().toString();
+       // temp.add(add);
+        post.put("author",add);
+        add = ListViewCategory.CATEGORY;
+        //temp.add(add);
+        post.put("category",add);
+        post.saveInBackground();
+       // ListViewCategory.listItems.add(temp);
+       // NavUtils.navigateUpFromSameTask(this);
+        Intent back = new Intent(this,ListViewCategory.class);
+        startActivity(back);
        
 	}
 	
 	public void Cancel(View view){
-		NavUtils.navigateUpFromSameTask(this);
+		//NavUtils.navigateUpFromSameTask(this);
+		Intent back = new Intent(this,ListViewCategory.class);
+        startActivity(back);
+        //
 	}
 
 }
