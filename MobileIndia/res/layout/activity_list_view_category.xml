@@ -1,18 +1,23 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-    <Button
-        android:id="@+id/addBtn"
-        android:text="@string/add_new_item"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:onClick="addItems"/>
+    android:layout_height="fill_parent"
+    android:background="#2F4F4F"
+    android:orientation="vertical" >
+
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:drawSelectorOnTop="true"
-    />
+        android:layout_height="0dp"
+        android:layout_weight="1.00"
+        android:drawSelectorOnTop="true" >
+    </ListView>
+
+    <Button
+        android:id="@+id/addBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFA069"
+        android:onClick="addItems"
+        android:text="@string/add_new_item" />
+
 </LinearLayout>

@@ -3,6 +3,7 @@ package com.example.mobileindia;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,12 +56,10 @@ public class Item_Adapter extends ArrayAdapter<ArrayList<String>> {
 			// This is how you obtain a reference to the TextViews.
 			// These TextViews are created in the XML files we defined.
 
-			TextView title = (TextView) v.findViewById(R.id.textView2);
-			TextView summary = (TextView) v.findViewById(R.id.textView4);
-			TextView author = (TextView) v.findViewById(R.id.textView6);
-			TextView TITLE = (TextView) v.findViewById(R.id.textView1);
-			TextView AUTHOR = (TextView) v.findViewById(R.id.textView3);
-			TextView SUMMARY = (TextView) v.findViewById(R.id.textView5);
+			TextView title = (TextView) v.findViewById(R.id.post_title_list);
+			TextView summary = (TextView) v.findViewById(R.id.post_summary_list);
+			TextView author = (TextView) v.findViewById(R.id.post_author_list);
+			
 			// check to see if each individual textview is null.
 			// if not, assign some text!
 			if (title != null){
@@ -72,9 +71,15 @@ public class Item_Adapter extends ArrayAdapter<ArrayList<String>> {
 			if (author != null){
 				author.setText(i.get(2));
 			}
-			TITLE.setText("Title:");
-			SUMMARY.setText("Summary");
-			AUTHOR.setText("Author");
+
+			//color the post
+			int temp;
+			if(position % 2 == 0){
+				temp = Color.GRAY;
+			}else{
+				temp = Color.WHITE;
+			}
+			v.setBackgroundColor(temp);
 		}
 
 		// the view must be returned to our activity
