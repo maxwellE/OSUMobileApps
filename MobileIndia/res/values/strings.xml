@@ -23,11 +23,10 @@
     <string name="PasswordConfirmHint">Retype Password</string>
     <string name="PasswordHint">Password</string>
     <string name="EmailHint">Email</string>
-
     <string name="title_activity_categories2">Categories2</string>
     <string name="CategoriesHeader">Categories</string>
-
-
     <string name="create_user_progress_signing_in">Creating User and Signing in</string>
     <string name="UsernameHint">Username</string>
+    <string name="title_activity_locate_me">LocateMeActivity</string>
+
 </resources>

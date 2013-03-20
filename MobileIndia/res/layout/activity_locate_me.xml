@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LocateMeActivity" >
+
+    <com.google.android.maps.MapView
+        android:id="@+id/locateMe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:apiKey="0tvY84jFiACe8vc5qyfq2uaNkKfP5C3JFB5mkiw"
+        android:clickable="true" >
+    </com.google.android.maps.MapView>
+    
+    <TableLayout 
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="200dip"
+        android:stretchColumns="1">
+        <TableRow>
+            <Button
+                android:id="@+id/button_locate_me"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Locate Me"/>
+             <TextView
+                android:id="@+id/my_location"
+                android:layout_column="1"
+                android:text="Where am I ..."
+                android:layout_width="match_parent"
+                android:padding="3dip"/> 
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button_locate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Find"/>
+
+            <EditText
+                android:id="@+id/location"
+                android:layout_width="match_parent"
+                android:ems="10"
+                android:padding="3dip"
+                android:text="Enter address ..." >
+
+                <requestFocus />
+            </EditText>
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>	

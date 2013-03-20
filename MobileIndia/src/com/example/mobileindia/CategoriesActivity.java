@@ -2,9 +2,8 @@ package com.example.mobileindia;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
 import android.view.Menu;
-import android.widget.Toast;
+
 
 
 public class CategoriesActivity extends Activity {
