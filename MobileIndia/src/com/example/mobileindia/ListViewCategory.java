@@ -17,7 +17,6 @@ import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 
 public class ListViewCategory extends ListActivity {
     //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS

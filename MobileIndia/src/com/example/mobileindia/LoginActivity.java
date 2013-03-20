@@ -124,10 +124,6 @@ public class LoginActivity extends Activity {
 			mPasswordView.setError(getString(R.string.error_field_required));
 			focusView = mPasswordView;
 			cancel = true;
-		} else if (mPassword.length() < 4) {
-			mPasswordView.setError(getString(R.string.error_invalid_password));
-			focusView = mPasswordView;
-			cancel = true;
 		}
 
 		// Check for a valid email address.
@@ -221,20 +217,21 @@ public class LoginActivity extends Activity {
 			if (success) {
 				finish();
 				Context context = getApplicationContext();
+				Intent i = new Intent(context, Categories2.class);
+		        startActivity(i); 
 				int duration = Toast.LENGTH_LONG;
 				Toast toast = Toast.makeText(context, "Successfully logged in!", duration);
 				toast.show();
-				Intent i = new Intent(context, Categories2.class);
-		        startActivity(i); 
 			} else {
 				switch (LoginActivity.loginErrorCode) {
+				case ParseException.VALIDATION_ERROR:
+					mPasswordView.setError("Invalid password.");
+					mPasswordView.requestFocus();
+					break;
 				case ParseException.OBJECT_NOT_FOUND:
 					mUsernameView.setError("No account with this phone number and password found");
 					mUsernameView.requestFocus();
 					break;
-				case ParseException.VALIDATION_ERROR:
-					mPasswordView.setError("Invalid password.");
-					mPasswordView.requestFocus();
 				default:
 					break;
 				}
