@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
 import android.os.AsyncTask;
 import android.os.Build;
@@ -124,10 +125,6 @@ public class LoginActivity extends Activity {
 			mPasswordView.setError(getString(R.string.error_field_required));
 			focusView = mPasswordView;
 			cancel = true;
-		} else if (mPassword.length() < 4) {
-			mPasswordView.setError(getString(R.string.error_invalid_password));
-			focusView = mPasswordView;
-			cancel = true;
 		}
 
 		// Check for a valid email address.
@@ -209,26 +206,7 @@ public class LoginActivity extends Activity {
 			} catch (ParseException e) {
 				Log.d("PARSE","Signup FAILED");
 				Log.d("PARSE", "ERROR CODE: " + String.valueOf(e.getCode()));
-
-				
 				LoginActivity.loginErrorCode = e.getCode();
-//				switch (e.getCode()) {
-//				case ParseException.OBJECT_NOT_FOUND:
-//					toastText = "No account found with those credentials, do you have an account?";
-//					break;
-//				default:
-//					toastText = "Something went wrong, please try to log in again.";
-//					break;
-//				}
-//				Context context = getApplicationContext();
-//				int duration = Toast.LENGTH_LONG;
-//				Toast toast = Toast.makeText(context, toastText, duration);
-//				toast.show();
-//				mUsernameView.setError("No account with this username found");
-//				mUsernameView.requestFocus();
-
-				LoginActivity.loginErrorCode = e.getCode();
-
 			}
 			return LoginActivity.loginSuccess;
 		}
@@ -240,20 +218,21 @@ public class LoginActivity extends Activity {
 			if (success) {
 				finish();
 				Context context = getApplicationContext();
+				Intent i = new Intent(context, Categories2.class);
+		        startActivity(i); 
 				int duration = Toast.LENGTH_LONG;
 				Toast toast = Toast.makeText(context, "Successfully logged in!", duration);
 				toast.show();
-				//Intent i = new Intent(context, CategoriesActivity.class);
-		        //startActivity(i); 
 			} else {
 				switch (LoginActivity.loginErrorCode) {
+				case ParseException.VALIDATION_ERROR:
+					mPasswordView.setError("Invalid password.");
+					mPasswordView.requestFocus();
+					break;
 				case ParseException.OBJECT_NOT_FOUND:
 					mUsernameView.setError("No account with this phone number and password found");
 					mUsernameView.requestFocus();
 					break;
-				case ParseException.VALIDATION_ERROR:
-					mPasswordView.setError("Invalid password.");
-					mPasswordView.requestFocus();
 				default:
 					break;
 				}
