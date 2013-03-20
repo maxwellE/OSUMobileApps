@@ -3,19 +3,15 @@ package com.example.mobileindia;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.example.mobileindia.LoginActivity.UserLoginTask;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Bundle;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -26,6 +22,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 public class CreateUserActivity extends Activity {
     private EditText mPasswordView;
