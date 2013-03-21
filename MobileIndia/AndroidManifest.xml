@@ -45,8 +45,6 @@
         <activity
             android:name="com.example.mobileindia.Categories2"
             android:label="@string/title_activity_categories2" >
-            android:name="com.example.mobileindia.CategoriesActivity"
-            android:label="@string/title_activity_categories" >
         </activity>
         <activity
             android:name="com.example.mobileindia.ListViewCategory"

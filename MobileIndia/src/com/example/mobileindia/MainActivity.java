@@ -37,8 +37,5 @@ public class MainActivity extends Activity {
 		 startActivity(i);
 	 }
 	 
-	 public void gotoCategoriesActivity(View view){
-		 Intent i = new Intent(this, CategoriesActivity.class);
-		 startActivity(i);
-	 }
+	 
 }
