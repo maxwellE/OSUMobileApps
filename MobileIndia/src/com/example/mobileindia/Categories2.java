@@ -20,10 +20,7 @@ public class Categories2 extends Activity {
 		
 		setHeader();
 		
-		addCatButtons();
-		
-		
-		
+		addCatButtons();		
 	}
 
 	@Override
