@@ -10,12 +10,13 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-    private static boolean anonSuccess;
+    public static boolean anonSuccess;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,27 +36,26 @@ public class MainActivity extends Activity {
 	 }
 	 
 	 public void cityBrowse(View view){
-		 MainActivity.anonSuccess = false;
+		 final Context context = getApplicationContext();
+		 final int duration = Toast.LENGTH_LONG;
+		 final Intent i = new Intent(this, CitySelect.class);
 		 ParseAnonymousUtils.logIn(new LogInCallback() {
+			 
 			  @Override
 			  public void done(ParseUser user, ParseException e) {
+				  
 				  if (e == null){
-					  MainActivity.anonSuccess = true;
+						Toast toast = Toast.makeText(context, "Logged in as anonymous user", duration);
+						startActivity(i);
+						toast.show();
+				  }else{
+						Toast toast = Toast.makeText(context, "Could not log in anonymously", duration);
+						startActivity(i);
+						toast.show();
 				  }
+					  
 			  }
 		 });
-			Context context = getApplicationContext();
-			int duration = Toast.LENGTH_LONG;
-			Intent i = new Intent(this, CitySelect.class);
-			if (MainActivity.anonSuccess) {
-				Toast toast = Toast.makeText(context, "Successfully logged in as anonymous user!", duration);
-				startActivity(i);
-				toast.show();
-			} else {
-				Toast toast = Toast.makeText(context, "Could not log in anonymously!", duration);
-				startActivity(i);
-				toast.show();
-			}
 	 }
 
 	 public void createUserActivity(View view){
