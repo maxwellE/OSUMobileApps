@@ -1,16 +1,15 @@
 package com.example.mobileindia;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AbsListView.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AbsListView.LayoutParams;
 
 public class Categories2 extends Activity {
 
@@ -76,6 +75,7 @@ public class Categories2 extends Activity {
 	
 	public void gotoPost(View v, String passVal){
 		//TODO uncomment this
+		 ListViewCategory.CATEGORY = passVal;
          Intent i = new Intent(this, ListViewCategory.class);
 //		 i.putExtra("passVal", passVal);
 		 startActivity(i);
