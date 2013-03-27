@@ -17,6 +17,8 @@ import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import com.parse.ParseObject;
 
 public class ListViewCategory extends ListActivity {
     //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
@@ -122,6 +124,17 @@ public class ListViewCategory extends ListActivity {
 	public void onStop(){
 		super.onStop();
 		Log.v("LIST", "Stopped LIST APPCLASS");
+	}
+	
+	public void addPost(){
+		
+		ParseObject Post = new ParseObject("Post");
+		Post.put("author", "Jeff");
+		Post.put("description", "This is some really nice junk I am selling!!!");
+		Post.put("title", "Junk Sale");
+		Post.saveInBackground();
+		
+		
 	}
 
 
