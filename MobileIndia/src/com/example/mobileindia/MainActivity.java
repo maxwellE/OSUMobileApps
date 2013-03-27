@@ -23,15 +23,28 @@ public class MainActivity extends Activity {
 	    Parse.initialize(this, "dlhBQJUyZsOPxkFdp8Uf7MWXY7IpRWXXZipSyO8f", "sa5JGVnNQXEoWawJPxw5TKk1xLmFirXcGMr5P5JK");
 		setContentView(R.layout.activity_main);
 	}
+	protected void onResume (){
+		super.onResume();
+		rebuildMainMenuAndLabel();	
+	}
 	protected void onPostCreate (Bundle savedInstanceState){
 		super.onPostCreate(savedInstanceState);
+		rebuildMainMenuAndLabel();
+	}
+	private void rebuildMainMenuAndLabel() {
 		TextView t = (TextView) findViewById(R.id.mainActivityUserLabel);
 		if (ParseUser.getCurrentUser() == null) {
 			t.setText("Not logged in");
 		}else if (ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())){ 
-			t.setText("Logged in anonymously");
+	    	t.setText("Logged in anonymously");
+	    	findViewById(R.id.btnSignUp).setVisibility(8);
+	    	TextView btnLogin = (TextView) findViewById(R.id.btnLogin);
+	    	btnLogin.setText("Logout");
 	    }else {
-			t.setText("Logged in as: " + ParseUser.getCurrentUser().getUsername());
+	    	t.setText("Logged in as: " + ParseUser.getCurrentUser().getUsername());
+	    	findViewById(R.id.btnSignUp).setVisibility(8);
+	    	TextView btnLogin = (TextView) findViewById(R.id.btnLogin);
+	    	btnLogin.setText("Logout");
 		}
 	}
 	@Override
@@ -41,31 +54,43 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	 public void loginUserActivity(View view) {
-		 Intent i = new Intent(this, LoginActivity.class);
-		 startActivity(i);
+		 if(ParseUser.getCurrentUser() == null){
+			 Intent i = new Intent(this, LoginActivity.class);
+			 startActivity(i);
+		 }else{
+			 ParseUser.logOut();
+			 findViewById(R.id.btnSignUp).setVisibility(0);
+			 TextView btnLogin = (TextView) findViewById(R.id.btnLogin);
+			 TextView userLabel = (TextView) findViewById(R.id.mainActivityUserLabel);
+			 userLabel.setText("Not logged in");
+		     btnLogin.setText("Login");
+		 }
 	 }
 	 
 	 public void cityBrowse(View view){
 		 final Context context = getApplicationContext();
 		 final int duration = Toast.LENGTH_LONG;
 		 final Intent i = new Intent(this, CitySelect.class);
-		 ParseAnonymousUtils.logIn(new LogInCallback() {
-			 
-			  @Override
-			  public void done(ParseUser user, ParseException e) {
-				  
-				  if (e == null){
-						Toast toast = Toast.makeText(context, "Logged in as anonymous user", duration);
-						startActivity(i);
-						toast.show();
-				  }else{
-						Toast toast = Toast.makeText(context, "Could not log in anonymously", duration);
-						startActivity(i);
-						toast.show();
-				  }
-					  
-			  }
-		 });
+		 if(ParseUser.getCurrentUser() == null){
+			 ParseAnonymousUtils.logIn(new LogInCallback() {
+				 @Override
+				 public void done(ParseUser user, ParseException e) {
+
+					 if (e == null){
+						 Toast toast = Toast.makeText(context, "Logged in as anonymous user", duration);
+						 startActivity(i);
+						 toast.show();
+					 }else{
+						 Toast toast = Toast.makeText(context, "Could not log in anonymously", duration);
+						 startActivity(i);
+						 toast.show();
+					 }
+
+				 }
+			 });
+		 }else{
+			 startActivity(i);
+		 }
 	 }
 
 	 public void createUserActivity(View view){
