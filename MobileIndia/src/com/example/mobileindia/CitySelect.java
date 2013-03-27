@@ -1,5 +1,9 @@
 package com.example.mobileindia;
 
+import java.util.Currency;
+
+import com.parse.ParseUser;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +14,7 @@ import android.widget.AbsListView.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class CitySelect extends Activity implements OnClickListener {
 
@@ -20,6 +25,13 @@ public class CitySelect extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_city_select);
 		addCityButtons();
 
+	}
+	@Override
+	protected void onPostCreate (Bundle savedInstanceState)
+	{
+		super.onPostCreate(savedInstanceState);
+		//TextView labelUser = (TextView) findViewById(R.id.loginUserLabelCity);
+		//labelUser.setText(ParseUser.getCurrentUser().getUsername());
 	}
 
 	@Override
