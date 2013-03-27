@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ public class Item_Adapter extends ArrayAdapter<ArrayList<String>> {
 	
 	public Item_Adapter(Context context, int textViewResourceId, ArrayList<ArrayList<String>> objects) {
 		super(context, textViewResourceId, objects);
-		this.objects = objects;
+		this.objects = objects;		
 	}
 
 	/*
