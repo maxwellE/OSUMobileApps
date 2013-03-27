@@ -17,7 +17,6 @@ public class Categories2 extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_categories2);
-		
 		setHeader();
 		
 		addCatButtons();		
@@ -85,7 +84,7 @@ public class Categories2 extends Activity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 		    String extraText = extras.getString("CityName");
-		    
+
 		    Context context = getApplicationContext();
 //		    CharSequence text = "Categories For " + extraText;
 		    
