@@ -101,7 +101,7 @@ public class Categories2 extends Activity {
 		}
 		
 		TextView t = new TextView(this);
-		t=(TextView)findViewById(R.id.textView1);
+		t=(TextView)findViewById(R.id.mainActivityUserLabel);
 		
 		t.setText(headerText);
 		

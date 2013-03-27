@@ -22,6 +22,17 @@
              />
     </LinearLayout> -->
 
+
+
+   <TextView
+       android:id="@+id/mainActivityUserLabel"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_alignParentTop="true"
+       android:textIsSelectable="true"
+       android:textAppearance="?android:attr/textAppearanceSmall" />
+
    <Button
        android:id="@+id/btnLogin"
        android:layout_width="202dp"
@@ -53,5 +64,5 @@
        android:layout_marginTop="24dp"
        android:onClick="createUserActivity"
        android:text="@string/create_user_button_text" />
-    
+
 </RelativeLayout>

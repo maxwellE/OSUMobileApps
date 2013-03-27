@@ -1,9 +1,5 @@
 package com.example.mobileindia;
 
-import java.util.Currency;
-
-import com.parse.ParseUser;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,8 +9,6 @@ import android.view.View.OnClickListener;
 import android.widget.AbsListView.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 public class CitySelect extends Activity implements OnClickListener {
 
