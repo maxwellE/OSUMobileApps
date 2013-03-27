@@ -43,8 +43,15 @@
         android:layout_centerVertical="true"
         android:text="@string/create_user_button_text"
         android:onClick="createUserActivity" 
-        /> 
-    
+        />
 
+   <TextView
+       android:id="@+id/mainActivityUserLabel"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentRight="true"
+       android:layout_alignParentTop="true"
+       android:textIsSelectable="true"
+       android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>
