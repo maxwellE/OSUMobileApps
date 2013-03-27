@@ -40,11 +40,12 @@ public class ListViewCategory extends ListActivity {
 			e.printStackTrace();
 		}
     	Log.v("LIST", "LIST : create    APPCLASS");
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);      
         setContentView(R.layout.activity_list_view_category);
-
+    	
         adapter0 = new Item_Adapter(this, R.layout.list, listItems);
         setListAdapter(adapter0);
+    	
         
         // Make sure we're running on Honeycomb or higher to use ActionBar APIs
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
