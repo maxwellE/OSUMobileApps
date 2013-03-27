@@ -29,6 +29,7 @@ public class CitySelect extends Activity implements OnClickListener {
 	@Override
 	protected void onPostCreate (Bundle savedInstanceState)
 	{
+		super.onPostCreate(savedInstanceState);
 		//TextView labelUser = (TextView) findViewById(R.id.loginUserLabelCity);
 		//labelUser.setText(ParseUser.getCurrentUser().getUsername());
 	}
