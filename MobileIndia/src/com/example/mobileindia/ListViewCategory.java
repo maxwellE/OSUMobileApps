@@ -23,7 +23,8 @@ import com.parse.ParseObject;
 public class ListViewCategory extends ListActivity {
     //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
    static ArrayList<ArrayList<String>> listItems=new ArrayList<ArrayList<String>>();
-   static String CATEGORY = "";
+   public static String CATEGORY = "";
+   public static String CITY = "";
    
    
     
@@ -60,6 +61,7 @@ public class ListViewCategory extends ListActivity {
 	   
     	ParseQuery get = new ParseQuery("Post");
     	get.whereEqualTo("category", ListViewCategory.CATEGORY);
+    	get.whereEqualTo("city", ListViewCategory.CITY);
 //    	get.findInBackground(new FindCallback(){
 //    		public void done(List<ParseObject> objects, ParseException e){
 //    			if(e == null){
