@@ -10,14 +10,15 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <uses-library android:name="com.google.android.maps"/>
+        <uses-library android:name="com.google.android.maps" />
+
         <activity
             android:name="com.example.mobileindia.MainActivity"
             android:label="@string/app_name" >
@@ -38,8 +39,7 @@
         </activity>
         <activity
             android:name="com.example.mobileindia.CreateUserActivity"
-            android:label="@string/title_activity_create_user"
-             >
+            android:label="@string/title_activity_create_user" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.mobileindia.MainActivity" />
@@ -50,8 +50,7 @@
         </activity>
         <activity
             android:name="com.example.mobileindia.ListViewCategory"
-            android:label="@string/title_activity_list_view_category"
-             >
+            android:label="@string/title_activity_list_view_category" >
         </activity>
         <activity
             android:name="com.example.mobileindia.LocateMeActivity"
@@ -59,8 +58,16 @@
         </activity>
         <activity
             android:name="com.example.mobileindia.Add_Post"
-            android:label="@string/title_activity_add__post"
-            >
+            android:label="@string/title_activity_add__post" >
+        </activity>
+        <activity
+            android:name="com.example.mobileindia.SinglePostView"
+            android:label="@string/title_activity_single_post_view" >
+        </activity>
+        <activity
+            android:name="com.example.mobileindia.PostList"
+            android:label="@string/title_activity_post_list" >
         </activity>
     </application>
+
 </manifest>
