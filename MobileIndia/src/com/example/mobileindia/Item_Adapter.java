@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class Item_Adapter extends ArrayAdapter<ArrayList<String>> {
@@ -60,6 +61,8 @@ public class Item_Adapter extends ArrayAdapter<ArrayList<String>> {
 			TextView title = (TextView) v.findViewById(R.id.post_title_list);
 			TextView summary = (TextView) v.findViewById(R.id.post_summary_list);
 			TextView author = (TextView) v.findViewById(R.id.post_author_list);
+			Button b = (Button) v.findViewById(R.id.full_post_button);
+			
 			
 			// check to see if each individual textview is null.
 			// if not, assign some text!
@@ -72,7 +75,12 @@ public class Item_Adapter extends ArrayAdapter<ArrayList<String>> {
 			if (author != null){
 				author.setText(i.get(2));
 			}
-
+			//if (b != null){
+				b.setHint(i.get(3));
+			//}else{
+				//b.setHint(null);
+			//}
+			
 			//color the post
 			int temp;
 			if(position % 2 == 0){

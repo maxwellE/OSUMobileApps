@@ -1,10 +1,13 @@
 package com.example.mobileindia;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView.LayoutParams;
 import android.widget.Button;
@@ -13,13 +16,19 @@ import android.widget.TextView;
 
 public class Categories2 extends Activity {
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_categories2);
 		setHeader();
 		
-		addCatButtons();		
+		addCatButtons();	
+		// Make sure we're running on Honeycomb or higher to use ActionBar APIs
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            // Show the Up button in the action bar.
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 	}
 
 	@Override
@@ -28,6 +37,13 @@ public class Categories2 extends Activity {
 		getMenuInflater().inflate(R.menu.activity_categories2, menu);
 		return true;
 	}
+	
+	 @Override
+	    public boolean onOptionsItemSelected(MenuItem item) {
+	    	Intent back = new Intent(this,CitySelect.class);
+	        startActivity(back);
+	        return super.onOptionsItemSelected(item);
+	    }
 	
 	public void addCatButtons(){
 		

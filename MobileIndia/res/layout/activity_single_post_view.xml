@@ -11,9 +11,11 @@
     tools:context=".SinglePostView" >
 
     <TextView
+        android:id="@+id/singlePostCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="Category"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,50 +26,61 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <EditText
-                android:id="@+id/editText2"
+            <TextView
+                android:id="@+id/singlePost_Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10" >
+                android:ems="10"
+                android:text="Title" >
 
                 <requestFocus />
-            </EditText>
+            </TextView>
 
-            <EditText
-                android:id="@+id/editText1"
+            <TextView
+                android:id="@+id/singlePost_Location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="10" />
+                android:ems="10"
+                android:text="Location" />
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/editText3"
+        <TextView
+            android:id="@+id/singlePost_Summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:text="Summary" />
 
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/editText4"
+    <TextView
+        android:id="@+id/single_Post_Author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" />
+        android:ems="10"
+        android:text="Author" />
 
-    <ListView
-        android:id="@+id/listView1"
+    <TextView
+        android:id="@+id/singlePost_Number"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="NUmber" />
 
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Add Comment" />
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
 
 </LinearLayout>

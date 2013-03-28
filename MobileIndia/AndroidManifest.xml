@@ -64,6 +64,10 @@
             android:name="com.example.mobileindia.SinglePostView"
             android:label="@string/title_activity_single_post_view" >
         </activity>
+        <activity
+            android:name="com.example.mobileindia.PostList"
+            android:label="@string/title_activity_post_list" >
+        </activity>
     </application>
 
 </manifest>

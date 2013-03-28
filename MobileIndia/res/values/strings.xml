@@ -40,5 +40,6 @@
     <string name="user_label_string"></string>
     <string name="login_submit_button">Sign in</string>
     <string name="title_activity_single_post_view">SinglePostView</string>
+    <string name="title_activity_post_list">PostList</string>
 
 </resources>

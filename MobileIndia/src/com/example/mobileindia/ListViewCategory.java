@@ -14,6 +14,9 @@ import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class ListViewCategory extends ListActivity {
     //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
@@ -41,7 +44,7 @@ public class ListViewCategory extends ListActivity {
         super.onCreate(savedInstanceState);      
         setContentView(R.layout.activity_list_view_category);
     	
-        adapter0 = new Item_Adapter(this, R.layout.list, listItems);
+       adapter0 = new Item_Adapter(this, R.layout.list, listItems);
         setListAdapter(adapter0);
     	
         
@@ -66,6 +69,8 @@ public class ListViewCategory extends ListActivity {
     					temp.add(parseObject.getString("title"));
     					temp.add(parseObject.getString("summary"));
     					temp.add(parseObject.getString("author"));
+    					temp.add(parseObject.getString("post_num"));
+    					Log.v("Post", "POST : post_num    APPCLASS " + parseObject.getString("post_num"));
     					listItems.add(temp);
     					
 					}
@@ -74,13 +79,7 @@ public class ListViewCategory extends ListActivity {
 
     //METHOD WHICH WILL HANDLE DYNAMIC INSERTION
     public void addItems(View v) {
-    	//Log.v("LIST", "LIST : ADD    APPCLASS");
-    	ArrayList<String> temp = new ArrayList<String>();
-        temp.add("Test "+clickCounter++);
-        temp.add("This is a test post");
-        temp.add("Jeff Walsh");
-        //listItems.add(temp);
-       
+
         Intent intent = new Intent(this, Add_Post.class);
 		startActivity(intent);
         adapter0.notifyDataSetChanged();
@@ -90,17 +89,16 @@ public class ListViewCategory extends ListActivity {
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case android.R.id.home:
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
-        }
+    	Intent back = new Intent(this,Categories2.class);
+        startActivity(back);
         return super.onOptionsItemSelected(item);
     }
+    //
 
     @Override
 	public void onPause(){
 		super.onPause();
+		////
 		Log.v("LIST", "PAUSED LIST APPCLASS");
 
 	}
@@ -119,22 +117,17 @@ public class ListViewCategory extends ListActivity {
 		Log.v("LIST", "Stopped LIST APPCLASS");
 	}
 	
-	public void addPost(){
-		
-		ParseObject Post = new ParseObject("Post");
-		Post.put("author", "Jeff");
-		Post.put("description", "This is some really nice junk I am selling!!!");
-		Post.put("title", "Junk Sale");
-		Post.saveInBackground();
-		
-		
-	}
-
-
-
-
-
-
+	
+	 public void SinglePost(View view){
+		 Log.v("List", "go to single view List APPCLASS");
+		 	Button title = (Button) view.findViewById(R.id.full_post_button);
+		 	Log.v("List", "grabbed title List APPCLASS " + (String) title.getHint() + "     end");
+		 	SinglePostView.TITLE = (String) title.getHint();
+		 	if(SinglePostView.TITLE != null){
+		 		Intent intent = new Intent(this, SinglePostView.class);
+				startActivity(intent);
+		 	}
+		}
 
 
 }
