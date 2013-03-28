@@ -1,16 +1,15 @@
 package com.example.mobileindia;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AbsListView.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AbsListView.LayoutParams;
 
 public class Categories2 extends Activity {
 
@@ -18,13 +17,9 @@ public class Categories2 extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_categories2);
-		
 		setHeader();
 		
-		addCatButtons();
-		
-		
-		
+		addCatButtons();		
 	}
 
 	@Override
@@ -76,6 +71,7 @@ public class Categories2 extends Activity {
 	
 	public void gotoPost(View v, String passVal){
 		//TODO uncomment this
+		 ListViewCategory.CATEGORY = passVal;
          Intent i = new Intent(this, ListViewCategory.class);
 //		 i.putExtra("passVal", passVal);
 		 startActivity(i);
@@ -88,7 +84,7 @@ public class Categories2 extends Activity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 		    String extraText = extras.getString("CityName");
-		    
+
 		    Context context = getApplicationContext();
 //		    CharSequence text = "Categories For " + extraText;
 		    
@@ -105,7 +101,7 @@ public class Categories2 extends Activity {
 		}
 		
 		TextView t = new TextView(this);
-		t=(TextView)findViewById(R.id.textView1);
+		t=(TextView)findViewById(R.id.mainActivityUserLabel);
 		
 		t.setText(headerText);
 		

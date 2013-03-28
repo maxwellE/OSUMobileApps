@@ -16,7 +16,6 @@
             android:layout_gravity="center_vertical|center_horizontal"
             android:layout_weight="1"
             android:padding="@dimen/activity_horizontal_margin"
-            android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textIsSelectable="true"
             android:textSize="@dimen/post_list_title_size"
