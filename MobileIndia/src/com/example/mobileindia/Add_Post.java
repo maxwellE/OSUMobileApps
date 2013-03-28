@@ -13,7 +13,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
+import com.parse.ParseAnonymousUtils;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 
 public class Add_Post extends Activity {
@@ -66,6 +69,9 @@ public class Add_Post extends Activity {
         add = ListViewCategory.CATEGORY;
         //temp.add(add);
         post.put("category",add);
+        if(ParseUser.getCurrentUser() != null && !ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())){
+          post.put("user", ParseUser.getCurrentUser());
+        }
         post.saveInBackground();
        // ListViewCategory.listItems.add(temp);
        // NavUtils.navigateUpFromSameTask(this);
