@@ -55,17 +55,20 @@ public class Add_Post extends Activity {
 		ArrayList<String> temp = new ArrayList<String>();
 		String add = "";
 		add = ((EditText) findViewById(R.id.post_title_add)).getText().toString();
-        //temp.add(add);
         post.put("title", add);
-        add = ((EditText) findViewById(R.id.post_summary_add)).getText().toString();
-       // temp.add(add);
+        
+        add = ((EditText) findViewById(R.id.post_summary_add)).getText().toString();    
         post.put("summary", add);
-        add = ((EditText) findViewById(R.id.post_author_add)).getText().toString();
-       // temp.add(add);
+        
+        add = ((EditText) findViewById(R.id.post_author_add)).getText().toString();   
         post.put("author",add);
-        add = ListViewCategory.CATEGORY;
-        //temp.add(add);
+        
+        add = ListViewCategory.CATEGORY;      
         post.put("category",add);
+        
+        add = ListViewCategory.CITY;
+        post.put("city", add);
+        
         post.saveInBackground();
        // ListViewCategory.listItems.add(temp);
        // NavUtils.navigateUpFromSameTask(this);
