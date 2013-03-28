@@ -70,7 +70,8 @@ public class CitySelect extends Activity implements OnClickListener {
 	
 	public void CatAct(View view, String cityName){
 		Intent i = new Intent(this, Categories2.class);
-		i.putExtra("CityName", cityName);
+		//i.putExtra("CityName", cityName);
+		ListViewCategory.CITY = cityName;
 		startActivity(i);
 	 }
 	
