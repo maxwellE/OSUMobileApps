@@ -68,6 +68,14 @@
             android:name="com.example.mobileindia.PostList"
             android:label="@string/title_activity_post_list" >
         </activity>
+        <activity
+            android:name="com.example.mobileindia.Single_Post"
+            android:label="@string/title_activity_single__post" >
+        </activity>
+        <activity
+            android:name="com.example.mobileindia.Add_Comment"
+            android:label="@string/title_activity_add__comment" >
+        </activity>
     </application>
 
 </manifest>

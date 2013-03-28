@@ -13,17 +13,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 
-public class SinglePostView extends ListActivity {
+public class Single_Post extends ListActivity {
 	
-	public static String TITLE = "";
+	public static String NUM = "";
     //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
    static ArrayList<ArrayList<String>> listItems=new ArrayList<ArrayList<String>>();
    
     //DEFINING STRING ADAPTER WHICH WILL HANDLE DATA OF LISTVIEW
-    Item_Adapter adapter0;
+    CommentAdapter adapter0;
   
     int clickCounter=0;
 
@@ -31,43 +30,60 @@ public class SinglePostView extends ListActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
     	
-//    	try {
-//			populate_list();
-//		} catch (ParseException e) {
-//			/// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+    	try {
+			populate_list();
+		} catch (ParseException e) {
+			/// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
         super.onCreate(savedInstanceState);      
-        setContentView(R.layout.activity_single_post_view);
+        setContentView(R.layout.activity_single__post);
+        ParseQuery get = new ParseQuery("Post");
+    	get.whereEqualTo("post_num", Integer.parseInt(NUM));
+    	
+    	List<ParseObject> objects = null;
+		try {
+			objects = get.find();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	ParseObject parseObject = objects.get(0);
         TextView title = (TextView) findViewById(R.id.singlePost_Title);
-    	title.setText(TITLE);
+        TextView summary = (TextView) findViewById(R.id.singlePost_Summary);
+        TextView author = (TextView) findViewById(R.id.single_Post_Author);
+        TextView category = (TextView) findViewById(R.id.singlePostCategory);
+        TextView number = (TextView) findViewById(R.id.singlePost_Number);
+    	title.setText(parseObject.getString("title"));
+    	summary.setText(parseObject.getString("summary"));
+    	author.setText(parseObject.getString("author"));
+    	category.setText(parseObject.getString("category"));
+    	number.setText(NUM);
     	
  
-      // adapter0 = new Item_Adapter(this, R.layout.comment, listItems);
-      //  setListAdapter(adapter0);
+       adapter0 = new CommentAdapter(this, R.layout.comment, listItems);
+       setListAdapter(adapter0);
     	
         // Make sure we're running on Honeycomb or higher to use ActionBar APIs
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             // Show the Up button in the action bar.
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        Log.v("Post", "POST : create ended    APPCLASS");
     }
     
    public static void  populate_list() throws ParseException{
 	   
-    	ParseQuery get = new ParseQuery("Post");
-    	get.whereEqualTo("category", ListViewCategory.CATEGORY);
-    	get.whereEqualTo("city", ListViewCategory.CITY);
+    	ParseQuery get = new ParseQuery("Comment");
+    	get.whereEqualTo("postNum", NUM);
 
     				List<ParseObject> objects = get.find();
     				listItems.clear();
     				
     				for (ParseObject parseObject : objects) {
     					ArrayList<String> temp = new ArrayList<String>();
-    					temp.add(parseObject.getString("title"));
-    					temp.add(parseObject.getString("summary"));
+    					temp.add(parseObject.getString("date"));
+    					temp.add(parseObject.getString("content"));
     					temp.add(parseObject.getString("author"));
     					listItems.add(temp);
     					
@@ -78,7 +94,7 @@ public class SinglePostView extends ListActivity {
     //METHOD WHICH WILL HANDLE DYNAMIC INSERTION
     public void addItems(View v) {
       
-        Intent intent = new Intent(this, Add_Post.class);
+        Intent intent = new Intent(this, Add_Comment.class);
 		startActivity(intent);
        // adapter0.notifyDataSetChanged();
     }

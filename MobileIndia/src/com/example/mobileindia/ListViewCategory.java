@@ -10,13 +10,10 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
 
 public class ListViewCategory extends ListActivity {
     //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
@@ -40,13 +37,13 @@ public class ListViewCategory extends ListActivity {
 			/// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	Log.v("LIST", "LIST : create    APPCLASS");
+    	//Log.v("Post", "POST : listView built  APPCLASS ");
         super.onCreate(savedInstanceState);      
         setContentView(R.layout.activity_list_view_category);
-    	
+       // Log.v("Post", "POST : content set  APPCLASS ");
        adapter0 = new Item_Adapter(this, R.layout.list, listItems);
         setListAdapter(adapter0);
-    	
+      //  Log.v("Post", "POST : adapter set APPCLASS ");
         
         // Make sure we're running on Honeycomb or higher to use ActionBar APIs
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -69,8 +66,9 @@ public class ListViewCategory extends ListActivity {
     					temp.add(parseObject.getString("title"));
     					temp.add(parseObject.getString("summary"));
     					temp.add(parseObject.getString("author"));
-    					temp.add(parseObject.getString("post_num"));
-    					Log.v("Post", "POST : post_num    APPCLASS " + parseObject.getString("post_num"));
+    					String num_string = Integer.toString(parseObject.getInt("post_num"));
+    					temp.add(num_string);
+    					Log.v("Post", "POST : post_num LIST   APPCLASS = " + num_string);
     					listItems.add(temp);
     					
 					}
@@ -99,13 +97,13 @@ public class ListViewCategory extends ListActivity {
 	public void onPause(){
 		super.onPause();
 		////
-		Log.v("LIST", "PAUSED LIST APPCLASS");
+		//Log.v("LIST", "PAUSED LIST APPCLASS");
 
 	}
 	
 	@Override
 	public void onResume(){
-		Log.v("List", "RESUMED List APPCLASS");
+		//Log.v("List", "RESUMED List APPCLASS");
 		super.onResume();
 		//adapter0.notifyDataSetChanged();
 		
@@ -114,17 +112,17 @@ public class ListViewCategory extends ListActivity {
 	@Override
 	public void onStop(){
 		super.onStop();
-		Log.v("LIST", "Stopped LIST APPCLASS");
+		//Log.v("LIST", "Stopped LIST APPCLASS");
 	}
 	
 	
 	 public void SinglePost(View view){
-		 Log.v("List", "go to single view List APPCLASS");
 		 	Button title = (Button) view.findViewById(R.id.full_post_button);
-		 	Log.v("List", "grabbed title List APPCLASS " + (String) title.getHint() + "     end");
-		 	SinglePostView.TITLE = (String) title.getHint();
-		 	if(SinglePostView.TITLE != null){
-		 		Intent intent = new Intent(this, SinglePostView.class);
+		 	//Log.v("List", "grabbed num List APPCLASS " +  title.getHint() + "     end");
+		 	Single_Post.NUM =  (String) title.getHint();
+		 	if(Single_Post.NUM != null){
+		 		//Log.v("List", "hint SINGLE APPCLASS = " +  SinglePostView.TITLE  + "     end");
+		 		Intent intent = new Intent(this, Single_Post.class);
 				startActivity(intent);
 		 	}
 		}
