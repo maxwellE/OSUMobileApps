@@ -2,12 +2,9 @@ package com.example.mobileindia;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.FindCallback;
 import com.parse.ParseQuery;
-
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -17,8 +14,6 @@ import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import com.parse.ParseObject;
 
 public class ListViewCategory extends ListActivity {
     //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
@@ -62,9 +57,7 @@ public class ListViewCategory extends ListActivity {
     	ParseQuery get = new ParseQuery("Post");
     	get.whereEqualTo("category", ListViewCategory.CATEGORY);
     	get.whereEqualTo("city", ListViewCategory.CITY);
-//    	get.findInBackground(new FindCallback(){
-//    		public void done(List<ParseObject> objects, ParseException e){
-//    			if(e == null){
+
     				List<ParseObject> objects = get.find();
     				listItems.clear();
     				
@@ -74,13 +67,9 @@ public class ListViewCategory extends ListActivity {
     					temp.add(parseObject.getString("summary"));
     					temp.add(parseObject.getString("author"));
     					listItems.add(temp);
-    					//Invalidate();
+    					
 					}
-//    			}else{
-//    				
-//    			}
-//    		}
-//    	});
+
     }
 
     //METHOD WHICH WILL HANDLE DYNAMIC INSERTION
@@ -96,6 +85,8 @@ public class ListViewCategory extends ListActivity {
 		startActivity(intent);
         adapter0.notifyDataSetChanged();
     }
+    
+
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
