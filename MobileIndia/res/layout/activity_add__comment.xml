@@ -8,10 +8,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Add_Post" >
+    tools:context=".Add_Comment" >
 
     <EditText
-        android:id="@+id/post_author_add"
+        android:id="@+id/comment_author_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -21,14 +21,14 @@
     </EditText>
 
     <EditText
-        android:id="@+id/post_title_add"
+        android:id="@+id/comment_date_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/title_add_post" />
+        android:hint="Enter a date" />
 
     <EditText
-        android:id="@+id/post_summary_add"
+        android:id="@+id/comment_content_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -42,7 +42,7 @@
             android:id="@+id/btnBrowse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="AddPost"
+            android:onClick="AddComment"
             android:text="@string/Add" />
 
         <Button

@@ -9,10 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
-public class Item_Adapter extends ArrayAdapter<ArrayList<String>> {
+public class CommentAdapter extends ArrayAdapter<ArrayList<String>> {
 
 	// declaring our ArrayList of items
 	private ArrayList<ArrayList<String>> objects;
@@ -22,7 +21,7 @@ public class Item_Adapter extends ArrayAdapter<ArrayList<String>> {
 	* because it is the list of objects we want to display.
 	*/
 	
-	public Item_Adapter(Context context, int textViewResourceId, ArrayList<ArrayList<String>> objects) {
+	public CommentAdapter(Context context, int textViewResourceId, ArrayList<ArrayList<String>> objects) {
 		super(context, textViewResourceId, objects);
 		this.objects = objects;		
 	}
@@ -41,7 +40,7 @@ public class Item_Adapter extends ArrayAdapter<ArrayList<String>> {
 		// to inflate it basically means to render, or show, the view.
 		if (v == null) {
 			LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			v = inflater.inflate(R.layout.list, null);
+			v = inflater.inflate(R.layout.comment, null);
 		}
 
 		/*
@@ -58,30 +57,23 @@ public class Item_Adapter extends ArrayAdapter<ArrayList<String>> {
 			// This is how you obtain a reference to the TextViews.
 			// These TextViews are created in the XML files we defined.
 
-			TextView title = (TextView) v.findViewById(R.id.post_title_list);
-			TextView summary = (TextView) v.findViewById(R.id.post_summary_list);
-			TextView author = (TextView) v.findViewById(R.id.post_author_list);
-			Button b = (Button) v.findViewById(R.id.full_post_button);
+			TextView date = (TextView) v.findViewById(R.id.commentDate);
+			TextView content = (TextView) v.findViewById(R.id.commentContent);
+			TextView author = (TextView) v.findViewById(R.id.commentAuthor);
 			
 			
 			// check to see if each individual textview is null.
 			// if not, assign some text!
-			if (title != null){
-				title.setText(i.get(0));
+			if (date != null){
+				date.setText(i.get(0));
 			}
-			if (summary != null){
-				summary.setText(i.get(1));
+			if (content != null){
+				content.setText(i.get(1));
 			}
 			if (author != null){
 				author.setText(i.get(2));
 			}
-			 //Log.v("Post", "POST : all but button APPCLASS ");
-			if (b != null){
-				//String sNum = i.get(3).toString();
-				//Log.v("Post", "POST : make string APPCLASS ");
-				b.setHint(i.get(3));
-			}
-			//Log.v("Post", "POST : APPCLASS hint = " + i.get(3));
+			
 			
 			//color the post
 			int temp;

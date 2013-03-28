@@ -9,7 +9,6 @@ import android.view.View.OnClickListener;
 import android.widget.AbsListView.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 public class CitySelect extends Activity implements OnClickListener {
 
@@ -20,6 +19,13 @@ public class CitySelect extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_city_select);
 		addCityButtons();
 
+	}
+	@Override
+	protected void onPostCreate (Bundle savedInstanceState)
+	{
+		super.onPostCreate(savedInstanceState);
+		//TextView labelUser = (TextView) findViewById(R.id.loginUserLabelCity);
+		//labelUser.setText(ParseUser.getCurrentUser().getUsername());
 	}
 
 	@Override
@@ -64,7 +70,8 @@ public class CitySelect extends Activity implements OnClickListener {
 	
 	public void CatAct(View view, String cityName){
 		Intent i = new Intent(this, Categories2.class);
-		i.putExtra("CityName", cityName);
+		//i.putExtra("CityName", cityName);
+		ListViewCategory.CITY = cityName;
 		startActivity(i);
 	 }
 	
