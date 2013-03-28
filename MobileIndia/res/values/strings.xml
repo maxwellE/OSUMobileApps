@@ -6,7 +6,7 @@
     <string name="menu_settings">Settings</string>
     <string name="login_text_box">Login</string>
     <string name="browse_button_text">Browse</string>
-    <string name="title_activity_city_select">CitySelect</string>
+    <string name="title_activity_city_select">City</string>
     <string name="title_activity_categories">Categories</string>
     <string name="housing_button_description">Housing</string>
     <string name="job_button_description">Jobs</string>
@@ -23,7 +23,7 @@
     <string name="PasswordConfirmHint">Retype Password</string>
     <string name="PasswordHint">Password</string>
     <string name="EmailHint">Email</string>
-    <string name="title_activity_categories2">Categories2</string>
+    <string name="title_activity_categories2">Categories</string>
     <string name="CategoriesHeader">Categories</string>
     <string name="create_user_progress_signing_in">Creating User and Signing in</string>
     <string name="UsernameHint">Username</string>
@@ -37,4 +37,9 @@
     <string name="summary_add_post">Provide a summary</string>
     <string name="Add">Add</string>
     <string name="Cancel">Cancel</string>
+    <string name="user_label_string"></string>
+    <string name="login_submit_button">Sign in</string>
+    <string name="title_activity_single_post_view">SinglePostView</string>
+    <string name="title_activity_post_list">PostList</string>
+
 </resources>

@@ -15,14 +15,26 @@
         android:text="@string/CityHeader"
         android:textSize="26sp" />
 
-    <LinearLayout
-        android:id="@+id/CityList"
+
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/textView1"
-        android:layout_marginTop="35dp"
-        android:orientation="vertical" >
+		 >
+
+	        <LinearLayout
+	            android:id="@+id/CityList"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="35dp"
+	            android:orientation="vertical" >
+	    	</LinearLayout>
+    </ScrollView>
+
         
-    </LinearLayout>
+        
 </RelativeLayout>

@@ -9,9 +9,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import com.google.android.maps.GeoPoint;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.Criteria;
