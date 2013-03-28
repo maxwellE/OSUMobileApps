@@ -15,13 +15,13 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 
-public class Add_Post extends Activity {
+public class Add_Comment extends Activity {
 
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_add__post);
+		setContentView(R.layout.activity_add__comment);
 	
 	  // Make sure we're running on Honeycomb or higher to use ActionBar APIs
 //		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -34,7 +34,7 @@ public class Add_Post extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.add__post, menu);
+		getMenuInflater().inflate(R.menu.add__comment, menu);
 		return true;
 	}
 	
@@ -49,50 +49,34 @@ public class Add_Post extends Activity {
 //	    }
 	
 	
-	public void AddPost(View view){
-		ParseObject post = new ParseObject("Post");
-		ArrayList<String> temp = new ArrayList<String>();
+	public void AddComment(View view){
+		ParseObject comment = new ParseObject("Comment");
 		String add = "";
-		add = ((EditText) findViewById(R.id.post_title_add)).getText().toString();
-        post.put("title", add);
+		add = ((EditText) findViewById(R.id.comment_author_add)).getText().toString();
+		comment.put("author", add);
         
-        add = ((EditText) findViewById(R.id.post_summary_add)).getText().toString();    
-        post.put("summary", add);
+        add = ((EditText) findViewById(R.id.comment_content_add)).getText().toString();    
+        comment.put("content", add);
         
-        add = ((EditText) findViewById(R.id.post_author_add)).getText().toString();   
-        post.put("author",add);
+        add = ((EditText) findViewById(R.id.comment_date_add)).getText().toString();   
+        comment.put("date",add);
         
-        add = ListViewCategory.CATEGORY;      
-        post.put("category",add);
-        
-        add = ListViewCategory.CITY;
-        post.put("city", add);
-        
-        ParseQuery get = new ParseQuery("Post");
-        int num = 0;
-		try {
-			num = get.count();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        post.put("post_num", num);
+        comment.put("postNum", Single_Post.NUM);
        // post.saveInBackground();
         try {
-			post.save();
+        	comment.save();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
-			Log.v("Post", "POST : post error  APPCLASS = " + num);
 			e.printStackTrace();
 		}
-        Intent back = new Intent(this,ListViewCategory.class);
+        Intent back = new Intent(this,Single_Post.class);
         startActivity(back);
        
 	}
 	
 	public void Cancel(View view){
 		//NavUtils.navigateUpFromSameTask(this);
-		Intent back = new Intent(this,ListViewCategory.class);
+		Intent back = new Intent(this,Single_Post.class);
         startActivity(back);
         //
 	}
