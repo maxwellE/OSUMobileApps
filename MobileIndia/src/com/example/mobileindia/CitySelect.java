@@ -100,6 +100,7 @@ public class CitySelect extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		Intent intent = new Intent(this, LocateMeActivity.class);
 		startActivity(intent);
+		
 	}
 
 }
