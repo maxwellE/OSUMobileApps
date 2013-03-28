@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 		 final Context context = getApplicationContext();
 		 final int duration = Toast.LENGTH_LONG;
 		 final Intent i = new Intent(this, CitySelect.class);
-		 if(ParseUser.getCurrentUser() == null){
+		 if(ParseUser.getCurrentUser() == null || !ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())){
 			 ParseAnonymousUtils.logIn(new LogInCallback() {
 				 @Override
 				 public void done(ParseUser user, ParseException e) {
