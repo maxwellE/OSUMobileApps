@@ -32,6 +32,7 @@ public class ListViewCategory extends ListActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
     	try {
+    		
 			populate_list();
 		} catch (ParseException e) {
 			/// TODO Auto-generated catch block
@@ -53,7 +54,6 @@ public class ListViewCategory extends ListActivity {
     }
     
    public static void  populate_list() throws ParseException{
-	   
     	ParseQuery get = new ParseQuery("Post");
     	get.whereEqualTo("category", ListViewCategory.CATEGORY);
     	get.whereEqualTo("city", ListViewCategory.CITY);
