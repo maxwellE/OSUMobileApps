@@ -72,7 +72,7 @@
         android:text="NUmber" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/logged_in_user_posts_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="addItems"

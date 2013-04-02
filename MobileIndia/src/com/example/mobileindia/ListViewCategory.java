@@ -20,7 +20,7 @@ public class ListViewCategory extends ListActivity {
    static ArrayList<ArrayList<String>> listItems=new ArrayList<ArrayList<String>>();
    public static String CATEGORY = "";
    public static String CITY = "";
-   
+   public static List<ParseObject> parsePostList =  new ArrayList<ParseObject>();
    
     
     //DEFINING STRING ADAPTER WHICH WILL HANDLE DATA OF LISTVIEW
@@ -32,7 +32,11 @@ public class ListViewCategory extends ListActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
     	try {
-			populate_list();
+    		if(savedInstanceState.getBoolean("userPosts")){
+    			populate_list(ListViewCategory.parsePostList);
+    	    }else{
+    	    	populate_list(null);
+    	    }
 		} catch (ParseException e) {
 			/// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,8 +56,8 @@ public class ListViewCategory extends ListActivity {
         }
     }
     
-   public static void  populate_list() throws ParseException{
-	   
+   public static void  populate_list(List<ParseObject> parsePostList2) throws ParseException{
+	    if(parsePostList2 == null){
     	ParseQuery get = new ParseQuery("Post");
     	get.whereEqualTo("category", ListViewCategory.CATEGORY);
     	get.whereEqualTo("city", ListViewCategory.CITY);
@@ -72,6 +76,19 @@ public class ListViewCategory extends ListActivity {
     					listItems.add(temp);
     					
 					}
+	    }else{
+			for (ParseObject parseObject : parsePostList2) {
+				ArrayList<String> temp = new ArrayList<String>();
+				temp.add(parseObject.getString("title"));
+				temp.add(parseObject.getString("summary"));
+				temp.add(parseObject.getString("author"));
+				String num_string = Integer.toString(parseObject.getInt("post_num"));
+				temp.add(num_string);
+				Log.v("Post", "POST : post_num LIST   APPCLASS = " + num_string);
+				listItems.add(temp);
+				
+			}
+	    }
 
     }
 

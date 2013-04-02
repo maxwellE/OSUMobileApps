@@ -200,6 +200,7 @@ public class LoginActivity extends Activity {
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
+			LoginActivity.loginSuccess = false;
 			try {
 				ParseUser.logIn(mUsername, mPassword);
 				LoginActivity.loginSuccess = true;
@@ -218,7 +219,7 @@ public class LoginActivity extends Activity {
 			if (success) {
 				finish();
 				Context context = getApplicationContext();
-				Intent i = new Intent(context, Categories2.class);
+				Intent i = new Intent(context, MainActivity.class);
 		        startActivity(i); 
 				int duration = Toast.LENGTH_LONG;
 				Toast toast = Toast.makeText(context, "Successfully logged in!", duration);
