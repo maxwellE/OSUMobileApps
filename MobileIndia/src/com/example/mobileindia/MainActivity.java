@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
 		 final Context context = getApplicationContext();
 		 final int duration = Toast.LENGTH_LONG;
 		 final Intent i = new Intent(this, CitySelect.class);
-		 if(ParseUser.getCurrentUser() == null || !ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())){
+		 if(ParseUser.getCurrentUser() == null && !ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())){
 			 ParseAnonymousUtils.logIn(new LogInCallback() {
 				 @Override
 				 public void done(ParseUser user, ParseException e) {
@@ -107,14 +107,15 @@ public class MainActivity extends Activity {
 	 }
 	 
 	 public void viewUserPosts(View view){
+		 ListViewCategory.parsePostList = null;
 		 ParseQuery query = new ParseQuery("Post");
-		 MainActivity.foundUserPostsSuccess = false;
 		 query.whereEqualTo("user", ParseUser.getCurrentUser());
 		 try {
 			ListViewCategory.parsePostList = query.find();
 			MainActivity.foundUserPostsSuccess = true;
 		} catch (ParseException e1) {
 			ListViewCategory.parsePostList = null;
+			MainActivity.foundUserPostsSuccess = false;
 		}
 		 if(MainActivity.foundUserPostsSuccess){
 			 Intent i = new Intent(this,ListViewCategory.class);

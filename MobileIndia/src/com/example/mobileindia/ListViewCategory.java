@@ -31,8 +31,9 @@ public class ListViewCategory extends ListActivity {
     @SuppressLint("NewApi")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+    	super.onCreate(savedInstanceState);
     	try {
-    		if(savedInstanceState.getBoolean("userPosts")){
+    		if(ListViewCategory.parsePostList != null){
     			populate_list(ListViewCategory.parsePostList);
     	    }else{
     	    	populate_list(null);
@@ -77,6 +78,7 @@ public class ListViewCategory extends ListActivity {
     					
 					}
 	    }else{
+			listItems.clear();
 			for (ParseObject parseObject : parsePostList2) {
 				ArrayList<String> temp = new ArrayList<String>();
 				temp.add(parseObject.getString("title"));
@@ -85,9 +87,9 @@ public class ListViewCategory extends ListActivity {
 				String num_string = Integer.toString(parseObject.getInt("post_num"));
 				temp.add(num_string);
 				Log.v("Post", "POST : post_num LIST   APPCLASS = " + num_string);
-				listItems.add(temp);
-				
+				listItems.add(temp);			
 			}
+			ListViewCategory.parsePostList = null;
 	    }
 
     }
