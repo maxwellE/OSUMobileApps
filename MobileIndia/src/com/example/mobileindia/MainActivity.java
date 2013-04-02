@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	    Parse.initialize(this, "dlhBQJUyZsOPxkFdp8Uf7MWXY7IpRWXXZipSyO8f", "sa5JGVnNQXEoWawJPxw5TKk1xLmFirXcGMr5P5JK");
+	    Parse.initialize(this, "mxi3f2SxGpnfFCxW4FKz5D8f9i97BSVnLQ0PR6L9", "2VRMIqpKdwzfimui1EpUfwC6wUvlWHv2O84q87NC");
 		setContentView(R.layout.activity_main);
 	}
 	protected void onResume (){
@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
 		 final Context context = getApplicationContext();
 		 final int duration = Toast.LENGTH_LONG;
 		 final Intent i = new Intent(this, CitySelect.class);
-		 if(ParseUser.getCurrentUser() == null && !ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())){
+		 if(ParseUser.getCurrentUser() == null){
 			 ParseAnonymousUtils.logIn(new LogInCallback() {
 				 @Override
 				 public void done(ParseUser user, ParseException e) {
