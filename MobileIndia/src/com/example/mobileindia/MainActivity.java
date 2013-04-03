@@ -41,6 +41,7 @@ public class MainActivity extends Activity {
 	    	t.setText("Logged in anonymously");
 	    	findViewById(R.id.btnSignUp).setVisibility(8);
 	    	TextView btnLogin = (TextView) findViewById(R.id.btnLogin);
+	    	ListViewCategory.hideAdd = true;
 	    	btnLogin.setText("Logout");
 	    }else {
 	    	t.setText("Logged in as: " + ParseUser.getCurrentUser().getUsername());
@@ -62,6 +63,7 @@ public class MainActivity extends Activity {
 			 startActivity(i);
 		 }else{
 			 ParseUser.logOut();
+			 ListViewCategory.hideAdd = true;
 			 findViewById(R.id.btnSignUp).setVisibility(0);
 			 TextView btnLogin = (TextView) findViewById(R.id.btnLogin);
 			 TextView userLabel = (TextView) findViewById(R.id.mainActivityUserLabel);
@@ -115,9 +117,8 @@ public class MainActivity extends Activity {
 		}
 		 if(MainActivity.foundUserPostsSuccess){
 			 Intent i = new Intent(this,ListViewCategory.class);
-			 i.putExtra("userPosts", true);
+			 ListViewCategory.hideAdd = true;
 			 startActivity(i);
 		 }
 	 }
-	 
 }

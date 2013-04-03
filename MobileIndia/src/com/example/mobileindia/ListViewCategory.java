@@ -20,6 +20,7 @@ public class ListViewCategory extends ListActivity {
    static ArrayList<ArrayList<String>> listItems=new ArrayList<ArrayList<String>>();
    public static String CATEGORY = "";
    public static String CITY = "";
+   public static boolean hideAdd = false;
    public static List<ParseObject> parsePostList =  new ArrayList<ParseObject>();
    
     
@@ -55,6 +56,12 @@ public class ListViewCategory extends ListActivity {
             // Show the Up button in the action bar.
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
+    }
+    protected void onPostCreate (Bundle savedInstanceState){
+ 		super.onPostCreate(savedInstanceState);
+ 		if(ListViewCategory.hideAdd){
+ 			findViewById(R.id.addBtn).setVisibility(8);
+ 		}
     }
     
    public static void  populate_list(List<ParseObject> parsePostList2) throws ParseException{
