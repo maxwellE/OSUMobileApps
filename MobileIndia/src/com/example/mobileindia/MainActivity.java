@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
@@ -41,10 +42,12 @@ public class MainActivity extends Activity {
 	    	t.setText("Logged in anonymously");
 	    	findViewById(R.id.btnSignUp).setVisibility(8);
 	    	TextView btnLogin = (TextView) findViewById(R.id.btnLogin);
+	    	findViewById(R.id.btnSearch).setVisibility(0);
 	    	ListViewCategory.hideAdd = true;
 	    	btnLogin.setText("Logout");
 	    }else {
 	    	t.setText("Logged in as: " + ParseUser.getCurrentUser().getUsername());
+	    	findViewById(R.id.btnSearch).setVisibility(0);
 	    	findViewById(R.id.logged_in_user_posts_button).setVisibility(0);
 	    	findViewById(R.id.btnSignUp).setVisibility(8);
 	    	TextView btnLogin = (TextView) findViewById(R.id.btnLogin);
@@ -68,6 +71,7 @@ public class MainActivity extends Activity {
 			 TextView btnLogin = (TextView) findViewById(R.id.btnLogin);
 			 TextView userLabel = (TextView) findViewById(R.id.mainActivityUserLabel);
 		     findViewById(R.id.logged_in_user_posts_button).setVisibility(8);
+		     findViewById(R.id.btnSearch).setVisibility(8);
 			 userLabel.setText("Not logged in");
 		     btnLogin.setText("Login");
 		 }
@@ -77,6 +81,7 @@ public class MainActivity extends Activity {
 		 final Context context = getApplicationContext();
 		 final int duration = Toast.LENGTH_LONG;
 		 final Intent i = new Intent(this, CitySelect.class);
+		 findViewById(R.id.btnBrowse).setClickable(false);
 		 if(ParseUser.getCurrentUser() == null){
 			 ParseAnonymousUtils.logIn(new LogInCallback() {
 				 @Override
@@ -84,10 +89,12 @@ public class MainActivity extends Activity {
 
 					 if (e == null){
 						 Toast toast = Toast.makeText(context, "Logged in as anonymous user", duration);
+						 findViewById(R.id.btnBrowse).setClickable(true);
 						 startActivity(i);
 						 toast.show();
 					 }else{
 						 Toast toast = Toast.makeText(context, "Could not log in anonymously", duration);
+						 findViewById(R.id.btnBrowse).setClickable(true);
 						 startActivity(i);
 						 toast.show();
 					 }
@@ -95,6 +102,7 @@ public class MainActivity extends Activity {
 				 }
 			 });
 		 }else{
+			 findViewById(R.id.btnBrowse).setClickable(true);
 			 startActivity(i);
 		 }
 	 }
@@ -120,5 +128,9 @@ public class MainActivity extends Activity {
 			 ListViewCategory.hideAdd = true;
 			 startActivity(i);
 		 }
+	 }
+	 public void searchPosts(View view){
+		Intent i = new Intent(this,SearchPostActivity.class);
+		startActivity(i);
 	 }
 }

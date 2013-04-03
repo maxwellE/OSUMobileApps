@@ -76,6 +76,14 @@
             android:name="com.example.mobileindia.Add_Comment"
             android:label="@string/title_activity_add__comment" >
         </activity>
+        <activity
+            android:name="com.example.mobileindia.SearchPostActivity"
+            android:label="@string/title_activity_search_post"
+            android:parentActivityName="com.example.mobileindia.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.mobileindia.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
