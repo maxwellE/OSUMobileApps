@@ -3,12 +3,14 @@ package com.example.mobileindia;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsListView.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class CitySelect extends Activity implements OnClickListener {
 
@@ -54,18 +56,14 @@ public class CitySelect extends Activity implements OnClickListener {
 				    	CatAct(v, NameOfCity);
 				    }
 				});
-				
-				cityLocate.setOnClickListener(this);
 					
-				//RelativeLayout rl = (RelativeLayout)findViewById(R.id.CityList);
 				LinearLayout ll = (LinearLayout)findViewById(R.id.CityList);
 				LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 				ll.addView(cityButton, lp);
 				ll.addView(cityLocate);
 								
 				i++;
-		}
-		
+		}		
 	}
 	
 	public void CatAct(View view, String cityName){
@@ -104,9 +102,10 @@ public class CitySelect extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stu
+		
 		Intent intent = new Intent(this, LocateMeActivity.class);
-		startActivity(intent);
+		startActivity(intent);				
 	}
 
 }

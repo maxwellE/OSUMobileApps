@@ -41,6 +41,7 @@ public class Add_Post extends Activity {
         
         add = ((EditText) findViewById(R.id.post_summary_add)).getText().toString();    
         post.put("summary", add);
+                
         
         add = ((EditText) findViewById(R.id.post_author_add)).getText().toString();   
         post.put("author",add);
