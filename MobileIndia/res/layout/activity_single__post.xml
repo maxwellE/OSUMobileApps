@@ -37,13 +37,29 @@
                 <requestFocus />
             </TextView>
 
-            <TextView
-                android:id="@+id/singlePost_Location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:text="Location" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <TextView
+                    android:id="@+id/singlePost_Location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:onClick="shareLocation"
+                    android:text="Location" />
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="shareLocation"
+                    android:text="Location" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -71,12 +87,40 @@
         android:ems="10"
         android:text="NUmber" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="addItems"
-        android:text="Add Comment" />
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="addItems"
+            android:text="Add Comment" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="shareSMS"
+                android:text="Share by SMS" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="shareEmail"
+                android:text="Share by Email" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <ListView
         android:id="@android:id/list"

@@ -13,13 +13,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class Single_Post extends ListActivity {
-	
+
 	public static String NUM = "";
     //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
-   static ArrayList<ArrayList<String>> listItems=new ArrayList<ArrayList<String>>();
+    static ArrayList<ArrayList<String>> listItems=new ArrayList<ArrayList<String>>();
    
     //DEFINING STRING ADAPTER WHICH WILL HANDLE DATA OF LISTVIEW
     CommentAdapter adapter0;
@@ -61,9 +62,11 @@ public class Single_Post extends ListActivity {
     	category.setText(parseObject.getString("category"));
     	number.setText(NUM);
     	
- 
+		
+		
        adapter0 = new CommentAdapter(this, R.layout.comment, listItems);
        setListAdapter(adapter0);
+       
     	
         // Make sure we're running on Honeycomb or higher to use ActionBar APIs
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -71,6 +74,36 @@ public class Single_Post extends ListActivity {
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
+    
+   public void shareSMS(View view) {
+		// TODO Auto-generated method stub
+	   TextView title = (TextView) findViewById(R.id.singlePost_Title);
+		String titlestr = title.getText().toString();
+		SMSActivity.Title=titlestr;
+    	Intent SmsShare = new Intent(this, SMSActivity.class);
+        startActivity(SmsShare);
+        
+    }
+  
+   public void shareEmail(View view) {
+		// TODO Auto-generated method stub
+	    TextView title = (TextView) findViewById(R.id.singlePost_Title);
+		String titlestr = title.getText().toString();
+		EmailActivity.Title=titlestr;
+      	Intent EmailShare = new Intent(this, EmailActivity.class);
+        startActivity(EmailShare);
+       
+   }
+   
+   public void shareLocation(View view) {
+		// TODO Auto-generated method stub
+	    TextView location = (TextView) findViewById(R.id.singlePost_Location);
+		String locationstr = location.getText().toString();
+		LocateMeActivity.LocationNow =locationstr;
+     	Intent LocationShare = new Intent(this, LocateMeActivity.class);
+        startActivity(LocationShare);
+      
+  }
     
    public static void  populate_list() throws ParseException{
 	   
