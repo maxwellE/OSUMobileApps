@@ -33,7 +33,82 @@
 	            android:layout_marginTop="35dp"
 	            android:layout_marginLeft="85dp"
 	            android:orientation="vertical" >
+
+	            <Button
+		            android:id="@+id/btnDelhi"
+		            android:layout_width="140dp"
+		            android:layout_height="wrap_content"
+		            android:text="@string/btnDelhi_Text"
+		            android:tag="Delhi" />
+		        
+		        <Button
+		            android:id="@+id/btnMumbai"
+		            android:layout_width="140dp"
+		            android:layout_height="wrap_content"
+		            android:text="@string/btnMumbai_Text"
+		            android:tag="Delhi" />
+		        
+		        <Button
+		            android:id="@+id/btnKolkata"
+		            android:layout_width="140dp"
+		            android:layout_height="wrap_content"
+		            android:text="@string/btnKolkata_Text"
+		            android:tag="Kolkata" />
+		        
+		        <Button
+		            android:id="@+id/btnChennai"
+		            android:layout_width="140dp"
+		            android:layout_height="wrap_content"
+		            android:text="@string/btnChennai_Text"
+		            android:tag="Chennai" />
+	            
+		        <Button
+		            android:id="@+id/btnBanglore"
+		            android:layout_width="140dp"
+		            android:layout_height="wrap_content"
+		            android:text="@string/btnBanglore_Text"
+		            android:tag="Banglore" />
+	            
+		        <Button
+		            android:id="@+id/btnPune"
+		            android:layout_width="140dp"
+		            android:layout_height="wrap_content"
+		            android:text="@string/btnPune_Text"
+		            android:tag="Pune" />
+	            
+		        <Button
+		            android:id="@+id/btnNagpur"
+		            android:layout_width="140dp"
+		            android:layout_height="wrap_content"
+		            android:text="@string/btnNagpur_Text"
+		            android:tag="Nagpur" />
+	            
+		        <Button
+		            android:id="@+id/btnIndore"
+		            android:layout_width="140dp"
+		            android:layout_height="wrap_content"
+		            android:text="@string/btnIndore_Text"
+		            android:tag="Indore" />
+	            
+		        <Button
+		            android:id="@+id/btnJaipur"
+		            android:layout_width="140dp"
+		            android:layout_height="wrap_content"
+		            android:text="@string/btnJaipur_Text"
+		            android:tag="Jaipur" />
+	            
+		        <Button
+		            android:id="@+id/btnKanpur"
+		            android:layout_width="140dp"
+		            android:layout_height="wrap_content"
+		            android:text="@string/btnKanpur_Text"
+		            android:tag="Kanpur" />
+	            
+
 	    	</LinearLayout>
+
+        
+
     </ScrollView>
 
         

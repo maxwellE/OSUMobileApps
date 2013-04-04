@@ -43,5 +43,15 @@
     <string name="title_activity_post_list">PostList</string>
     <string name="title_activity_single__post">Single_Post</string>
     <string name="title_activity_add__comment">Add_Comment</string>
+    <string name="btnDelhi_Text">Delhi</string>
+    <string name="btnMumbai_Text">Mumbai</string>
+    <string name="btnKolkata_Text">Kolkata</string>
+    <string name="btnChennai_Text">Chennai</string>
+    <string name="btnBanglore_Text">Banglore</string>
+    <string name="btnPune_Text">Pune</string>
+    <string name="btnNagpur_Text">Nagpur</string>
+    <string name="btnIndore_Text">Indore</string>
+    <string name="btnJaipur_Text">Jaipur</string>
+    <string name="btnKanpur_Text">Kanpur</string>
 
 </resources>

@@ -58,10 +58,10 @@ public class CitySelect extends Activity implements OnClickListener {
 				cityLocate.setOnClickListener(this);
 					
 				//RelativeLayout rl = (RelativeLayout)findViewById(R.id.CityList);
-				LinearLayout ll = (LinearLayout)findViewById(R.id.CityList);
+				LinearLayout ll = (LinearLayout)findViewById(R.id.CityListButton);
 				LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 				ll.addView(cityButton, lp);
-				ll.addView(cityLocate);
+				ll.addView(cityLocate, lp);
 								
 				i++;
 		}
