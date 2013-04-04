@@ -1,5 +1,8 @@
 package com.example.mobileindia;
 
+import com.parse.ParseAnonymousUtils;
+import com.parse.ParseUser;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -86,12 +89,15 @@ public class Categories2 extends Activity {
 	}
 	
 	public void gotoPost(View v, String passVal){
-		//TODO make a "model"
 		 ListViewCategory.CATEGORY = passVal;
          Intent i = new Intent(this, ListViewCategory.class);
-//		 i.putExtra("passVal", passVal);
+         ListViewCategory.parsePostList = null;
+         if (!ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())) {
+        	 ListViewCategory.hideAdd = false;
+         }else{
+        	 ListViewCategory.hideAdd = true;
+         }
 		 startActivity(i);
-		
 	}
 	
 	public void setHeader(){

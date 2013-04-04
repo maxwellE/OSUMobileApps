@@ -20,7 +20,8 @@ public class ListViewCategory extends ListActivity {
    static ArrayList<ArrayList<String>> listItems=new ArrayList<ArrayList<String>>();
    public static String CATEGORY = "";
    public static String CITY = "";
-   
+   public static boolean hideAdd = false;
+   public static List<ParseObject> parsePostList =  new ArrayList<ParseObject>();
    
     
     //DEFINING STRING ADAPTER WHICH WILL HANDLE DATA OF LISTVIEW
@@ -31,8 +32,13 @@ public class ListViewCategory extends ListActivity {
     @SuppressLint("NewApi")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+    	super.onCreate(savedInstanceState);
     	try {
-			populate_list();
+    		if(ListViewCategory.parsePostList != null){
+    			populate_list(ListViewCategory.parsePostList);
+    	    }else{
+    	    	populate_list(null);
+    	    }
 		} catch (ParseException e) {
 			/// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,29 +57,57 @@ public class ListViewCategory extends ListActivity {
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
+    protected void onPostCreate (Bundle savedInstanceState){
+ 		super.onPostCreate(savedInstanceState);
+ 		if(ListViewCategory.hideAdd){
+ 			findViewById(R.id.addBtn).setVisibility(8);
+ 		}
+    }
     
-   public static void  populate_list() throws ParseException{
-	   
-    	ParseQuery get = new ParseQuery("Post");
-    	get.whereEqualTo("category", ListViewCategory.CATEGORY);
-    	get.whereEqualTo("city", ListViewCategory.CITY);
-
-    				List<ParseObject> objects = get.find();
-    				listItems.clear();
-    				
-    				for (ParseObject parseObject : objects) {
-    					ArrayList<String> temp = new ArrayList<String>();
-    					temp.add(parseObject.getString("title"));
-    					temp.add(parseObject.getString("summary"));
-    					temp.add(parseObject.getString("author"));
-    					String num_string = Integer.toString(parseObject.getInt("post_num"));
-    					temp.add(num_string);
-    					Log.v("Post", "POST : post_num LIST   APPCLASS = " + num_string);
-    					listItems.add(temp);
-    					
-					}
+   public static void  populate_list(List<ParseObject> parsePostList2) throws ParseException{
+	    if(parsePostList2 == null){
+	    	defaultPopulateList();
+	    }else{
+			populateYourPosts(parsePostList2);
+	    }
 
     }
+
+private static void defaultPopulateList() throws ParseException {
+	ParseQuery get = new ParseQuery("Post");
+	get.whereEqualTo("category", ListViewCategory.CATEGORY);
+	get.whereEqualTo("city", ListViewCategory.CITY);
+
+				List<ParseObject> objects = get.find();
+				listItems.clear();
+				
+				for (ParseObject parseObject : objects) {
+					ArrayList<String> temp = new ArrayList<String>();
+					temp.add(parseObject.getString("title"));
+					temp.add(parseObject.getString("summary"));
+					temp.add(parseObject.getString("author"));
+					String num_string = Integer.toString(parseObject.getInt("post_num"));
+					temp.add(num_string);
+					Log.v("Post", "POST : post_num LIST   APPCLASS = " + num_string);
+					listItems.add(temp);
+					
+				}
+}
+
+private static void populateYourPosts(List<ParseObject> parsePostList2) {
+	listItems.clear();
+	for (ParseObject parseObject : parsePostList2) {
+		ArrayList<String> temp = new ArrayList<String>();
+		temp.add(parseObject.getString("title"));
+		temp.add(parseObject.getString("summary"));
+		temp.add(parseObject.getString("author"));
+		String num_string = Integer.toString(parseObject.getInt("post_num"));
+		temp.add(num_string);
+		Log.v("Post", "POST : post_num LIST   APPCLASS = " + num_string);
+		listItems.add(temp);			
+	}
+	ListViewCategory.parsePostList = null;
+}
 
     //METHOD WHICH WILL HANDLE DYNAMIC INSERTION
     public void addItems(View v) {

@@ -82,7 +82,7 @@ public class CreateUserActivity extends Activity {
 				mPhoneView.setError("A phone number is required");
 				focusView = mPhoneView;
 				cancel = true;
-		 }else if (!PhoneNumberUtils.isGlobalPhoneNumber(mPhoneView.getText().toString())){
+		 }else if (!mPhoneView.getText().toString().matches("^[0-9]{10,12}$")){
 				mPhoneView.setError("phone number is invalid");
 				focusView = mPhoneView;
 				cancel = true;
@@ -182,7 +182,7 @@ public class CreateUserActivity extends Activity {
 				if (success) {
 					finish();
 					Context context = getApplicationContext();
-					Intent i = new Intent(context, Categories2.class);
+					Intent i = new Intent(context, MainActivity.class);
 			        startActivity(i); 
 					int duration = Toast.LENGTH_LONG;
 					Toast toast = Toast.makeText(context, "Successfully signed up!", duration);
