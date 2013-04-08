@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.parse.FindCallback;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.codec.binary.StringUtils;
 
@@ -115,18 +117,21 @@ public class SearchPostActivity extends Activity {
 		} else {
 			findViewById(R.id.btnSearchPosts).setClickable(false);
 			ParseQuery orQuery = ParseQuery.or(queryList);
-			try {
-				 ListViewCategory.parsePostList = null;
-				 ListViewCategory.parsePostList = orQuery.find();
-				 ListViewCategory.hideAdd = true;
-				 findViewById(R.id.btnSearchPosts).setClickable(true);
-				 Intent i = new Intent(this,ListViewCategory.class);
-				 startActivity(i);
-			} catch (com.parse.ParseException e) {
-				findViewById(R.id.btnSearchPosts).setClickable(true);
-				Log.d("PARSE", "QUERY ERROR");
-			}
+			ListViewCategory.parsePostList = null;
+			final Intent i = new Intent(this,ListViewCategory.class);
+			orQuery.findInBackground(new FindCallback() {
+				@Override
+				public void done(List<ParseObject> objects, com.parse.ParseException e) {
+					if (e == null) {
+						ListViewCategory.hideAdd = true;
+						ListViewCategory.parsePostList = objects;
+						startActivity(i);
+					} else {
+						//TODO: HANDLE FAILURE
+					}
+					findViewById(R.id.btnSearchPosts).setClickable(true);
+				}
+			});
 		}
 	}
-
 }
