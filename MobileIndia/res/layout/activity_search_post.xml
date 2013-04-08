@@ -17,7 +17,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/search_post_number_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
@@ -28,21 +28,22 @@
         android:inputType="number" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/search_post_keywords_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText1"
+        android:layout_below="@+id/search_post_date_field"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="48dp"
         android:ems="10"
         android:hint="@string/post_keywords_hint" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/search_post_date_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_below="@+id/editText2"
+        android:layout_alignLeft="@+id/search_post_number_field"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_below="@+id/search_post_number_field"
         android:layout_marginTop="46dp"
         android:ems="10"
         android:hint="@string/post_date_hint"
@@ -52,23 +53,34 @@
     </EditText>
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/search_post_author_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText3"
-        android:layout_below="@+id/editText3"
+        android:layout_alignLeft="@+id/search_post_keywords_field"
+        android:layout_below="@+id/search_post_keywords_field"
         android:layout_marginTop="48dp"
         android:ems="10"
         android:hint="@string/post_author_hint" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/btnSearchPosts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText4"
-        android:layout_alignRight="@+id/editText4"
-        android:layout_below="@+id/editText4"
+        android:layout_alignLeft="@+id/search_post_author_field"
+        android:layout_alignRight="@+id/search_post_author_field"
+        android:layout_below="@+id/search_post_author_field"
         android:layout_marginTop="24dp"
+        android:onClick="performSearch"
         android:text="@string/search_post_label" />
+
+    <Button
+        android:id="@+id/button2"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/search_post_date_field"
+        android:layout_toRightOf="@+id/search_post_date_field"
+        android:onClick="performSearch"
+        android:text="@string/date_picker_search_button" />
 
 </RelativeLayout>

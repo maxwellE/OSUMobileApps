@@ -50,7 +50,8 @@
     <string name="search_post_button_text">Search</string>
     <string name="search_post_number_hint">Post Number #</string>
     <string name="post_date_hint">Post Date</string>
-    <string name="post_keywords_hint">Post Keywords</string>
+    <string name="post_keywords_hint">Post Keywords (comma separated)</string>
     <string name="post_author_hint">Post Author</string>
+    <string name="date_picker_search_button">Pick Date</string>
 
 </resources>
