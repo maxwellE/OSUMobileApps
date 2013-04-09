@@ -114,6 +114,7 @@ public class MainActivity extends Activity {
 	 
 	 public void viewUserPosts(View view){
 		 ListViewCategory.parsePostList = null;
+		 ListViewCategory.forceHome = true;
 		 ParseQuery query = new ParseQuery("Post");
 		 query.whereEqualTo("user", ParseUser.getCurrentUser());
 		 try {
