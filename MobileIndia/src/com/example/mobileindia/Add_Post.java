@@ -2,6 +2,9 @@ package com.example.mobileindia;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import android.location.Location;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -66,7 +69,33 @@ public class Add_Post extends Activity {
         if(ParseUser.getCurrentUser() != null && !ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())){
             post.put("user", ParseUser.getCurrentUser());
           }
+        
+        Calendar cal = Calendar.getInstance(); 
+
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int dayofmonth = cal.get(Calendar.DAY_OF_MONTH);
+        
+        String date = month + "/" + dayofmonth + "/" + year;
+        post.put("date", date);
+        
+        Location myLocation=null;
+        
+        GeoLocation myGeoLocator = new GeoLocation(this);
+        
+		myLocation = myGeoLocator.getBestCurrentLocation();
+		if(myLocation == null){
+    		//myLocationField.setText(" Current Location not available.");
+    		}else{
+    			double latitude = myLocation.getLatitude();
+    			double longitude = myLocation.getLongitude();
+				post.put("longitude", longitude);
+				post.put("latitude", latitude);
+    		}
+        
 	    post.saveEventually();
+	    
+	    
         Intent back = new Intent(this,ListViewCategory.class);
         startActivity(back);
        

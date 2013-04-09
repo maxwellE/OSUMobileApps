@@ -21,13 +21,6 @@
     </EditText>
 
     <EditText
-        android:id="@+id/comment_date_add"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Enter a date" />
-
-    <EditText
         android:id="@+id/comment_content_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

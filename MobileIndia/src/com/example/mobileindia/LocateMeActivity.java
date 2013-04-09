@@ -18,6 +18,10 @@ import android.widget.TextView;
 public class LocateMeActivity extends MapActivity implements OnClickListener{
 
 	public static String LocationNow = " ";
+	//for post added by jeff
+	public static boolean post_location = false;
+	public static double post_long;
+	public static double post_lat;
 	private MapController whereAmIController=null;
 	private EditText locationEditableField=null;
 	private TextView myLocationField=null;
@@ -43,6 +47,19 @@ public class LocateMeActivity extends MapActivity implements OnClickListener{
 		buttonLocate.setOnClickListener(this);
 		
 		myGeoLocator = new GeoLocation(this);
+		
+		if(post_location){
+			post_location = false;
+			GeoPoint point = new GeoPoint((int) (post_lat * 1E6), (int) (post_long * 1E6));
+			
+			MyLocationOverlay locationOverlay = new MyLocationOverlay(this, whereamiView);
+			whereamiView.getOverlays().add(locationOverlay);
+			locationOverlay.enableMyLocation();
+		
+			whereAmIController.setZoom(19);
+			whereAmIController.animateTo(point);
+		}
+		
 	}
 
 	@Override
@@ -65,8 +82,8 @@ public class LocateMeActivity extends MapActivity implements OnClickListener{
 		}else{
 			
 			myLocationField.setText(LocationNow);
-			double latitude=myLocation.getLatitude();
-			double longitude=myLocation.getLongitude();
+			double latitude = myLocation.getLatitude();
+			double longitude = myLocation.getLongitude();
 			GeoPoint point = new GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
 			
 			MyLocationOverlay locationOverlay = new MyLocationOverlay(this, whereamiView);

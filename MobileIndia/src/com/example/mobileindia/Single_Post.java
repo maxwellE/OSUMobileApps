@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +22,10 @@ import android.widget.RatingBar.OnRatingBarChangeListener;
 
 public class Single_Post extends ListActivity {
 
+	public double longitude;
+	public double latitude;
 	public static String NUM = "";
+	public static boolean hideAdd = false;
     //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
     static ArrayList<ArrayList<String>> listItems=new ArrayList<ArrayList<String>>();
    
@@ -36,7 +40,7 @@ public class Single_Post extends ListActivity {
     @SuppressLint("NewApi")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
-    	
+    	Log.v("Single Post", "made it");
     	try {
 			populate_list();
 		} catch (ParseException e) {
@@ -46,6 +50,7 @@ public class Single_Post extends ListActivity {
     	
         super.onCreate(savedInstanceState);      
         setContentView(R.layout.activity_single__post);
+        Log.v("Single Post", "view set");
         ParseQuery get = new ParseQuery("Post");
     	get.whereEqualTo("post_num", Integer.parseInt(NUM));
     	
@@ -56,6 +61,8 @@ public class Single_Post extends ListActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+    	Log.v("Single Post", "got all parse objects");
     	ParseObject parseObject = objects.get(0);
         TextView title = (TextView) findViewById(R.id.singlePost_Title);
         TextView summary = (TextView) findViewById(R.id.singlePost_Summary);
@@ -67,7 +74,11 @@ public class Single_Post extends ListActivity {
     	author.setText(parseObject.getString("author"));
     	category.setText(parseObject.getString("category"));
     	number.setText(NUM);
-    	
+    	longitude = parseObject.getDouble("longitude");
+    	latitude = parseObject.getDouble("latitude");
+    	if(longitude == 0 || latitude == 0){
+    		findViewById(R.id.button5).setVisibility(8);
+    	}
 		
 		
        adapter0 = new CommentAdapter(this, R.layout.comment, listItems);
@@ -155,12 +166,19 @@ public class Single_Post extends ListActivity {
    }
    
    public void shareLocation(View view) {
+	   if(longitude == 0 || latitude == 0){
+		   
+	   }else{
 		// TODO Auto-generated method stub
-	    TextView location = (TextView) findViewById(R.id.singlePost_Location);
+	    TextView location = (TextView) findViewById(R.id.button5);
 		String locationstr = location.getText().toString();
 		LocateMeActivity.LocationNow =locationstr;
+		LocateMeActivity.post_long = longitude;
+		LocateMeActivity.post_lat = latitude;
+		LocateMeActivity.post_location = true;
      	Intent LocationShare = new Intent(this, LocateMeActivity.class);
         startActivity(LocationShare);
+	   }
       
   }
    
@@ -213,7 +231,12 @@ public class Single_Post extends ListActivity {
        // adapter0.notifyDataSetChanged();
     }
     
-
+    protected void onPostCreate (Bundle savedInstanceState){
+ 		super.onPostCreate(savedInstanceState);
+ 		if(Single_Post.hideAdd){
+ 			findViewById(R.id.logged_in_user_posts_button).setVisibility(8);
+ 		}
+    }
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -222,6 +245,16 @@ public class Single_Post extends ListActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+           // Log.d(this.getClass().getName(), "back button pressed");
+        	Intent back = new Intent(this,ListViewCategory.class);
+            startActivity(back);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    
     @Override
 	public void onPause(){
 		super.onPause();
