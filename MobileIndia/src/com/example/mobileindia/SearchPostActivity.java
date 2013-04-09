@@ -88,7 +88,7 @@ public class SearchPostActivity extends Activity {
 			try {
 				java.util.Date parsedDate = format.parse(mPostDateField.getText().toString());
 				ParseQuery dateQuery = new ParseQuery("Post");
-				dateQuery.whereEqualTo("createdAt", parsedDate);
+				dateQuery.whereEqualTo("date", parsedDate);
 				queryList.add(dateQuery);
 			} catch (ParseException e) {
 				mPostDateField.setError("Not a valid date. Plese specify a valid date.");
