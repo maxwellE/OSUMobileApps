@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -88,7 +89,10 @@ private static void defaultPopulateList() throws ParseException {
 					temp.add(parseObject.getString("author"));
 					String num_string = Integer.toString(parseObject.getInt("post_num"));
 					temp.add(num_string);
-					Log.v("Post", "POST : post_num LIST   APPCLASS = " + num_string);
+					//change to object ID
+					//temp.add(parseObject.getObjectId());
+					//add automatic date
+					temp.add(parseObject.getString("date"));
 					listItems.add(temp);
 					
 				}
@@ -103,6 +107,7 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 		temp.add(parseObject.getString("author"));
 		String num_string = Integer.toString(parseObject.getInt("post_num"));
 		temp.add(num_string);
+		temp.add(parseObject.getString("date"));
 		Log.v("Post", "POST : post_num LIST   APPCLASS = " + num_string);
 		listItems.add(temp);			
 	}
@@ -126,6 +131,15 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
         return super.onOptionsItemSelected(item);
     }
     //
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+           // Log.d(this.getClass().getName(), "back button pressed");
+        	Intent back = new Intent(this,Categories2.class);
+            startActivity(back);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     @Override
 	public void onPause(){
@@ -155,7 +169,7 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 		 	//Log.v("List", "grabbed num List APPCLASS " +  title.getHint() + "     end");
 		 	Single_Post.NUM =  (String) title.getHint();
 		 	if(Single_Post.NUM != null){
-		 		//Log.v("List", "hint SINGLE APPCLASS = " +  SinglePostView.TITLE  + "     end");
+		 		Log.v("List", "hint SINGLE APPCLASS = " +  Single_Post.NUM  + "     end");
 		 		Intent intent = new Intent(this, Single_Post.class);
 				startActivity(intent);
 		 	}

@@ -2,6 +2,8 @@ package com.example.mobileindia;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -58,8 +60,15 @@ public class Add_Comment extends Activity {
         add = ((EditText) findViewById(R.id.comment_content_add)).getText().toString();    
         comment.put("content", add);
         
-        add = ((EditText) findViewById(R.id.comment_date_add)).getText().toString();   
-        comment.put("date",add);
+        //add = ((EditText) findViewById(R.id.comment_date_add)).getText().toString();  
+        Calendar cal = Calendar.getInstance(); 
+
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int dayofmonth = cal.get(Calendar.DAY_OF_MONTH);
+        
+        String date = month + "/" + dayofmonth + "/" + year;
+        comment.put("date",date);
         
         comment.put("postNum", Single_Post.NUM);
        // post.saveInBackground();
