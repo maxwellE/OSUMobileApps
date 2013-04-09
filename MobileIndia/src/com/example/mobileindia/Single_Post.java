@@ -16,6 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
+
 
 public class Single_Post extends ListActivity {
 
@@ -30,6 +33,9 @@ public class Single_Post extends ListActivity {
     CommentAdapter adapter0;
   
     int clickCounter=0;
+    
+    private RatingBar ratebar;
+    private TextView avgRating ;
 
     @SuppressLint("NewApi")
 	@Override
@@ -84,8 +90,61 @@ public class Single_Post extends ListActivity {
             // Show the Up button in the action bar.
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        
+        ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
+        ratebar.setRating((float) 3.5);
+        
+        try {
+			setRating();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        addRatebarListner();
+        
     }
     
+    //Sets the Avg rating textview
+   private void setRating() throws ParseException {
+		
+//	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
+	   avgRating = (TextView) findViewById(R.id.txtAvgRating);
+	 
+	   avgRating.setText(Float.toString(getRating()) + " Avg Rating");
+	  
+	}
+
+   private void addRatebarListner() {
+	   
+	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
+		
+	   ratebar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+			public void onRatingChanged(RatingBar ratingBar, float rating,
+					boolean fromUser) {
+		 
+					setNewRating(rating);
+		 
+				}
+			});
+	}
+   
+   public void setNewRating(float r){
+	   
+	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
+	   ratebar.setRating(r);
+	   
+	   Log.d("BTest","New rating of " + r + " starts");
+	   
+	   try {
+		setRating();
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	   
+   }
+
    public void shareSMS(View view) {
 		// TODO Auto-generated method stub
 	   TextView title = (TextView) findViewById(R.id.singlePost_Title);
@@ -122,6 +181,28 @@ public class Single_Post extends ListActivity {
 	   }
       
   }
+   
+   //Gets the Avg Rating for a single post
+   public static float getRating() throws ParseException{
+	   
+	   ParseQuery get = new ParseQuery("Rating");
+	   get.whereEqualTo("PostNum", NUM);
+	   
+	   List<ParseObject> obj = get.find();
+	   
+	   float totalRatings = obj.size();
+	   float Ratings = 0;
+	   
+	   for (ParseObject parseObject : obj) {
+		   Number temp = parseObject.getNumber("Rating");
+		   Ratings += temp.floatValue();
+	   }
+	   
+	   Ratings /= totalRatings;
+	   
+	   return Ratings;
+	   
+   }
     
    public static void  populate_list() throws ParseException{
 	   
@@ -195,6 +276,8 @@ public class Single_Post extends ListActivity {
 		super.onStop();
 		Log.v("LIST", "Stopped LIST APPCLASS");
 	}
+	
+	
 	
 
 }
