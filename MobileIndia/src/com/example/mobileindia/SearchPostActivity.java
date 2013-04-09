@@ -7,8 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.parse.FindCallback;
+import com.parse.LogInCallback;
+import com.parse.ParseAnonymousUtils;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.codec.binary.StringUtils;
 
 import android.os.Bundle;
@@ -18,10 +21,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.provider.CalendarContract.Calendars;
@@ -116,22 +121,44 @@ public class SearchPostActivity extends Activity {
 			focusView.requestFocus();
 		} else {
 			findViewById(R.id.btnSearchPosts).setClickable(false);
-			ParseQuery orQuery = ParseQuery.or(queryList);
-			ListViewCategory.parsePostList = null;
-			final Intent i = new Intent(this,ListViewCategory.class);
-			orQuery.findInBackground(new FindCallback() {
-				@Override
-				public void done(List<ParseObject> objects, com.parse.ParseException e) {
-					if (e == null) {
-						ListViewCategory.hideAdd = true;
-						ListViewCategory.parsePostList = objects;
-						startActivity(i);
-					} else {
-						//TODO: HANDLE FAILURE
+			if (queryList.size() == 0) {
+				 final Context context = getApplicationContext();
+				 final int duration = Toast.LENGTH_LONG;
+				 Toast toast = Toast.makeText(context, "No Query Provided. Plase fill a search field above.", duration);
+				 toast.show();
+				 findViewById(R.id.btnSearchPosts).setClickable(true);
+			}else{
+				ParseQuery orQuery = ParseQuery.or(queryList);
+				ListViewCategory.parsePostList = null;
+				final Intent i = new Intent(this,ListViewCategory.class);
+				orQuery.findInBackground(new FindCallback() {
+					@Override
+					public void done(List<ParseObject> objects, com.parse.ParseException e) {
+						if (e == null) {
+							if (objects.size() == 0) {
+								final Context context = getApplicationContext();
+								final int duration = Toast.LENGTH_LONG;
+								Toast toast = Toast.makeText(context, "No posts found with that search query. Please loosen your query.", duration);
+								toast.show();
+								findViewById(R.id.btnSearchPosts).setClickable(true);
+							} else {
+								ListViewCategory.hideAdd = true;
+								ListViewCategory.parsePostList = objects;
+								startActivity(i);
+								findViewById(R.id.btnSearchPosts).setClickable(true);
+							}
+						} else {
+							 final Context context = getApplicationContext();
+							 final int duration = Toast.LENGTH_LONG;
+							 Toast toast = Toast.makeText(context, "There was an error while searching posts. Please try again.", duration);
+							 toast.show();
+							 findViewById(R.id.btnSearchPosts).setClickable(true);
+						}
+						findViewById(R.id.btnSearchPosts).setClickable(true);
 					}
-					findViewById(R.id.btnSearchPosts).setClickable(true);
-				}
-			});
+				});
+			}
+
 		}
 	}
 }
