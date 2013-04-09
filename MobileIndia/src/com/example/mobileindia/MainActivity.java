@@ -133,4 +133,9 @@ public class MainActivity extends Activity {
 		Intent i = new Intent(this,SearchPostActivity.class);
 		startActivity(i);
 	 }
+	 
+	 public void exitApp(View view){
+		 finish();
+	 }
+	 
 }

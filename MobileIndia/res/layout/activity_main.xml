@@ -89,4 +89,16 @@
        android:text="@string/search_post_button_label"
        android:visibility="invisible" />
 
+    <Button
+        android:id="@+id/btnExit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="31dp"
+        android:minHeight="45dp"
+        android:minWidth="200dp"
+        android:onClick="exitApp"
+        android:text="Exit" />
+
 </RelativeLayout>
