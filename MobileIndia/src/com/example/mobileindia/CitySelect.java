@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -65,6 +66,16 @@ public class CitySelect extends Activity implements OnClickListener {
 				i++;
 		}		
 	}
+	
+	@Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+           // Log.d(this.getClass().getName(), "back button pressed");
+        	Intent back = new Intent(this,MainActivity.class);
+            startActivity(back);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 	
 	public void CatAct(View view, String cityName){
 		Intent i = new Intent(this, Categories2.class);
