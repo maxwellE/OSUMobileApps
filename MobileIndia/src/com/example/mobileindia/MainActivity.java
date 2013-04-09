@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
@@ -114,6 +115,7 @@ public class MainActivity extends Activity {
 	 
 	 public void viewUserPosts(View view){
 		 ListViewCategory.parsePostList = null;
+		 ListViewCategory.forceHome = true;
 		 ParseQuery query = new ParseQuery("Post");
 		 query.whereEqualTo("user", ParseUser.getCurrentUser());
 		 try {
@@ -132,5 +134,8 @@ public class MainActivity extends Activity {
 	 public void searchPosts(View view){
 		Intent i = new Intent(this,SearchPostActivity.class);
 		startActivity(i);
+	 }
+	 @Override
+	 public void onBackPressed() {
 	 }
 }

@@ -22,7 +22,9 @@ public class ListViewCategory extends ListActivity {
    public static String CATEGORY = "";
    public static String CITY = "";
    public static boolean hideAdd = false;
+   public static boolean forceHome = false;
    public static List<ParseObject> parsePostList =  new ArrayList<ParseObject>();
+   public static boolean forceSearch;
    
     
     //DEFINING STRING ADAPTER WHICH WILL HANDLE DATA OF LISTVIEW
@@ -133,11 +135,19 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
     //
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+        if (ListViewCategory.forceHome) {
            // Log.d(this.getClass().getName(), "back button pressed");
+        	Intent back = new Intent(this,MainActivity.class);
+            startActivity(back);
+        }else if (forceSearch) {
+        	Intent back = new Intent(this,SearchPostActivity.class);
+            startActivity(back);
+		}else if(keyCode == KeyEvent.KEYCODE_BACK){
         	Intent back = new Intent(this,Categories2.class);
             startActivity(back);
         }
+        ListViewCategory.forceSearch = false;
+        ListViewCategory.forceHome = false;
         return super.onKeyDown(keyCode, event);
     }
 

@@ -1,30 +1,28 @@
 package com.example.mobileindia;
 
-import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.parse.FindCallback;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.codec.binary.StringUtils;
-
-import android.os.Bundle;
+import android.annotation.TargetApi;
 import android.app.Activity;
-import android.util.Log;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.text.TextUtils;
+import android.text.format.DateFormat;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.support.v4.app.NavUtils;
-import android.text.TextUtils;
-import android.text.format.DateFormat;
-import android.annotation.TargetApi;
-import android.content.Intent;
-import android.os.Build;
-import android.provider.CalendarContract.Calendars;
+import android.widget.Toast;
+
+import com.parse.FindCallback;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 public class SearchPostActivity extends Activity {
 
@@ -71,6 +69,7 @@ public class SearchPostActivity extends Activity {
 	}
 	
 	public void performSearch(View view) {
+		ListViewCategory.forceSearch = false;
 		TextView mPostNumberField = (TextView) findViewById(R.id.search_post_number_field);
 		TextView mPostDateField = (TextView) findViewById(R.id.search_post_date_field);
 		TextView mPostKeywordsField = (TextView) findViewById(R.id.search_post_keywords_field);
@@ -116,22 +115,54 @@ public class SearchPostActivity extends Activity {
 			focusView.requestFocus();
 		} else {
 			findViewById(R.id.btnSearchPosts).setClickable(false);
-			ParseQuery orQuery = ParseQuery.or(queryList);
-			ListViewCategory.parsePostList = null;
-			final Intent i = new Intent(this,ListViewCategory.class);
-			orQuery.findInBackground(new FindCallback() {
-				@Override
-				public void done(List<ParseObject> objects, com.parse.ParseException e) {
-					if (e == null) {
-						ListViewCategory.hideAdd = true;
-						ListViewCategory.parsePostList = objects;
-						startActivity(i);
-					} else {
-						//TODO: HANDLE FAILURE
+			if (queryList.size() == 0) {
+				 final Context context = getApplicationContext();
+				 final int duration = Toast.LENGTH_LONG;
+				 Toast toast = Toast.makeText(context, "No Query Provided. Plase fill a search field above.", duration);
+				 toast.show();
+				 findViewById(R.id.btnSearchPosts).setClickable(true);
+			}else{
+				ParseQuery orQuery = ParseQuery.or(queryList);
+				ListViewCategory.parsePostList = null;
+				final Intent i = new Intent(this,ListViewCategory.class);
+				orQuery.findInBackground(new FindCallback() {
+					@Override
+					public void done(List<ParseObject> objects, com.parse.ParseException e) {
+						if (e == null) {
+							if (objects.size() == 0) {
+								final Context context = getApplicationContext();
+								final int duration = Toast.LENGTH_LONG;
+								Toast toast = Toast.makeText(context, "No posts found with that search query. Please loosen your query.", duration);
+								toast.show();
+								findViewById(R.id.btnSearchPosts).setClickable(true);
+							} else {
+								ListViewCategory.hideAdd = true;
+								ListViewCategory.parsePostList = objects;
+								ListViewCategory.forceSearch = true;
+								startActivity(i);
+								findViewById(R.id.btnSearchPosts).setClickable(true);
+							}
+						} else {
+							 final Context context = getApplicationContext();
+							 final int duration = Toast.LENGTH_LONG;
+							 Toast toast = Toast.makeText(context, "There was an error while searching posts. Please try again.", duration);
+							 toast.show();
+							 findViewById(R.id.btnSearchPosts).setClickable(true);
+						}
+						findViewById(R.id.btnSearchPosts).setClickable(true);
 					}
-					findViewById(R.id.btnSearchPosts).setClickable(true);
-				}
-			});
+				});
+			}
+
 		}
+
 	}
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+        	Intent back = new Intent(this,MainActivity.class);
+            startActivity(back);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
