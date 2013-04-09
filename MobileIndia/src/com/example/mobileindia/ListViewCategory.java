@@ -80,10 +80,8 @@ private static void defaultPopulateList() throws ParseException {
 	ParseQuery get = new ParseQuery("Post");
 	get.whereEqualTo("category", ListViewCategory.CATEGORY);
 	get.whereEqualTo("city", ListViewCategory.CITY);
-
 				List<ParseObject> objects = get.find();
 				listItems.clear();
-				
 				for (ParseObject parseObject : objects) {
 					ArrayList<String> temp = new ArrayList<String>();
 					temp.add(parseObject.getString("title"));
@@ -95,8 +93,7 @@ private static void defaultPopulateList() throws ParseException {
 					//temp.add(parseObject.getObjectId());
 					//add automatic date
 					temp.add(parseObject.getString("date"));
-					listItems.add(temp);
-					
+					listItems.add(temp);	
 				}
 }
 
@@ -118,13 +115,10 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 
     //METHOD WHICH WILL HANDLE DYNAMIC INSERTION
     public void addItems(View v) {
-
         Intent intent = new Intent(this, Add_Post.class);
 		startActivity(intent);
         adapter0.notifyDataSetChanged();
     }
-    
-
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -132,11 +126,9 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
         startActivity(back);
         return super.onOptionsItemSelected(item);
     }
-    //
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (ListViewCategory.forceHome) {
-           // Log.d(this.getClass().getName(), "back button pressed");
         	Intent back = new Intent(this,MainActivity.class);
             startActivity(back);
         }else if (forceSearch) {
@@ -154,29 +146,20 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
     @Override
 	public void onPause(){
 		super.onPause();
-		////
-		//Log.v("LIST", "PAUSED LIST APPCLASS");
-
 	}
 	
 	@Override
 	public void onResume(){
-		//Log.v("List", "RESUMED List APPCLASS");
-		super.onResume();
-		//adapter0.notifyDataSetChanged();
-		
+		super.onResume();		
 	}
 	
 	@Override
 	public void onStop(){
 		super.onStop();
-		//Log.v("LIST", "Stopped LIST APPCLASS");
 	}
 	
-	
-	 public void SinglePost(View view){
+	public void SinglePost(View view){
 		 	Button title = (Button) view.findViewById(R.id.full_post_button);
-		 	//Log.v("List", "grabbed num List APPCLASS " +  title.getHint() + "     end");
 		 	Single_Post.NUM =  (String) title.getHint();
 		 	if(Single_Post.NUM != null){
 		 		Log.v("List", "hint SINGLE APPCLASS = " +  Single_Post.NUM  + "     end");
