@@ -1,35 +1,28 @@
 package com.example.mobileindia;
 
-import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.parse.FindCallback;
-import com.parse.LogInCallback;
-import com.parse.ParseAnonymousUtils;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
-import com.parse.codec.binary.StringUtils;
-
-import android.os.Bundle;
+import android.annotation.TargetApi;
 import android.app.Activity;
-import android.util.Log;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.text.TextUtils;
+import android.text.format.DateFormat;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v4.app.NavUtils;
-import android.text.TextUtils;
-import android.text.format.DateFormat;
-import android.annotation.TargetApi;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
-import android.provider.CalendarContract.Calendars;
+
+import com.parse.FindCallback;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 public class SearchPostActivity extends Activity {
 
@@ -76,6 +69,7 @@ public class SearchPostActivity extends Activity {
 	}
 	
 	public void performSearch(View view) {
+		ListViewCategory.forceSearch = false;
 		TextView mPostNumberField = (TextView) findViewById(R.id.search_post_number_field);
 		TextView mPostDateField = (TextView) findViewById(R.id.search_post_date_field);
 		TextView mPostKeywordsField = (TextView) findViewById(R.id.search_post_keywords_field);
@@ -144,6 +138,7 @@ public class SearchPostActivity extends Activity {
 							} else {
 								ListViewCategory.hideAdd = true;
 								ListViewCategory.parsePostList = objects;
+								ListViewCategory.forceSearch = true;
 								startActivity(i);
 								findViewById(R.id.btnSearchPosts).setClickable(true);
 							}
@@ -160,5 +155,14 @@ public class SearchPostActivity extends Activity {
 			}
 
 		}
+
 	}
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK){
+        	Intent back = new Intent(this,MainActivity.class);
+            startActivity(back);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
