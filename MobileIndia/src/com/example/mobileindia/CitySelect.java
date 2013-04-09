@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.widget.AbsListView.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class CitySelect extends Activity implements OnClickListener {
 
@@ -68,6 +69,7 @@ public class CitySelect extends Activity implements OnClickListener {
 //		}
 //		
 //	}
+
 	
 	public void CatAct(View v){
 		Intent i = new Intent(this, Categories2.class);
@@ -129,9 +131,10 @@ public class CitySelect extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stu
+		
 		Intent intent = new Intent(this, LocateMeActivity.class);
-		startActivity(intent);
+		startActivity(intent);				
 	}
 
 }

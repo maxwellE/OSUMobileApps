@@ -13,18 +13,25 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
+
 
 public class Single_Post extends ListActivity {
-	
+
 	public static String NUM = "";
     //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
-   static ArrayList<ArrayList<String>> listItems=new ArrayList<ArrayList<String>>();
+    static ArrayList<ArrayList<String>> listItems=new ArrayList<ArrayList<String>>();
    
     //DEFINING STRING ADAPTER WHICH WILL HANDLE DATA OF LISTVIEW
     CommentAdapter adapter0;
   
     int clickCounter=0;
+    
+    private RatingBar ratebar;
+    private TextView avgRating ;
 
     @SuppressLint("NewApi")
 	@Override
@@ -61,16 +68,123 @@ public class Single_Post extends ListActivity {
     	category.setText(parseObject.getString("category"));
     	number.setText(NUM);
     	
- 
+		
+		
        adapter0 = new CommentAdapter(this, R.layout.comment, listItems);
        setListAdapter(adapter0);
+       
     	
         // Make sure we're running on Honeycomb or higher to use ActionBar APIs
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             // Show the Up button in the action bar.
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        
+        ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
+        ratebar.setRating((float) 3.5);
+        
+        try {
+			setRating();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        addRatebarListner();
+        
     }
+    
+    //Sets the Avg rating textview
+   private void setRating() throws ParseException {
+		
+//	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
+	   avgRating = (TextView) findViewById(R.id.txtAvgRating);
+	 
+	   avgRating.setText(Float.toString(getRating()) + " Avg Rating");
+	  
+	}
+
+   private void addRatebarListner() {
+	   
+	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
+		
+	   ratebar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+			public void onRatingChanged(RatingBar ratingBar, float rating,
+					boolean fromUser) {
+		 
+					setNewRating(rating);
+		 
+				}
+			});
+	}
+   
+   public void setNewRating(float r){
+	   
+	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
+	   ratebar.setRating(r);
+	   
+	   Log.d("BTest","New rating of " + r + " starts");
+	   
+	   try {
+		setRating();
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	   
+   }
+
+   public void shareSMS(View view) {
+		// TODO Auto-generated method stub
+	   TextView title = (TextView) findViewById(R.id.singlePost_Title);
+		String titlestr = title.getText().toString();
+		SMSActivity.Title=titlestr;
+    	Intent SmsShare = new Intent(this, SMSActivity.class);
+        startActivity(SmsShare);
+        
+    }
+  
+   public void shareEmail(View view) {
+		// TODO Auto-generated method stub
+	    TextView title = (TextView) findViewById(R.id.singlePost_Title);
+		String titlestr = title.getText().toString();
+		EmailActivity.Title=titlestr;
+      	Intent EmailShare = new Intent(this, EmailActivity.class);
+        startActivity(EmailShare);
+       
+   }
+   
+   public void shareLocation(View view) {
+		// TODO Auto-generated method stub
+	    TextView location = (TextView) findViewById(R.id.singlePost_Location);
+		String locationstr = location.getText().toString();
+		LocateMeActivity.LocationNow =locationstr;
+     	Intent LocationShare = new Intent(this, LocateMeActivity.class);
+        startActivity(LocationShare);
+      
+  }
+   
+   //Gets the Avg Rating for a single post
+   public static float getRating() throws ParseException{
+	   
+	   ParseQuery get = new ParseQuery("Rating");
+	   get.whereEqualTo("PostNum", NUM);
+	   
+	   List<ParseObject> obj = get.find();
+	   
+	   float totalRatings = obj.size();
+	   float Ratings = 0;
+	   
+	   for (ParseObject parseObject : obj) {
+		   Number temp = parseObject.getNumber("Rating");
+		   Ratings += temp.floatValue();
+	   }
+	   
+	   Ratings /= totalRatings;
+	   
+	   return Ratings;
+	   
+   }
     
    public static void  populate_list() throws ParseException{
 	   
@@ -129,6 +243,8 @@ public class Single_Post extends ListActivity {
 		super.onStop();
 		Log.v("LIST", "Stopped LIST APPCLASS");
 	}
+	
+	
 	
 
 }

@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:allowBackup="true"
@@ -77,6 +79,25 @@
             android:label="@string/title_activity_add__comment" >
         </activity>
         <activity
+            android:name="com.example.mobileindia.LocationActivity"
+            android:label="@string/title_activity_location" >
+        </activity>
+        <activity
+            android:name="com.example.mobileindia.SMSActivity"
+            android:label="@string/title_activity_sms" >
+        </activity>
+
+        <receiver android:name="com.example.mobileindia.SMSReceiver" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.example.mobileindia.EmailActivity"
+            android:label="@string/title_activity_email" >
+        </activity>
+		<activity
             android:name="com.example.mobileindia.SearchPostActivity"
             android:label="@string/title_activity_search_post"
             android:parentActivityName="com.example.mobileindia.MainActivity" >

@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class LocateMeActivity extends MapActivity implements OnClickListener{
 
-
+	public static String LocationNow = " ";
 	private MapController whereAmIController=null;
 	private EditText locationEditableField=null;
 	private TextView myLocationField=null;
@@ -64,7 +64,7 @@ public class LocateMeActivity extends MapActivity implements OnClickListener{
 		myLocationField.setText(" Current Location not available.");
 		}else{
 			
-			myLocationField.setText(" Current Location");
+			myLocationField.setText(LocationNow);
 			double latitude=myLocation.getLatitude();
 			double longitude=myLocation.getLongitude();
 			GeoPoint point = new GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
