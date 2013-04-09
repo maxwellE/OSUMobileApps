@@ -65,4 +65,28 @@
        android:onClick="createUserActivity"
        android:text="@string/create_user_button_text" />
 
+   <Button
+       android:id="@+id/logged_in_user_posts_button"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignLeft="@+id/btnSearch"
+       android:layout_alignRight="@+id/btnSearch"
+       android:layout_below="@+id/btnSearch"
+       android:layout_marginTop="14dp"
+       android:onClick="viewUserPosts"
+       android:text="@string/logged_in_user_posts_button"
+       android:visibility="invisible" />
+
+   <Button
+       android:id="@+id/btnSearch"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignLeft="@+id/btnSignUp"
+       android:layout_alignRight="@+id/btnSignUp"
+       android:layout_below="@+id/btnSignUp"
+       android:layout_marginTop="19dp"
+       android:onClick="searchPosts"
+       android:text="@string/search_post_button_label"
+       android:visibility="invisible" />
+
 </RelativeLayout>

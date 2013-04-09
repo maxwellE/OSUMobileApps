@@ -43,7 +43,16 @@
     <string name="title_activity_post_list">PostList</string>
     <string name="title_activity_single__post">Single_Post</string>
     <string name="title_activity_add__comment">Add_Comment</string>
-    <string name="btnDelhi_Text">Delhi</string>
+    <string name="logged_in_user_posts_button">Your Posts</string>
+    <string name="search_post_button_label">Search Posts</string>
+    <string name="title_activity_search_post">SearchPostActivity</string>
+    <string name="search_post_label">Search Posts</string>
+    <string name="search_post_button_text">Search</string>
+    <string name="search_post_number_hint">Post Number #</string>
+    <string name="post_date_hint">Post Date</string>
+    <string name="post_keywords_hint">Post Keywords</string>
+    <string name="post_author_hint">Post Author</string>
+	<string name="btnDelhi_Text">Delhi</string>
     <string name="btnMumbai_Text">Mumbai</string>
     <string name="btnKolkata_Text">Kolkata</string>
     <string name="btnChennai_Text">Chennai</string>
@@ -53,5 +62,6 @@
     <string name="btnIndore_Text">Indore</string>
     <string name="btnJaipur_Text">Jaipur</string>
     <string name="btnKanpur_Text">Kanpur</string>
+    <string name="btnLocMe_Text">View Map</string>
 
 </resources>

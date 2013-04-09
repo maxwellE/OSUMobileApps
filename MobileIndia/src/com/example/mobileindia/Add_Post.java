@@ -24,13 +24,6 @@ public class Add_Post extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add__post);
-	
-	  // Make sure we're running on Honeycomb or higher to use ActionBar APIs
-//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-//    		// Show the Up button in the action bar.
-//    		getActionBar().setDisplayHomeAsUpEnabled(true);
-//    	}
-    
 	}
 
 	@Override
@@ -39,17 +32,6 @@ public class Add_Post extends Activity {
 		getMenuInflater().inflate(R.menu.add__post, menu);
 		return true;
 	}
-	
-//	  @Override
-//	    public boolean onOptionsItemSelected(MenuItem item) {
-//	        switch (item.getItemId()) {
-//	        case android.R.id.home:
-//	            NavUtils.navigateUpFromSameTask(this);
-//	            return true;
-//	        }
-//	        return super.onOptionsItemSelected(item);
-//	    }
-	
 	
 	public void AddPost(View view){
 		ParseObject post = new ParseObject("Post");
@@ -65,7 +47,7 @@ public class Add_Post extends Activity {
         
         add = ListViewCategory.CATEGORY;      
         post.put("category",add);
-        if(ParseUser.getCurrentUser() != null && !ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())){
+        if(ParseUser.getCurrentUser() != null){
           post.put("user", ParseUser.getCurrentUser());
         }
         add = ListViewCategory.CITY;
@@ -90,10 +72,8 @@ public class Add_Post extends Activity {
 	}
 	
 	public void Cancel(View view){
-		//NavUtils.navigateUpFromSameTask(this);
 		Intent back = new Intent(this,ListViewCategory.class);
         startActivity(back);
-        //
 	}
 
 }

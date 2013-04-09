@@ -3,6 +3,7 @@ package com.example.mobileindia;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,7 +18,7 @@ public class CitySelect extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_city_select);
-		addCityButtons();
+//		addCityButtons();
 
 	}
 	@Override
@@ -35,65 +36,89 @@ public class CitySelect extends Activity implements OnClickListener {
 		return true;
 	}
 	
-	public void addCityButtons(){
-		int i = 0;
-		String[] cityName = new String[10];
-		cityName = getCity();
-		
-		while(i < 10){
-				final String NameOfCity = cityName[i];
-				Button cityButton = new Button(this);
-				cityButton.setText(NameOfCity);
-				Button cityLocate = new Button(this);
-				cityLocate.setText("LocateMe");
-				cityLocate.setOnClickListener(this);
-				
-				cityButton.setOnClickListener(new Button.OnClickListener() {
-					
-				    public void onClick(View v) {
-				    	CatAct(v, NameOfCity);
-				    }
-				});
-				
-				cityLocate.setOnClickListener(this);
-					
-				//RelativeLayout rl = (RelativeLayout)findViewById(R.id.CityList);
-				LinearLayout ll = (LinearLayout)findViewById(R.id.CityListButton);
-				LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-				ll.addView(cityButton, lp);
-				ll.addView(cityLocate, lp);
-								
-				i++;
-		}
-		
-	}
+//	public void addCityButtons(){
+//		int i = 0;
+//		String[] cityName = new String[10];
+//		cityName = getCity();
+//		
+//		while(i < 10){
+//				final String NameOfCity = cityName[i];
+//				Button cityButton = new Button(this);
+//				cityButton.setText(NameOfCity);
+//				Button cityLocate = new Button(this);
+//				cityLocate.setText("LocateMe");
+//				cityLocate.setOnClickListener(this);
+//				
+//				cityButton.setOnClickListener(new Button.OnClickListener() {
+//					
+//				    public void onClick(View v) {
+//				    	CatAct(v, NameOfCity);
+//				    }
+//				});
+//				
+//				cityLocate.setOnClickListener(this);
+//					
+//				//RelativeLayout rl = (RelativeLayout)findViewById(R.id.CityList);
+//				LinearLayout ll = (LinearLayout)findViewById(R.id.CityListButton);
+//				LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+//				ll.addView(cityButton, lp);
+//				ll.addView(cityLocate, lp);
+//								
+//				i++;
+//		}
+//		
+//	}
 	
-	public void CatAct(View view, String cityName){
+	public void CatAct(View v){
 		Intent i = new Intent(this, Categories2.class);
 		//i.putExtra("CityName", cityName);
+		String cityName = "";
+		try{
+			cityName = (String) v.getTag();
+		} catch(Exception e){
+			Log.e("catAct", "Error getting city name");
+		}
+		Log.d("BTest","Clicked " + cityName);
 		ListViewCategory.CITY = cityName;
 		startActivity(i);
+		
 	 }
 	
-	public String[] getCity(){
-		String[] city;
-		city = new String[10];
+	public void LocateMe(View v) {
+		// TODO Auto-generated method stub
+		Intent i = new Intent(this, LocateMeActivity.class);
 		
-		city[0] = "Delhi";
-		city[1] = "Mumbai";
-		city[2] = "Kolkata";
-		city[3] = "Chennai";
-		city[4] = "Banglore";
-		city[5] = "Pune";
-		city[6] = "Nagpur";
-		city[7] = "Indore";
-		city[8] = "Jaipur";
-		city[9] = "Kanpur";
+		String cityName = "";
+		try{
+			cityName = (String) v.getTag();
+		} catch(Exception e){
+			Log.e("catAct", "Error getting city name");
+		}
+		Log.d("BTest","Clicked Locate" + cityName);
+		ListViewCategory.CITY = cityName;
 		
-		
-		return city;
-		
+		startActivity(i);
 	}
+	
+//	public String[] getCity(){
+//		String[] city;
+//		city = new String[10];
+//		
+//		city[0] = "Delhi";
+//		city[1] = "Mumbai";
+//		city[2] = "Kolkata";
+//		city[3] = "Chennai";
+//		city[4] = "Banglore";
+//		city[5] = "Pune";
+//		city[6] = "Nagpur";
+//		city[7] = "Indore";
+//		city[8] = "Jaipur";
+//		city[9] = "Kanpur";
+//		
+//		
+//		return city;
+//		
+//	}
 	
 /*	public void sendMessage(View view) {
 
