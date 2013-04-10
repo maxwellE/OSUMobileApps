@@ -62,7 +62,7 @@ public class Add_Comment extends Activity {
         Calendar cal = Calendar.getInstance(); 
 
         int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
+        int month = cal.get(Calendar.MONTH) + 1;
         int dayofmonth = cal.get(Calendar.DAY_OF_MONTH);
         
         String date = month + "/" + dayofmonth + "/" + year;
