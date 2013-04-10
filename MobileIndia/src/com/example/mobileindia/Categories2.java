@@ -1,11 +1,15 @@
 package com.example.mobileindia;
 
+import com.parse.ParseAnonymousUtils;
+import com.parse.ParseUser;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +33,7 @@ public class Categories2 extends Activity {
             // Show the Up button in the action bar.
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        ListViewCategory.parsePostList = null;
 	}
 
 	@Override
@@ -43,6 +48,16 @@ public class Categories2 extends Activity {
 	    	Intent back = new Intent(this,CitySelect.class);
 	        startActivity(back);
 	        return super.onOptionsItemSelected(item);
+	    }
+	 
+	  @Override
+	    public boolean onKeyDown(int keyCode, KeyEvent event) {
+	        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+	           // Log.d(this.getClass().getName(), "back button pressed");
+	        	Intent back = new Intent(this,CitySelect.class);
+	            startActivity(back);
+	        }
+	        return super.onKeyDown(keyCode, event);
 	    }
 	
 	public void addCatButtons(){
@@ -86,13 +101,16 @@ public class Categories2 extends Activity {
 	}
 	
 	public void gotoPost(View v, String passVal){
-		//TODO make a "model"
 		 ListViewCategory.CATEGORY = passVal;
          Intent i = new Intent(this, ListViewCategory.class);
-//		 i.putExtra("passVal", passVal);
-         ListViewCategory.parsePostList = null;
+         if (!ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())) {
+        	 ListViewCategory.hideAdd = false;
+        	 Single_Post.hideAdd = false;
+         }else{
+        	 ListViewCategory.hideAdd = true;
+        	 Single_Post.hideAdd = true;
+         }
 		 startActivity(i);
-		
 	}
 	
 	public void setHeader(){

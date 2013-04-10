@@ -5,7 +5,7 @@
     tools:context=".CitySelect" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/searchPostLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -15,26 +15,204 @@
         android:text="@string/CityHeader"
         android:textSize="26sp" />
 
-
     <ScrollView
         android:id="@+id/scrollView1"
-        android:layout_width="wrap_content"
+        android:layout_width="202dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/searchPostLabel"
 		 >
 
-	        <LinearLayout
-	            android:id="@+id/CityList"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_marginTop="35dp"
-	            android:orientation="vertical" >
-	    	</LinearLayout>
-    </ScrollView>
-
+        <LinearLayout
+            android:id="@+id/llCityButtons"
+            android:layout_width="288dp"
+            android:layout_height="493dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="15dp"
+            android:orientation="horizontal" >
         
+		        <LinearLayout
+		            android:id="@+id/CityList"
+		            android:layout_width="147dp"
+		            android:layout_height="493dp"
+		            android:layout_marginTop="35dp"
+		            android:orientation="vertical" >
+	
+		            <Button
+			            android:id="@+id/btnDelhi"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnDelhi_Text"
+			            android:tag="Delhi" 
+			            android:onClick="CatAct" />
+			        
+			        <Button
+			            android:id="@+id/btnMumbai"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnMumbai_Text"
+			            android:tag="Mumbai" 
+			            android:onClick="CatAct" />
+			        
+			        <Button
+			            android:id="@+id/btnKolkata"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnKolkata_Text"
+			            android:tag="Kolkata" 
+			            android:onClick="CatAct" />
+			        
+			        <Button
+			            android:id="@+id/btnChennai"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnChennai_Text"
+			            android:tag="Chennai" 
+			            android:onClick="CatAct" />
+		            
+			        <Button
+			            android:id="@+id/btnBanglore"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnBanglore_Text"
+			            android:tag="Banglore" 
+			            android:onClick="CatAct" />
+		            
+			        <Button
+			            android:id="@+id/btnPune"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnPune_Text"
+			            android:tag="Pune" 
+			            android:onClick="CatAct" />
+		            
+			        <Button
+			            android:id="@+id/btnNagpur"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnNagpur_Text"
+			            android:tag="Nagpur" 
+			            android:onClick="CatAct" />
+		            
+			        <Button
+			            android:id="@+id/btnIndore"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnIndore_Text"
+			            android:tag="Indore" 
+			            android:onClick="CatAct" />
+		            
+			        <Button
+			            android:id="@+id/btnJaipur"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnJaipur_Text"
+			            android:tag="Jaipur" 
+			            android:onClick="CatAct" />
+		            
+			        <Button
+			            android:id="@+id/btnKanpur"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnKanpur_Text"
+			            android:tag="Kanpur" 
+			            android:onClick="CatAct" />
+		            
+		    	</LinearLayout>
+		    	
+		        <LinearLayout
+		            android:id="@+id/llCityLocate"
+		            android:layout_width="140dp"
+		            android:layout_height="493dp"
+		            android:layout_marginTop="35dp"
+		            android:orientation="vertical" >
+			        
+		            <Button
+			            android:id="@+id/btnLocDelhi"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnLocMe_Text"
+			            android:tag="Delhi" 
+			            android:onClick="LocateMe" />
+			        
+			        <Button
+			            android:id="@+id/btnLocMumbai"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnLocMe_Text"
+			            android:tag="Mumbai" 
+			            android:onClick="LocateMe" />
+			        
+			        <Button
+			            android:id="@+id/btnLocKolkata"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnLocMe_Text"
+			            android:tag="Kolkata" 
+			            android:onClick="LocateMe" />
+			        
+			        <Button
+			            android:id="@+id/btnLocChennai"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnLocMe_Text"
+			            android:tag="Chennai" 
+			            android:onClick="LocateMe" />
+		            
+			        <Button
+			            android:id="@+id/btnLocBanglore"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnLocMe_Text"
+			            android:tag="Banglore" 
+			            android:onClick="LocateMe" />
+		            
+			        <Button
+			            android:id="@+id/btnLocPune"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnLocMe_Text"
+			            android:tag="Pune" 
+			            android:onClick="LocateMe" />
+		            
+			        <Button
+			            android:id="@+id/btnLocNagpur"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnLocMe_Text"
+			            android:tag="Nagpur" 
+			            android:onClick="LocateMe" />
+		            
+			        <Button
+			            android:id="@+id/btnLocIndore"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnLocMe_Text"
+			            android:tag="Indore" 
+			            android:onClick="LocateMe" />
+		            
+			        <Button
+			            android:id="@+id/btnLocJaipur"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnLocMe_Text"
+			            android:tag="Jaipur" 
+			            android:onClick="LocateMe" />
+		            
+			        <Button
+			            android:id="@+id/btnLocKanpur"
+			            android:layout_width="140dp"
+			            android:layout_height="wrap_content"
+			            android:text="@string/btnLocMe_Text"
+			            android:tag="Kanpur" 
+			            android:onClick="LocateMe" />
+		            
+        		</LinearLayout>
+	    	
+	        </LinearLayout>
+
+    </ScrollView>
         
 </RelativeLayout>

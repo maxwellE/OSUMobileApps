@@ -1,0 +1,71 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".SearchPostActivity" >
+
+    <TextView
+        android:id="@+id/post_date_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/search_post_label"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/search_post_number_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/search_post_keywords_field"
+        android:layout_below="@+id/post_date_list"
+        android:ems="10"
+        android:hint="@string/search_post_number_hint"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/search_post_date_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/search_post_number_field"
+        android:layout_below="@+id/search_post_number_field"
+        android:ems="10"
+        android:hint="@string/post_date_hint"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/search_post_keywords_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_post_date_field"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="@string/post_keywords_hint" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/search_post_author_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/search_post_keywords_field"
+        android:layout_below="@+id/search_post_keywords_field"
+        android:ems="10"
+        android:hint="@string/post_author_hint" />
+
+    <Button
+        android:id="@+id/btnSearchPosts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/search_post_author_field"
+        android:layout_alignRight="@+id/search_post_author_field"
+        android:layout_below="@+id/search_post_author_field"
+        android:layout_marginTop="74dp"
+        android:onClick="performSearch"
+        android:text="@string/search_post_label" />
+
+</RelativeLayout>
