@@ -1,23 +1,22 @@
 package com.example.mobileindia;
 
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
-import android.location.Location;
-import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
+import android.location.Location;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseUser;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 
 public class Add_Post extends Activity {
