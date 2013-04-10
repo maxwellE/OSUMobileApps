@@ -9,7 +9,7 @@
     tools:context=".EmailActivity" >
 
     <TextView
-        android:id="@+id/post_date_list"
+        android:id="@+id/searchPostLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -23,9 +23,9 @@
         android:id="@+id/EmailTo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/post_date_list"
+        android:layout_alignLeft="@+id/searchPostLabel"
         android:layout_alignRight="@+id/EmailMsg"
-        android:layout_below="@+id/post_date_list"
+        android:layout_below="@+id/searchPostLabel"
         android:ems="10" >
 
         <requestFocus />
@@ -35,7 +35,7 @@
         android:id="@+id/SendEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/post_date_list"
+        android:layout_alignBottom="@+id/searchPostLabel"
         android:layout_alignRight="@+id/EmailTo"
         android:text="Send" />
 
@@ -43,7 +43,7 @@
         android:id="@+id/EmailMsg"
         android:layout_width="350px"
         android:layout_height="400px"
-        android:layout_alignLeft="@+id/post_date_list"
+        android:layout_alignLeft="@+id/searchPostLabel"
         android:layout_below="@+id/textView3"
         android:layout_marginTop="14dp"
         android:ems="10"

@@ -62,7 +62,7 @@ public class Item_Adapter extends ArrayAdapter<ArrayList<String>> {
 			TextView summary = (TextView) v.findViewById(R.id.post_summary_list);
 			TextView author = (TextView) v.findViewById(R.id.post_author_list);
 			Button b = (Button) v.findViewById(R.id.full_post_button);
-			TextView date = (TextView) v.findViewById(R.id.post_date_list);
+			TextView date = (TextView) v.findViewById(R.id.searchPostLabel);
 			
 			// check to see if each individual textview is null.
 			// if not, assign some text!
