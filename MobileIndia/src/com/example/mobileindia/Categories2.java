@@ -33,6 +33,7 @@ public class Categories2 extends Activity {
             // Show the Up button in the action bar.
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        ListViewCategory.parsePostList = null;
 	}
 
 	@Override
@@ -102,7 +103,6 @@ public class Categories2 extends Activity {
 	public void gotoPost(View v, String passVal){
 		 ListViewCategory.CATEGORY = passVal;
          Intent i = new Intent(this, ListViewCategory.class);
-         ListViewCategory.parsePostList = null;
          if (!ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())) {
         	 ListViewCategory.hideAdd = false;
         	 Single_Post.hideAdd = false;

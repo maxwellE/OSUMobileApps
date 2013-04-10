@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
@@ -54,7 +53,7 @@ public class Single_Post extends ListActivity {
         setContentView(R.layout.activity_single__post);
         Log.v("Single Post", "view set");
         ParseQuery get = new ParseQuery("Post");
-    	get.whereEqualTo("post_num", Integer.parseInt(NUM));
+    	get.whereEqualTo("objectId", NUM);
     	
     	List<ParseObject> objects = null;
 		try {

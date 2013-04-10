@@ -97,9 +97,13 @@
             </ListView>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="match_parent" >
+
+            <Button
+                android:id="@+id/btnDatePicker"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical" />
 
                 <Button
                     android:id="@+id/logged_in_user_posts_button"

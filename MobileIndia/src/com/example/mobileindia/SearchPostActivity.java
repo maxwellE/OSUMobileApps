@@ -17,6 +17,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,7 +89,7 @@ public class SearchPostActivity extends Activity {
 			try {
 				java.util.Date parsedDate = format.parse(mPostDateField.getText().toString());
 				ParseQuery dateQuery = new ParseQuery("Post");
-				dateQuery.whereEqualTo("createdAt", parsedDate);
+				dateQuery.whereEqualTo("date", parsedDate);
 				queryList.add(dateQuery);
 			} catch (ParseException e) {
 				mPostDateField.setError("Not a valid date. Plese specify a valid date.");
@@ -156,6 +157,10 @@ public class SearchPostActivity extends Activity {
 
 		}
 
+	}
+	public void firePicker(View view){
+		DatePicker d = new DatePicker(getApplicationContext());
+		d.setEnabled(true);
 	}
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
