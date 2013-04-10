@@ -101,10 +101,12 @@ public class SearchPostActivity extends Activity {
 		if(!TextUtils.isEmpty(mPostKeywordsField.getText().toString())){
 			String keywords = mPostKeywordsField.getText().toString();
 			String[] splited = keywords.split(",");
-			ParseQuery keywordsQuery = new ParseQuery("Post");
-			keywordsQuery.whereMatches("summary", "/" + TextUtils.join("|", splited) + "/i");
-			keywordsQuery.whereMatches("title", "/" + TextUtils.join("|", splited) + "/i");
-			queryList.add(keywordsQuery);
+			ParseQuery summaryQuery = new ParseQuery("Post");
+			ParseQuery titleQuery = new ParseQuery("Post");
+			summaryQuery.whereMatches("summary", TextUtils.join("|", splited),"i");
+			titleQuery.whereMatches("title", TextUtils.join("|", splited), "i");
+			queryList.add(summaryQuery);
+			queryList.add(titleQuery);
 		}
 		if(!TextUtils.isEmpty(mPostAuthorField.getText().toString())){
 			String author = mPostAuthorField.getText().toString();
@@ -154,13 +156,11 @@ public class SearchPostActivity extends Activity {
 					}
 				});
 			}
-
 		}
-
 	}
 	public void firePicker(View view){
-		DatePicker d = new DatePicker(getApplicationContext());
-		d.setEnabled(true);
+//		DatePicker d = new DatePicker(getApplicationContext());
+//		d.setEnabled(true);
 	}
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
