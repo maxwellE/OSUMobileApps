@@ -2,10 +2,6 @@ package com.example.mobileindia;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
@@ -17,6 +13,10 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 public class ListViewCategory extends ListActivity {
     //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS

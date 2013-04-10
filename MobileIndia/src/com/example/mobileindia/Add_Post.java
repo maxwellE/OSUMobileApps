@@ -12,8 +12,6 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
-import com.parse.ParseAnonymousUtils;
-import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
