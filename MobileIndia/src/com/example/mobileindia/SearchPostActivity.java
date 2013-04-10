@@ -70,19 +70,12 @@ public class SearchPostActivity extends Activity {
 	
 	public void performSearch(View view) {
 		ListViewCategory.forceSearch = false;
-		TextView mPostNumberField = (TextView) findViewById(R.id.search_post_number_field);
 		TextView mPostDateField = (TextView) findViewById(R.id.search_post_date_field);
 		TextView mPostKeywordsField = (TextView) findViewById(R.id.search_post_keywords_field);
 		TextView mPostAuthorField = (TextView) findViewById(R.id.search_post_author_field);
 		List<ParseQuery> queryList = new ArrayList<ParseQuery>();
 		boolean cancel = false;
 		View focusView = null;
-		if(!TextUtils.isEmpty(mPostNumberField.getText().toString())){
-			ParseQuery numberQuery = new ParseQuery("Post");
-			numberQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
-			numberQuery.whereEqualTo("post_num", Integer.parseInt(mPostNumberField.getText().toString()));
-			queryList.add(numberQuery);
-		}
 		if(!TextUtils.isEmpty(mPostDateField.getText().toString())){
 			new DateFormat();
 			java.text.DateFormat format = DateFormat.getDateFormat(getApplicationContext());

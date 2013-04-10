@@ -27,14 +27,6 @@
             android:orientation="vertical" >
 
             <EditText
-                android:id="@+id/search_post_number_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/search_post_number_hint"
-                android:inputType="number" />
-
-            <EditText
                 android:id="@+id/search_post_date_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
