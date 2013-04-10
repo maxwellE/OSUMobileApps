@@ -66,11 +66,11 @@ public class ListViewCategory extends ListActivity {
     protected void onPostCreate (Bundle savedInstanceState){
  		super.onPostCreate(savedInstanceState);
 
-    	Log.v("Post", "POST1 : ADD start set APPCLASS ");
+    	//Log.v("Post", "POST1 : ADD start set APPCLASS ");
  		if(ListViewCategory.hideAdd){
  			findViewById(R.id.addBtn).setVisibility(8);
 
- 	    	Log.v("Post", "POST11 : ADD_DONE start set APPCLASS ");
+ 	    	//Log.v("Post", "POST11 : ADD_DONE start set APPCLASS ");
  		}
 // 		if(ParseUser.getCurrentUser() != null){
 // 			Log.v("Post", "POST11 : NOT_NULL start set APPCLASS ");
@@ -113,7 +113,7 @@ private static void defaultPopulateList() throws ParseException {
 					//change to object ID
 					temp.add(parseObject.getObjectId());
 
-			 		Log.v("List", "hint3 SINGLE APPCLASS = " +  parseObject.getObjectId()   + "     end");
+			 		//Log.v("List", "hint3 SINGLE APPCLASS = " +  parseObject.getObjectId()   + "     end");
 					//add automatic date
 					temp.add(parseObject.getString("date"));
 					listItems.add(temp);	
@@ -193,6 +193,31 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 		 	}
 		}
 
+	public void DeletePost(View view){
+		Log.v("List", " DELETE APPCLASS = end");
+		Button title = (Button) view.findViewById(R.id.button1);
+	 	String id =  (String) title.getHint();
+		Log.v("List", " APPCLASS id " + id);
+	 	if(id!= null){
 
+			Log.v("List", " APPCLASS Not NULL = end");
+	 		ParseQuery get = new ParseQuery("Post");
+	    	get.whereEqualTo("objectId", id);
+	    	List<ParseObject> objects = null;
+			try {
+				objects = get.find();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+	    	Log.v("Single Post", "got all parse objects");
+	    	ParseObject parseObject = objects.get(0);
+			parseObject.deleteEventually();
+			
+	 		Intent intent = new Intent(this, ListViewCategory.class);
+			startActivity(intent);
+	 	}
+	}
 }
 
