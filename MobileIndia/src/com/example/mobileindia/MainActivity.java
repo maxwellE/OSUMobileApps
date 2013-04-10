@@ -1,5 +1,7 @@
 package com.example.mobileindia;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -9,14 +11,18 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 public class MainActivity extends Activity {
     public static boolean anonSuccess;
+    public static boolean foundUserPostsSuccess;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,6 +48,7 @@ public class MainActivity extends Activity {
 	    	btnLogin.setText("Logout");
 	    }else {
 	    	t.setText("Logged in as: " + ParseUser.getCurrentUser().getUsername());
+	    	findViewById(R.id.logged_in_user_posts_button).setVisibility(0);
 	    	findViewById(R.id.btnSignUp).setVisibility(8);
 	    	TextView btnLogin = (TextView) findViewById(R.id.btnLogin);
 	    	btnLogin.setText("Logout");
@@ -62,6 +69,7 @@ public class MainActivity extends Activity {
 			 findViewById(R.id.btnSignUp).setVisibility(0);
 			 TextView btnLogin = (TextView) findViewById(R.id.btnLogin);
 			 TextView userLabel = (TextView) findViewById(R.id.mainActivityUserLabel);
+		     findViewById(R.id.logged_in_user_posts_button).setVisibility(8);
 			 userLabel.setText("Not logged in");
 		     btnLogin.setText("Login");
 		 }
@@ -71,7 +79,7 @@ public class MainActivity extends Activity {
 		 final Context context = getApplicationContext();
 		 final int duration = Toast.LENGTH_LONG;
 		 final Intent i = new Intent(this, CitySelect.class);
-		 if(ParseUser.getCurrentUser() == null){
+		 if(ParseUser.getCurrentUser() == null && !ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())){
 			 ParseAnonymousUtils.logIn(new LogInCallback() {
 				 @Override
 				 public void done(ParseUser user, ParseException e) {
@@ -96,6 +104,24 @@ public class MainActivity extends Activity {
 	 public void createUserActivity(View view){
 		 Intent i = new Intent(this, CreateUserActivity.class);
 		 startActivity(i);
+	 }
+	 
+	 public void viewUserPosts(View view){
+		 ListViewCategory.parsePostList = null;
+		 ParseQuery query = new ParseQuery("Post");
+		 query.whereEqualTo("user", ParseUser.getCurrentUser());
+		 try {
+			ListViewCategory.parsePostList = query.find();
+			MainActivity.foundUserPostsSuccess = true;
+		} catch (ParseException e1) {
+			ListViewCategory.parsePostList = null;
+			MainActivity.foundUserPostsSuccess = false;
+		}
+		 if(MainActivity.foundUserPostsSuccess){
+			 Intent i = new Intent(this,ListViewCategory.class);
+			 i.putExtra("userPosts", true);
+			 startActivity(i);
+		 }
 	 }
 	 
 }

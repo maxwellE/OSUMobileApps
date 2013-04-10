@@ -90,6 +90,7 @@ public class Categories2 extends Activity {
 		 ListViewCategory.CATEGORY = passVal;
          Intent i = new Intent(this, ListViewCategory.class);
 //		 i.putExtra("passVal", passVal);
+         ListViewCategory.parsePostList = null;
 		 startActivity(i);
 		
 	}

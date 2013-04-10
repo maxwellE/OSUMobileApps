@@ -65,4 +65,16 @@
        android:onClick="createUserActivity"
        android:text="@string/create_user_button_text" />
 
+   <Button
+       android:id="@+id/logged_in_user_posts_button"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignLeft="@+id/btnSignUp"
+       android:layout_alignRight="@+id/btnSignUp"
+       android:layout_below="@+id/btnSignUp"
+       android:layout_marginTop="21dp"
+       android:text="@string/logged_in_user_posts_button"
+       android:onClick="viewUserPosts"
+       android:visibility="gone" />
+
 </RelativeLayout>

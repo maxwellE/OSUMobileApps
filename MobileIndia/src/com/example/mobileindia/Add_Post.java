@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import com.parse.ParseAnonymousUtils;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 import com.parse.ParseQuery;
 
 
@@ -22,13 +24,6 @@ public class Add_Post extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add__post);
-	
-	  // Make sure we're running on Honeycomb or higher to use ActionBar APIs
-//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-//    		// Show the Up button in the action bar.
-//    		getActionBar().setDisplayHomeAsUpEnabled(true);
-//    	}
-    
 	}
 
 	@Override
@@ -38,20 +33,8 @@ public class Add_Post extends Activity {
 		return true;
 	}
 	
-//	  @Override
-//	    public boolean onOptionsItemSelected(MenuItem item) {
-//	        switch (item.getItemId()) {
-//	        case android.R.id.home:
-//	            NavUtils.navigateUpFromSameTask(this);
-//	            return true;
-//	        }
-//	        return super.onOptionsItemSelected(item);
-//	    }
-	
-	
 	public void AddPost(View view){
 		ParseObject post = new ParseObject("Post");
-		ArrayList<String> temp = new ArrayList<String>();
 		String add = "";
 		add = ((EditText) findViewById(R.id.post_title_add)).getText().toString();
         post.put("title", add);
@@ -64,7 +47,9 @@ public class Add_Post extends Activity {
         
         add = ListViewCategory.CATEGORY;      
         post.put("category",add);
-        
+        if(ParseUser.getCurrentUser() != null){
+          post.put("user", ParseUser.getCurrentUser());
+        }
         add = ListViewCategory.CITY;
         post.put("city", add);
         
@@ -77,24 +62,18 @@ public class Add_Post extends Activity {
 			e.printStackTrace();
 		}
         post.put("post_num", num);
-       // post.saveInBackground();
-        try {
-			post.save();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			Log.v("Post", "POST : post error  APPCLASS = " + num);
-			e.printStackTrace();
-		}
+        if(ParseUser.getCurrentUser() != null && !ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())){
+            post.put("user", ParseUser.getCurrentUser());
+          }
+	    post.saveEventually();
         Intent back = new Intent(this,ListViewCategory.class);
         startActivity(back);
        
 	}
 	
 	public void Cancel(View view){
-		//NavUtils.navigateUpFromSameTask(this);
 		Intent back = new Intent(this,ListViewCategory.class);
         startActivity(back);
-        //
 	}
 
 }
