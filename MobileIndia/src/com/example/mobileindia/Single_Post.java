@@ -5,6 +5,8 @@ import java.util.List;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -21,6 +23,7 @@ import android.widget.RatingBar.OnRatingBarChangeListener;
 
 public class Single_Post extends ListActivity {
 
+	private static final ParseObject ParseObject = null;
 	public double longitude;
 	public double latitude;
 	public static String NUM = "";
@@ -116,7 +119,7 @@ public class Single_Post extends ListActivity {
 	}
 
    private void addRatebarListner() {
-	   
+	    
 	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
 		
 	   ratebar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
@@ -134,12 +137,54 @@ public class Single_Post extends ListActivity {
 	   
 	   Log.d("BTest","New rating of " + r + " starts");
 	   
+//	   try {
+//		setRating();
+//	   }catch (ParseException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	   }
+	   
+	   ParseUser user = ParseUser.getCurrentUser();
+	   
+	   String userid = user.getObjectId();
+	   
+	   ParseQuery pqRating = new ParseQuery("Rating");
+	   
+	   //pqRating.whereEqualTo("UserId", user.getObjectId());
+	   pqRating.whereEqualTo("PostNum", NUM);
+	   
+	   List<ParseObject> objects = null;
 	   try {
-		setRating();
-	} catch (ParseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+		   objects = pqRating.find();
+	   } catch (ParseException e) {
+		   // TODO Auto-generated catch block
+		   e.printStackTrace();
+	   }
+		
+	   Log.v("Single Post", "got all parse objects");
+	   
+//	   ParseObject postObj = objects.get(0);
+	   ParseObject rateObj = ParseObject;
+	   
+	   for (ParseObject parseObject : objects) {
+		   String temp = parseObject.getString("UserId");
+		   
+		   if (temp.equals(userid.toString())){
+			   rateObj = parseObject;
+		   }
+		}
+	   
+	   if (rateObj != null){
+		   rateObj.put("Rating", (Number) r);
+		   rateObj.saveInBackground();
+	   }
+	   else{
+		   ParseObject newPORating = new ParseObject("Rating");
+		   newPORating.put("PostNum", NUM);
+		   newPORating.put("Rating", (Number) r);
+		   newPORating.put("UserId", userid);
+		   newPORating.saveInBackground();
+	   }
 	   
    }
 
@@ -150,7 +195,6 @@ public class Single_Post extends ListActivity {
 		SMSActivity.Title=titlestr;
     	Intent SmsShare = new Intent(this, SMSActivity.class);
         startActivity(SmsShare);
-        
     }
   
    public void shareEmail(View view) {
@@ -192,12 +236,14 @@ public class Single_Post extends ListActivity {
 	   float totalRatings = obj.size();
 	   float Ratings = 0;
 	   
-	   for (ParseObject parseObject : obj) {
-		   Number temp = parseObject.getNumber("Rating");
-		   Ratings += temp.floatValue();
-	   }
+	   if(totalRatings > 0){
+		   for (ParseObject parseObject : obj) {
+			   Number temp = parseObject.getNumber("Rating");
+			   Ratings += temp.floatValue();
+		   }
 	   
-	   Ratings /= totalRatings;
+		   Ratings /= totalRatings;
+	   }
 	   
 	   return Ratings;
 	   
@@ -209,17 +255,17 @@ public class Single_Post extends ListActivity {
     	get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
     	get.whereEqualTo("postNum", NUM);
 
-    				List<ParseObject> objects = get.find();
-    				listItems.clear();
-    				
-    				for (ParseObject parseObject : objects) {
-    					ArrayList<String> temp = new ArrayList<String>();
-    					temp.add(parseObject.getString("date"));
-    					temp.add(parseObject.getString("content"));
-    					temp.add(parseObject.getString("author"));
-    					listItems.add(temp);
-    					
-					}
+		List<ParseObject> objects = get.find();
+		listItems.clear();
+		
+		for (ParseObject parseObject : objects) {
+			ArrayList<String> temp = new ArrayList<String>();
+			temp.add(parseObject.getString("date"));
+			temp.add(parseObject.getString("content"));
+			temp.add(parseObject.getString("author"));
+			listItems.add(temp);
+			
+		}
 
     }
 

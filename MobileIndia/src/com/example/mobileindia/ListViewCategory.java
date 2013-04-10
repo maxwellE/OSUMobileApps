@@ -182,6 +182,7 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 		super.onStop();
 	}
 	
+
 	public void SinglePost(View view){
 		 	Button title = (Button) view.findViewById(R.id.full_post_button);
 		 	Single_Post.NUM =  (String) title.getHint();
@@ -192,7 +193,6 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 				startActivity(intent);
 		 	}
 		}
-
 
 }
 
