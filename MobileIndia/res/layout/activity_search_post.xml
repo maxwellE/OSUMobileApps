@@ -74,13 +74,13 @@
         android:text="@string/search_post_label" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnDatePicker"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/search_post_date_field"
         android:layout_toRightOf="@+id/search_post_date_field"
-        android:onClick="performSearch"
+        android:onClick="firePicker"
         android:text="@string/date_picker_search_button" />
 
 </RelativeLayout>

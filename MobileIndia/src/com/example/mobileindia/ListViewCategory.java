@@ -110,7 +110,6 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 		Log.v("Post", "POST : post_num LIST   APPCLASS = " + num_string);
 		listItems.add(temp);			
 	}
-	ListViewCategory.parsePostList = null;
 }
 
     //METHOD WHICH WILL HANDLE DYNAMIC INSERTION
