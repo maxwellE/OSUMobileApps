@@ -115,7 +115,7 @@ public class MainActivity extends Activity {
 		 ListViewCategory.parsePostList = null;
 		 ListViewCategory.forceHome = true;
 		 ParseQuery query = new ParseQuery("Post");
-		 query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+		 query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
 		 query.whereEqualTo("user", ParseUser.getCurrentUser());
 		 try {
 			ListViewCategory.parsePostList = query.find();
