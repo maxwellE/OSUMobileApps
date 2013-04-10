@@ -173,7 +173,6 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 		//Log.v("LIST", "Stopped LIST APPCLASS");
 	}
 	
-	
 	 public void SinglePost(View view){
 		 	Button title = (Button) view.findViewById(R.id.full_post_button);
 		 	//Log.v("List", "grabbed num List APPCLASS " +  title.getHint() + "     end");
@@ -184,7 +183,6 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 				startActivity(intent);
 		 	}
 		}
-
 
 }
 

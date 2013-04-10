@@ -5,6 +5,8 @@ import java.util.List;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -116,7 +118,7 @@ public class Single_Post extends ListActivity {
 	}
 
    private void addRatebarListner() {
-	   
+	    
 	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
 		
 	   ratebar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
@@ -136,12 +138,33 @@ public class Single_Post extends ListActivity {
 	   
 	   Log.d("BTest","New rating of " + r + " starts");
 	   
+//	   try {
+//		setRating();
+//	   }catch (ParseException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	   }
+	   
+	   ParseUser user = ParseUser.getCurrentUser();
+	   
+	   user.getObjectId();
+	   
+	   ParseQuery pqRating = new ParseQuery("Rating");
+	   pqRating.whereEqualTo("UserId", user.getObjectId());
+	   pqRating.whereEqualTo("PostNum", NUM);
+	   
+	   List<ParseObject> objects = null;
 	   try {
-		setRating();
-	} catch (ParseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+		   objects = pqRating.find();
+	   } catch (ParseException e) {
+		   // TODO Auto-generated catch block
+		   e.printStackTrace();
+	   }
+		
+	   Log.v("Single Post", "got all parse objects");
+	   ParseObject postObj = objects.get(0);
+	   	
+	   	
 	   
    }
 
@@ -193,12 +216,14 @@ public class Single_Post extends ListActivity {
 	   float totalRatings = obj.size();
 	   float Ratings = 0;
 	   
-	   for (ParseObject parseObject : obj) {
+	   if(totalRatings > 0){
+		   for (ParseObject parseObject : obj) {
 		   Number temp = parseObject.getNumber("Rating");
 		   Ratings += temp.floatValue();
-	   }
+		   }
 	   
-	   Ratings /= totalRatings;
+		   Ratings /= totalRatings;
+	   }
 	   
 	   return Ratings;
 	   
@@ -209,17 +234,17 @@ public class Single_Post extends ListActivity {
     	ParseQuery get = new ParseQuery("Comment");
     	get.whereEqualTo("postNum", NUM);
 
-    				List<ParseObject> objects = get.find();
-    				listItems.clear();
-    				
-    				for (ParseObject parseObject : objects) {
-    					ArrayList<String> temp = new ArrayList<String>();
-    					temp.add(parseObject.getString("date"));
-    					temp.add(parseObject.getString("content"));
-    					temp.add(parseObject.getString("author"));
-    					listItems.add(temp);
-    					
-					}
+		List<ParseObject> objects = get.find();
+		listItems.clear();
+		
+		for (ParseObject parseObject : objects) {
+			ArrayList<String> temp = new ArrayList<String>();
+			temp.add(parseObject.getString("date"));
+			temp.add(parseObject.getString("content"));
+			temp.add(parseObject.getString("author"));
+			listItems.add(temp);
+			
+		}
 
     }
 
