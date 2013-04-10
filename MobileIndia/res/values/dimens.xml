@@ -6,5 +6,8 @@
     <dimen name="post_list_title_size">20dp</dimen>
     <dimen name="post_summary_size">14dp</dimen>
     <dimen name="mainScrollViewTopPadding">32dp</dimen>
+    <dimen name="scrollViewSearchPaddingTop">40dp</dimen>
+    <dimen name="LastTextViewBeforeButtonPadding">8dp</dimen>
+    <dimen name="SearchButtonTopPadding">4dp</dimen>
 
 </resources>
