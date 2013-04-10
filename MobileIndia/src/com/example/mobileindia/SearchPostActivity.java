@@ -80,6 +80,7 @@ public class SearchPostActivity extends Activity {
 		View focusView = null;
 		if(!TextUtils.isEmpty(mPostNumberField.getText().toString())){
 			ParseQuery numberQuery = new ParseQuery("Post");
+			numberQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
 			numberQuery.whereEqualTo("post_num", Integer.parseInt(mPostNumberField.getText().toString()));
 			queryList.add(numberQuery);
 		}
@@ -89,6 +90,7 @@ public class SearchPostActivity extends Activity {
 			try {
 				java.util.Date parsedDate = format.parse(mPostDateField.getText().toString());
 				ParseQuery dateQuery = new ParseQuery("Post");
+				dateQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
 				dateQuery.whereEqualTo("date", parsedDate);
 				queryList.add(dateQuery);
 			} catch (ParseException e) {
@@ -102,6 +104,7 @@ public class SearchPostActivity extends Activity {
 			String keywords = mPostKeywordsField.getText().toString();
 			String[] splited = keywords.split(",");
 			ParseQuery keywordsQuery = new ParseQuery("Post");
+			keywordsQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
 			keywordsQuery.whereMatches("summary", "/" + TextUtils.join("|", splited) + "/i");
 			keywordsQuery.whereMatches("title", "/" + TextUtils.join("|", splited) + "/i");
 			queryList.add(keywordsQuery);
@@ -109,6 +112,7 @@ public class SearchPostActivity extends Activity {
 		if(!TextUtils.isEmpty(mPostAuthorField.getText().toString())){
 			String author = mPostAuthorField.getText().toString();
 			ParseQuery authorQuery = new ParseQuery("Post");
+			authorQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
 			authorQuery.whereContains("author", author);
 			queryList.add(authorQuery);
 		}
@@ -124,6 +128,7 @@ public class SearchPostActivity extends Activity {
 				 findViewById(R.id.btnSearchPosts).setClickable(true);
 			}else{
 				ParseQuery orQuery = ParseQuery.or(queryList);
+				orQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
 				ListViewCategory.parsePostList = null;
 				final Intent i = new Intent(this,ListViewCategory.class);
 				orQuery.findInBackground(new FindCallback() {

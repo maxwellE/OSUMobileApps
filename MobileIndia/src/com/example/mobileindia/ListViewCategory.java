@@ -78,6 +78,7 @@ public class ListViewCategory extends ListActivity {
 
 private static void defaultPopulateList() throws ParseException {
 	ParseQuery get = new ParseQuery("Post");
+	get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
 	get.whereEqualTo("category", ListViewCategory.CATEGORY);
 	get.whereEqualTo("city", ListViewCategory.CITY);
 				List<ParseObject> objects = get.find();

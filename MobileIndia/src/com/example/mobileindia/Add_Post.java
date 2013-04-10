@@ -57,6 +57,7 @@ public class Add_Post extends Activity {
         post.put("city", add);
         
         ParseQuery get = new ParseQuery("Post");
+        get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
         int num = 0;
 		try {
 			num = get.count();
