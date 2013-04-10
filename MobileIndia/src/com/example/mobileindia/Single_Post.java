@@ -52,6 +52,7 @@ public class Single_Post extends ListActivity {
         Log.v("Single Post", "view set");
         ParseQuery get = new ParseQuery("Post");
     	get.whereEqualTo("objectId", NUM);
+		get.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
     	
     	List<ParseObject> objects = null;
 		try {
@@ -121,9 +122,7 @@ public class Single_Post extends ListActivity {
 	   ratebar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 			public void onRatingChanged(RatingBar ratingBar, float rating,
 					boolean fromUser) {
-		 
 					setNewRating(rating);
-		 
 				}
 			});
 	}
@@ -185,6 +184,7 @@ public class Single_Post extends ListActivity {
    public static float getRating() throws ParseException{
 	   
 	   ParseQuery get = new ParseQuery("Rating");
+	   get.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
 	   get.whereEqualTo("PostNum", NUM);
 	   
 	   List<ParseObject> obj = get.find();
@@ -206,6 +206,7 @@ public class Single_Post extends ListActivity {
    public static void  populate_list() throws ParseException{
 	   
     	ParseQuery get = new ParseQuery("Comment");
+    	get.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
     	get.whereEqualTo("postNum", NUM);
 
     				List<ParseObject> objects = get.find();
@@ -266,8 +267,6 @@ public class Single_Post extends ListActivity {
 	public void onResume(){
 		Log.v("List", "RESUMED List APPCLASS");
 		super.onResume();
-		//adapter0.notifyDataSetChanged();
-		
 	}
 	
 	@Override
@@ -275,9 +274,4 @@ public class Single_Post extends ListActivity {
 		super.onStop();
 		Log.v("LIST", "Stopped LIST APPCLASS");
 	}
-	
-	
-	
-
 }
-
