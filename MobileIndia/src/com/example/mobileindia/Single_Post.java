@@ -23,6 +23,7 @@ import android.widget.RatingBar.OnRatingBarChangeListener;
 
 public class Single_Post extends ListActivity {
 
+	private static final ParseObject ParseObject = null;
 	public double longitude;
 	public double latitude;
 	public static String NUM = "";
@@ -146,10 +147,11 @@ public class Single_Post extends ListActivity {
 	   
 	   ParseUser user = ParseUser.getCurrentUser();
 	   
-	   user.getObjectId();
+	   String userid = user.getObjectId();
 	   
 	   ParseQuery pqRating = new ParseQuery("Rating");
-	   pqRating.whereEqualTo("UserId", user.getObjectId());
+	   
+	   //pqRating.whereEqualTo("UserId", user.getObjectId());
 	   pqRating.whereEqualTo("PostNum", NUM);
 	   
 	   List<ParseObject> objects = null;
@@ -161,9 +163,29 @@ public class Single_Post extends ListActivity {
 	   }
 		
 	   Log.v("Single Post", "got all parse objects");
-	   ParseObject postObj = objects.get(0);
-	   	
-	   	
+	   
+//	   ParseObject postObj = objects.get(0);
+	   ParseObject rateObj = ParseObject;
+	   
+	   for (ParseObject parseObject : objects) {
+		   String temp = parseObject.getString("UserId");
+		   
+		   if (temp.equals(userid.toString())){
+			   rateObj = parseObject;
+		   }
+		}
+	   
+	   if (rateObj != null){
+		   rateObj.put("Rating", (Number) r);
+		   rateObj.saveInBackground();
+	   }
+	   else{
+		   ParseObject newPORating = new ParseObject("Rating");
+		   newPORating.put("PostNum", NUM);
+		   newPORating.put("Rating", (Number) r);
+		   newPORating.put("UserId", userid);
+		   newPORating.saveInBackground();
+	   }
 	   
    }
 
@@ -174,7 +196,6 @@ public class Single_Post extends ListActivity {
 		SMSActivity.Title=titlestr;
     	Intent SmsShare = new Intent(this, SMSActivity.class);
         startActivity(SmsShare);
-        
     }
   
    public void shareEmail(View view) {
@@ -217,8 +238,8 @@ public class Single_Post extends ListActivity {
 	   
 	   if(totalRatings > 0){
 		   for (ParseObject parseObject : obj) {
-		   Number temp = parseObject.getNumber("Rating");
-		   Ratings += temp.floatValue();
+			   Number temp = parseObject.getNumber("Rating");
+			   Ratings += temp.floatValue();
 		   }
 	   
 		   Ratings /= totalRatings;
