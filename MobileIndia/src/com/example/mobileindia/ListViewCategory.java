@@ -2,10 +2,6 @@ package com.example.mobileindia;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
@@ -17,6 +13,10 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 public class ListViewCategory extends ListActivity {
     //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
@@ -99,6 +99,7 @@ public class ListViewCategory extends ListActivity {
 
 private static void defaultPopulateList() throws ParseException {
 	ParseQuery get = new ParseQuery("Post");
+	get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 	get.whereEqualTo("category", ListViewCategory.CATEGORY);
 	get.whereEqualTo("city", ListViewCategory.CITY);
 				List<ParseObject> objects = get.find();
@@ -182,6 +183,7 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 		super.onStop();
 	}
 	
+
 	public void SinglePost(View view){
 		 	Button title = (Button) view.findViewById(R.id.full_post_button);
 		 	Single_Post.NUM =  (String) title.getHint();
@@ -192,6 +194,7 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 				startActivity(intent);
 		 	}
 		}
+
 
 	public void DeletePost(View view){
 		Log.v("List", " DELETE APPCLASS = end");
@@ -219,5 +222,6 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 			startActivity(intent);
 	 	}
 	}
+
 }
 

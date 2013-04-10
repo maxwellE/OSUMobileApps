@@ -33,60 +33,56 @@
        android:textIsSelectable="true"
        android:textAppearance="?android:attr/textAppearanceSmall" />
 
-   <Button
-       android:id="@+id/btnLogin"
-       android:layout_width="202dp"
-       android:layout_height="wrap_content"
-       android:layout_alignParentTop="true"
-       android:layout_centerHorizontal="true"
-       android:layout_marginTop="38dp"
-       android:onClick="loginUserActivity"
-       android:text="@string/login_text_box" />
-
-   <Button
-       android:id="@+id/btnBrowse"
+   <ScrollView
+       android:id="@+id/scrollView1"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:layout_alignLeft="@+id/btnLogin"
-       android:layout_alignRight="@+id/btnLogin"
-       android:layout_below="@+id/btnLogin"
-       android:layout_marginTop="26dp"
-       android:onClick="cityBrowse"
-       android:text="@string/browse_button_text" />
+       android:layout_below="@+id/mainActivityUserLabel"
+       android:layout_centerHorizontal="true" >
 
-   <Button
-       android:id="@+id/btnSignUp"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_alignLeft="@+id/btnBrowse"
-       android:layout_alignRight="@+id/btnBrowse"
-       android:layout_below="@+id/btnBrowse"
-       android:layout_marginTop="24dp"
-       android:onClick="createUserActivity"
-       android:text="@string/create_user_button_text" />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="321dp"
+           android:orientation="vertical"
+           android:paddingTop="@dimen/mainScrollViewTopPadding" >
 
-   <Button
-       android:id="@+id/logged_in_user_posts_button"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_alignLeft="@+id/btnSearch"
-       android:layout_alignRight="@+id/btnSearch"
-       android:layout_below="@+id/btnSearch"
-       android:layout_marginTop="14dp"
-       android:onClick="viewUserPosts"
-       android:text="@string/logged_in_user_posts_button"
-       android:visibility="invisible" />
+           <Button
+               android:id="@+id/btnLogin"
+               android:layout_width="202dp"
+               android:layout_height="wrap_content"
+               android:onClick="loginUserActivity"
+               android:text="@string/login_text_box" />
 
-   <Button
-       android:id="@+id/btnSearch"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_alignLeft="@+id/btnSignUp"
-       android:layout_alignRight="@+id/btnSignUp"
-       android:layout_below="@+id/btnSignUp"
-       android:layout_marginTop="19dp"
-       android:onClick="searchPosts"
-       android:text="@string/search_post_button_label"
-       android:visibility="invisible" />
+           <Button
+               android:id="@+id/btnBrowse"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:onClick="cityBrowse"
+               android:text="@string/browse_button_text" />
+
+           <Button
+               android:id="@+id/btnSignUp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:onClick="createUserActivity"
+               android:text="@string/create_user_button_text" />
+
+           <Button
+               android:id="@+id/btnSearch"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:onClick="searchPosts"
+               android:text="@string/search_post_button_label"
+               android:visibility="invisible" />
+
+           <Button
+               android:id="@+id/logged_in_user_posts_button"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:onClick="viewUserPosts"
+               android:text="@string/logged_in_user_posts_button"
+               android:visibility="invisible" />
+       </LinearLayout>
+   </ScrollView>
 
 </RelativeLayout>
