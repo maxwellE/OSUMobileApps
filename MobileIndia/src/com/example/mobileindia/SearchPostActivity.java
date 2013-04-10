@@ -79,7 +79,7 @@ public class SearchPostActivity extends Activity {
 		View focusView = null;
 		if(!TextUtils.isEmpty(mPostNumberField.getText().toString())){
 			ParseQuery numberQuery = new ParseQuery("Post");
-			numberQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+			numberQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 			numberQuery.whereEqualTo("post_num", Integer.parseInt(mPostNumberField.getText().toString()));
 			queryList.add(numberQuery);
 		}
@@ -89,7 +89,7 @@ public class SearchPostActivity extends Activity {
 			try {
 				java.util.Date parsedDate = format.parse(mPostDateField.getText().toString());
 				ParseQuery dateQuery = new ParseQuery("Post");
-				dateQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+				dateQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 				dateQuery.whereEqualTo("date", parsedDate);
 				queryList.add(dateQuery);
 			} catch (ParseException e) {
@@ -104,8 +104,8 @@ public class SearchPostActivity extends Activity {
 			String[] splited = keywords.split(",");
 			ParseQuery summaryQuery = new ParseQuery("Post");
 			ParseQuery titleQuery = new ParseQuery("Post");
-			summaryQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
-			titleQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+			summaryQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+			titleQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 			summaryQuery.whereMatches("summary", TextUtils.join("|", splited),"i");
 			titleQuery.whereMatches("title", TextUtils.join("|", splited), "i");
 			queryList.add(summaryQuery);
@@ -114,7 +114,7 @@ public class SearchPostActivity extends Activity {
 		if(!TextUtils.isEmpty(mPostAuthorField.getText().toString())){
 			String author = mPostAuthorField.getText().toString();
 			ParseQuery authorQuery = new ParseQuery("Post");
-			authorQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+			authorQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 			authorQuery.whereContains("author", author);
 			queryList.add(authorQuery);
 		}
@@ -130,7 +130,7 @@ public class SearchPostActivity extends Activity {
 				 findViewById(R.id.btnSearchPosts).setClickable(true);
 			}else{
 				ParseQuery orQuery = ParseQuery.or(queryList);
-				orQuery.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK);
+				orQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 				ListViewCategory.parsePostList = null;
 				final Intent i = new Intent(this,ListViewCategory.class);
 				orQuery.findInBackground(new FindCallback() {
