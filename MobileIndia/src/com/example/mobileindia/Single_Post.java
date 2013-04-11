@@ -56,7 +56,7 @@ public class Single_Post extends ListActivity {
         Log.v("Single Post", "view set");
         ParseQuery get = new ParseQuery("Post");
     	get.whereEqualTo("objectId", NUM);
-		get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+		get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
     	
     	List<ParseObject> objects = null;
 		try {
@@ -231,7 +231,7 @@ public class Single_Post extends ListActivity {
    public static float getRating() throws ParseException{
 	   
 	   ParseQuery get = new ParseQuery("Rating");
-	   get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+	   get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 	   get.whereEqualTo("PostNum", NUM);
 	   
 	   List<ParseObject> obj = get.find();
@@ -257,7 +257,7 @@ public class Single_Post extends ListActivity {
    public static void  populate_list() throws ParseException{
 	   
     	ParseQuery get = new ParseQuery("Comment");
-    	get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+    	get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
     	get.whereEqualTo("postNum", NUM);
 
 		List<ParseObject> objects = get.find();
