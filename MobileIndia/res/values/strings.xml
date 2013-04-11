@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MobileIndia</string>
+    <string name="app_name">Classifieds</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="login_text_box">Login</string>
@@ -66,5 +66,4 @@
     <string name="btnJaipur_Text">Jaipur</string>
     <string name="btnKanpur_Text">Kanpur</string>
     <string name="btnLocMe_Text">View Map</string>
-    <string name="date_picker_search_button">Pick Date</string>
 </resources>

@@ -66,11 +66,11 @@ public class ListViewCategory extends ListActivity {
     protected void onPostCreate (Bundle savedInstanceState){
  		super.onPostCreate(savedInstanceState);
 
-    	Log.v("Post", "POST1 : ADD start set APPCLASS ");
+    	//Log.v("Post", "POST1 : ADD start set APPCLASS ");
  		if(ListViewCategory.hideAdd){
  			findViewById(R.id.addBtn).setVisibility(8);
 
- 	    	Log.v("Post", "POST11 : ADD_DONE start set APPCLASS ");
+ 	    	//Log.v("Post", "POST11 : ADD_DONE start set APPCLASS ");
  		}
 // 		if(ParseUser.getCurrentUser() != null){
 // 			Log.v("Post", "POST11 : NOT_NULL start set APPCLASS ");
@@ -87,6 +87,7 @@ public class ListViewCategory extends ListActivity {
 // 		}
     }
     
+
    public static void  populate_list(List<ParseObject> parsePostList2) throws ParseException{
 	    if(parsePostList2 == null){
 	    	defaultPopulateList();
@@ -98,7 +99,7 @@ public class ListViewCategory extends ListActivity {
 
 private static void defaultPopulateList() throws ParseException {
 	ParseQuery get = new ParseQuery("Post");
-	get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+	get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
 	get.whereEqualTo("category", ListViewCategory.CATEGORY);
 	get.whereEqualTo("city", ListViewCategory.CITY);
 				List<ParseObject> objects = get.find();
@@ -113,7 +114,7 @@ private static void defaultPopulateList() throws ParseException {
 					//change to object ID
 					temp.add(parseObject.getObjectId());
 
-			 		Log.v("List", "hint3 SINGLE APPCLASS = " +  parseObject.getObjectId()   + "     end");
+			 		//Log.v("List", "hint3 SINGLE APPCLASS = " +  parseObject.getObjectId()   + "     end");
 					//add automatic date
 					temp.add(parseObject.getString("date"));
 					listItems.add(temp);	
@@ -193,6 +194,27 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 				startActivity(intent);
 		 	}
 		}
+
+
+	public void DeletePost(View view){
+		Button title = (Button) view.findViewById(R.id.button1);
+	 	String id =  (String) title.getHint();
+	 	if(id!= null){
+	 		ParseQuery get = new ParseQuery("Post");
+	    	get.whereEqualTo("objectId", id);
+	    	List<ParseObject> objects = null;
+			try {
+				objects = get.find();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	ParseObject parseObject = objects.get(0);
+			parseObject.deleteEventually();		
+	 		Intent intent = new Intent(this, ListViewCategory.class);
+			startActivity(intent);
+	 	}
+	}
 
 }
 

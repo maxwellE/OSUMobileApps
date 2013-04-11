@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
@@ -55,7 +56,7 @@ public class Single_Post extends ListActivity {
         Log.v("Single Post", "view set");
         ParseQuery get = new ParseQuery("Post");
     	get.whereEqualTo("objectId", NUM);
-		get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+		get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
     	
     	List<ParseObject> objects = null;
 		try {
@@ -95,7 +96,7 @@ public class Single_Post extends ListActivity {
         }
         
         ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
-        ratebar.setRating((float) 3.5);
+        ratebar.setRating((float) 0);
         
         try {
 			setRating();
@@ -113,9 +114,13 @@ public class Single_Post extends ListActivity {
 		
 //	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
 	   avgRating = (TextView) findViewById(R.id.txtAvgRating);
-	 
-	   avgRating.setText(Float.toString(getRating()) + " Avg Rating");
-	  
+	   float temp = 0;
+	   temp = getRating();
+	   avgRating.setText(Float.toString(temp) + " Avg Rating");
+	   //TODO
+	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
+	   
+	   ratebar.setRating(temp);
 	}
    
    //Listner for rating bar
@@ -178,6 +183,9 @@ public class Single_Post extends ListActivity {
 		   newPORating.put("UserId", userid);
 		   newPORating.saveInBackground();
 	   }
+	   //JEFF
+	   Intent LocationShare = new Intent(this, Single_Post.class);
+       startActivity(LocationShare);
 	   
    }
 
@@ -207,9 +215,9 @@ public class Single_Post extends ListActivity {
 		   
 	   }else{
 		// TODO Auto-generated method stub
-	    TextView location = (TextView) findViewById(R.id.button5);
-		String locationstr = location.getText().toString();
-		LocateMeActivity.LocationNow =locationstr;
+	   // TextView location = (TextView) findViewById(R.id.button5);
+		//String locationstr = location.getText().toString();
+		//LocateMeActivity.LocationNow =locationstr;
 		LocateMeActivity.post_long = longitude;
 		LocateMeActivity.post_lat = latitude;
 		LocateMeActivity.post_location = true;
@@ -223,7 +231,7 @@ public class Single_Post extends ListActivity {
    public static float getRating() throws ParseException{
 	   
 	   ParseQuery get = new ParseQuery("Rating");
-	   get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+	   get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
 	   get.whereEqualTo("PostNum", NUM);
 	   
 	   List<ParseObject> obj = get.find();
@@ -249,7 +257,7 @@ public class Single_Post extends ListActivity {
    public static void  populate_list() throws ParseException{
 	   
     	ParseQuery get = new ParseQuery("Comment");
-    	get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+    	get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
     	get.whereEqualTo("postNum", NUM);
 
 		List<ParseObject> objects = get.find();
@@ -260,6 +268,7 @@ public class Single_Post extends ListActivity {
 			temp.add(parseObject.getString("date"));
 			temp.add(parseObject.getString("content"));
 			temp.add(parseObject.getString("author"));
+			temp.add(parseObject.getObjectId());
 			listItems.add(temp);
 			
 		}
@@ -318,4 +327,27 @@ public class Single_Post extends ListActivity {
 		super.onStop();
 		Log.v("LIST", "Stopped LIST APPCLASS");
 	}
+	
+	public void DeleteComment(View v){
+		Button title = (Button) v.findViewById(R.id.button1);
+	 	String id =  (String) title.getHint();
+	 	if(id!= null){
+	 		ParseQuery get = new ParseQuery("Comment");
+	    	get.whereEqualTo("objectId", id);
+	    	List<ParseObject> objects = null;
+			try {
+				objects = get.find();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	ParseObject parseObject = objects.get(0);
+			parseObject.deleteEventually();		
+	 		Intent intent = new Intent(this, Single_Post.class);
+			startActivity(intent);
+	 	}
+	}
+	
 }
+
+

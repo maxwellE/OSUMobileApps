@@ -24,6 +24,11 @@ import com.parse.FindCallback;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+/*
+ * Activity used to handle searching posts.  There are many fields
+ * here to allow users to robustly search posts that they may be interested in.
+ * 
+ */
 public class SearchPostActivity extends Activity {
 
 	@Override
@@ -67,29 +72,30 @@ public class SearchPostActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+	/*
+	 * Main method of activity.  This method goes through each field and checks to see if it
+	 * was filled or not.  If a field is filled a ParseQuery is created and added to an or query,
+	 * we or the queries together using the ParseQuery.or method. After launching the query we will
+	 * show the ListViewCategory activity with the results.
+	 * 
+	 * This method will validate fields as well such as the date field, which must match a certain format
+	 * to be used for a search
+	 */
 	public void performSearch(View view) {
 		ListViewCategory.forceSearch = false;
-		TextView mPostNumberField = (TextView) findViewById(R.id.search_post_number_field);
 		TextView mPostDateField = (TextView) findViewById(R.id.search_post_date_field);
 		TextView mPostKeywordsField = (TextView) findViewById(R.id.search_post_keywords_field);
 		TextView mPostAuthorField = (TextView) findViewById(R.id.search_post_author_field);
 		List<ParseQuery> queryList = new ArrayList<ParseQuery>();
 		boolean cancel = false;
 		View focusView = null;
-		if(!TextUtils.isEmpty(mPostNumberField.getText().toString())){
-			ParseQuery numberQuery = new ParseQuery("Post");
-			numberQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
-			numberQuery.whereEqualTo("post_num", Integer.parseInt(mPostNumberField.getText().toString()));
-			queryList.add(numberQuery);
-		}
 		if(!TextUtils.isEmpty(mPostDateField.getText().toString())){
 			new DateFormat();
 			java.text.DateFormat format = DateFormat.getDateFormat(getApplicationContext());
 			try {
 				java.util.Date parsedDate = format.parse(mPostDateField.getText().toString());
 				ParseQuery dateQuery = new ParseQuery("Post");
-				dateQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+				dateQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
 				dateQuery.whereEqualTo("date", parsedDate);
 				queryList.add(dateQuery);
 			} catch (ParseException e) {
@@ -104,8 +110,8 @@ public class SearchPostActivity extends Activity {
 			String[] splited = keywords.split(",");
 			ParseQuery summaryQuery = new ParseQuery("Post");
 			ParseQuery titleQuery = new ParseQuery("Post");
-			summaryQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
-			titleQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+			summaryQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
+			titleQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
 			summaryQuery.whereMatches("summary", TextUtils.join("|", splited),"i");
 			titleQuery.whereMatches("title", TextUtils.join("|", splited), "i");
 			queryList.add(summaryQuery);
@@ -114,7 +120,7 @@ public class SearchPostActivity extends Activity {
 		if(!TextUtils.isEmpty(mPostAuthorField.getText().toString())){
 			String author = mPostAuthorField.getText().toString();
 			ParseQuery authorQuery = new ParseQuery("Post");
-			authorQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+			authorQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
 			authorQuery.whereContains("author", author);
 			queryList.add(authorQuery);
 		}
@@ -130,7 +136,7 @@ public class SearchPostActivity extends Activity {
 				 findViewById(R.id.btnSearchPosts).setClickable(true);
 			}else{
 				ParseQuery orQuery = ParseQuery.or(queryList);
-				orQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+				orQuery.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
 				ListViewCategory.parsePostList = null;
 				final Intent i = new Intent(this,ListViewCategory.class);
 				orQuery.findInBackground(new FindCallback() {

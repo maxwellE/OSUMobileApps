@@ -55,7 +55,7 @@ public class Add_Post extends Activity {
         post.put("city", add);
         
         ParseQuery get = new ParseQuery("Post");
-        get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ONLY);
         
 //        int num = 0;
 //		try {
@@ -73,7 +73,7 @@ public class Add_Post extends Activity {
         Calendar cal = Calendar.getInstance(); 
 
         int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
+        int month = cal.get(Calendar.MONTH) + 1;
         int dayofmonth = cal.get(Calendar.DAY_OF_MONTH);
         
         String date = month + "/" + dayofmonth + "/" + year;
