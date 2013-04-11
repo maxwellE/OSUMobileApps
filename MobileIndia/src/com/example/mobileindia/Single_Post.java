@@ -117,7 +117,8 @@ public class Single_Post extends ListActivity {
 	   avgRating.setText(Float.toString(getRating()) + " Avg Rating");
 	  
 	}
-
+   
+   //Listner for rating bar
    private void addRatebarListner() {
 	    
 	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
@@ -130,6 +131,7 @@ public class Single_Post extends ListActivity {
 			});
 	}
    
+   //When new rating is made
    public void setNewRating(float r){
 	   
 	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
@@ -137,20 +139,12 @@ public class Single_Post extends ListActivity {
 	   
 	   Log.d("BTest","New rating of " + r + " starts");
 	   
-//	   try {
-//		setRating();
-//	   }catch (ParseException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	   }
-	   
 	   ParseUser user = ParseUser.getCurrentUser();
 	   
 	   String userid = user.getObjectId();
 	   
 	   ParseQuery pqRating = new ParseQuery("Rating");
 	   
-	   //pqRating.whereEqualTo("UserId", user.getObjectId());
 	   pqRating.whereEqualTo("PostNum", NUM);
 	   
 	   List<ParseObject> objects = null;
@@ -163,7 +157,6 @@ public class Single_Post extends ListActivity {
 		
 	   Log.v("Single Post", "got all parse objects");
 	   
-//	   ParseObject postObj = objects.get(0);
 	   ParseObject rateObj = ParseObject;
 	   
 	   for (ParseObject parseObject : objects) {
@@ -188,6 +181,7 @@ public class Single_Post extends ListActivity {
 	   
    }
 
+   //Send a sms about the the post viewed
    public void shareSMS(View view) {
 		// TODO Auto-generated method stub
 	   TextView title = (TextView) findViewById(R.id.singlePost_Title);
@@ -197,6 +191,7 @@ public class Single_Post extends ListActivity {
         startActivity(SmsShare);
     }
   
+   //Send a sms about the the post viewed
    public void shareEmail(View view) {
 		// TODO Auto-generated method stub
 	    TextView title = (TextView) findViewById(R.id.singlePost_Title);
@@ -206,7 +201,7 @@ public class Single_Post extends ListActivity {
         startActivity(EmailShare);
        
    }
-   
+   //Share the locating of the post
    public void shareLocation(View view) {
 	   if(longitude == 0 || latitude == 0){
 		   
@@ -245,10 +240,12 @@ public class Single_Post extends ListActivity {
 		   Ratings /= totalRatings;
 	   }
 	   
-	   return Ratings;
+	   Log.d("Log", "Calc rating for list "+ NUM);
 	   
+	   return Ratings;
    }
     
+   //Build the post from the DB
    public static void  populate_list() throws ParseException{
 	   
     	ParseQuery get = new ParseQuery("Comment");
@@ -267,6 +264,7 @@ public class Single_Post extends ListActivity {
 			
 		}
 
+		Log.d("Log", "List build for post " + NUM);
     }
 
     //METHOD WHICH WILL HANDLE DYNAMIC INSERTION
