@@ -18,6 +18,8 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+//this class fills the list_view_XML. It dynamically uses the ItemAdapter to 
+//fill list found in activity_list_view_category
 public class ListViewCategory extends ListActivity {
     //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
    static ArrayList<ArrayList<String>> listItems=new ArrayList<ArrayList<String>>();
@@ -37,9 +39,10 @@ public class ListViewCategory extends ListActivity {
     @SuppressLint("NewApi")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
-    	Log.v("Post", "POST : POSTLIST start set APPCLASS ");
     	super.onCreate(savedInstanceState);
     	try {
+    		//choose which way to populate list.
+    		//This was done when Maxwell tried to use my code......
     		if(ListViewCategory.parsePostList != null){
     			populate_list(ListViewCategory.parsePostList);
     	    }else{
@@ -49,45 +52,27 @@ public class ListViewCategory extends ListActivity {
 			/// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	//Log.v("Post", "POST : listView built  APPCLASS ");
         super.onCreate(savedInstanceState);      
         setContentView(R.layout.activity_list_view_category);
-       // Log.v("Post", "POST : content set  APPCLASS ");
-       adapter0 = new Item_Adapter(this, R.layout.list, listItems);
-        setListAdapter(adapter0);
-      //  Log.v("Post", "POST : adapter set APPCLASS ");
         
+        //define adapter to fill list element XML
+        adapter0 = new Item_Adapter(this, R.layout.list, listItems);
+        setListAdapter(adapter0); 
         // Make sure we're running on Honeycomb or higher to use ActionBar APIs
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             // Show the Up button in the action bar.
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
+    //hides addbutton if anonymous
     protected void onPostCreate (Bundle savedInstanceState){
  		super.onPostCreate(savedInstanceState);
-
-    	//Log.v("Post", "POST1 : ADD start set APPCLASS ");
  		if(ListViewCategory.hideAdd){
  			findViewById(R.id.addBtn).setVisibility(8);
-
- 	    	//Log.v("Post", "POST11 : ADD_DONE start set APPCLASS ");
  		}
-// 		if(ParseUser.getCurrentUser() != null){
-// 			Log.v("Post", "POST11 : NOT_NULL start set APPCLASS ");
-// 			ParseObject obj = ParseUser.getCurrentUser();
-//
-// 			Log.v("Post", "POST123: OBJ_GOT start set APPCLASS ");
-// 			if(!obj.getBoolean("SUPER")){
-//
-// 	 			Log.v("Post", "POST123: SUPPPPPERRRR start set APPCLASS ");
-// 				findViewById(R.id.button1).setVisibility(8);
-//
-// 	 			Log.v("Post", "POST12345: SUPPPPPERRRR start set APPCLASS ");
-// 			}
-// 		}
     }
     
-
+    /// choose between correct list (ask Maxwell)
    public static void  populate_list(List<ParseObject> parsePostList2) throws ParseException{
 	    if(parsePostList2 == null){
 	    	defaultPopulateList();
@@ -97,6 +82,7 @@ public class ListViewCategory extends ListActivity {
 
     }
 
+   //populate the arraylist that will be sent to the itemAdapter
 private static void defaultPopulateList() throws ParseException {
 	ParseQuery get = new ParseQuery("Post");
 	get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
@@ -109,18 +95,14 @@ private static void defaultPopulateList() throws ParseException {
 					temp.add(parseObject.getString("title"));
 					temp.add(parseObject.getString("summary"));
 					temp.add(parseObject.getString("author"));
-					//String num_string = Integer.toString(parseObject.getInt("post_num"));
-					//temp.add(num_string);
-					//change to object ID
+					
 					temp.add(parseObject.getObjectId());
-
-			 		//Log.v("List", "hint3 SINGLE APPCLASS = " +  parseObject.getObjectId()   + "     end");
-					//add automatic date
 					temp.add(parseObject.getString("date"));
 					listItems.add(temp);	
 				}
 }
 
+//Maxwell.......
 private static void populateYourPosts(List<ParseObject> parsePostList2) {
 	listItems.clear();
 	for (ParseObject parseObject : parsePostList2) {
@@ -145,12 +127,14 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
         adapter0.notifyDataSetChanged();
     }
     
+    // only for higher api
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	Intent back = new Intent(this,Categories2.class);
         startActivity(back);
         return super.onOptionsItemSelected(item);
     }
+    
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (ListViewCategory.forceHome) {
@@ -159,6 +143,7 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
         }else if (forceSearch) {
         	Intent back = new Intent(this,SearchPostActivity.class);
             startActivity(back);
+            //override back button
 		}else if(keyCode == KeyEvent.KEYCODE_BACK){
         	Intent back = new Intent(this,Categories2.class);
             startActivity(back);
@@ -183,19 +168,19 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 		super.onStop();
 	}
 	
-
+	// method to start the single post that was clicked
 	public void SinglePost(View view){
+			//the view is the button so objectId I sent as a hint
 		 	Button title = (Button) view.findViewById(R.id.full_post_button);
+		 	//send that id to single post
 		 	Single_Post.NUM =  (String) title.getHint();
-		 	Log.v("List", "hint1 SINGLE APPCLASS = " +  Single_Post.NUM  + "     end");
 		 	if(Single_Post.NUM != null){
-		 		Log.v("List", "hint2 SINGLE APPCLASS = " +  Single_Post.NUM  + "     end");
 		 		Intent intent = new Intent(this, Single_Post.class);
 				startActivity(intent);
 		 	}
 		}
 
-
+	// same thing but removes the parse object from post
 	public void DeletePost(View view){
 		Button title = (Button) view.findViewById(R.id.button1);
 	 	String id =  (String) title.getHint();
