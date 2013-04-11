@@ -92,8 +92,8 @@ public class CitySelect extends Activity implements OnClickListener {
 			LocateMeActivity.post_lat = latitude;
 			LocateMeActivity.post_location = true;
 			
-			startActivity(i);
 		   }
+		startActivity(i);
 	}
 
 	@Override
