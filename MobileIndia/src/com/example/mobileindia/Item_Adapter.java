@@ -102,16 +102,9 @@ public class Item_Adapter extends ArrayAdapter<ArrayList<String>> {
 			
 			
 			if(ParseUser.getCurrentUser() != null){
-	 			Log.v("Post", "POST11 : NOT_NULL start set APPCLASS ");
 	 			ParseObject obj = ParseUser.getCurrentUser();
-
-	 			Log.v("Post", "POST123: OBJ_GOT start set APPCLASS ");
 	 			if(!obj.getBoolean("SUPER")){
-
-	 	 			Log.v("Post", "POST123: SUPPPPPERRRR start set APPCLASS ");
 	 				v.findViewById(R.id.button1).setVisibility(8);
-
-	 	 			Log.v("Post", "POST12345: SUPPPPPERRRR start set APPCLASS ");
 	 			}
 	 		}
 			

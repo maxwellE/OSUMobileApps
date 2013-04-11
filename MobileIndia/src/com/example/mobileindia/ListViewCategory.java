@@ -197,13 +197,9 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 
 
 	public void DeletePost(View view){
-		Log.v("List", " DELETE APPCLASS = end");
 		Button title = (Button) view.findViewById(R.id.button1);
 	 	String id =  (String) title.getHint();
-		Log.v("List", " APPCLASS id " + id);
 	 	if(id!= null){
-
-			Log.v("List", " APPCLASS Not NULL = end");
 	 		ParseQuery get = new ParseQuery("Post");
 	    	get.whereEqualTo("objectId", id);
 	    	List<ParseObject> objects = null;
@@ -213,11 +209,8 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-	    	Log.v("Single Post", "got all parse objects");
 	    	ParseObject parseObject = objects.get(0);
-			parseObject.deleteEventually();
-			
+			parseObject.deleteEventually();		
 	 		Intent intent = new Intent(this, ListViewCategory.class);
 			startActivity(intent);
 	 	}
