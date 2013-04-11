@@ -5,6 +5,8 @@ import java.util.List;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -16,9 +18,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
+
 
 public class Single_Post extends ListActivity {
 
+	private static final ParseObject ParseObject = null;
 	public double longitude;
 	public double latitude;
 	public static String NUM = "";
@@ -30,6 +36,9 @@ public class Single_Post extends ListActivity {
     CommentAdapter adapter0;
   
     int clickCounter=0;
+    
+    private RatingBar ratebar;
+    private TextView avgRating ;
 
     @SuppressLint("NewApi")
 	@Override
@@ -46,7 +55,8 @@ public class Single_Post extends ListActivity {
         setContentView(R.layout.activity_single__post);
         Log.v("Single Post", "view set");
         ParseQuery get = new ParseQuery("Post");
-    	get.whereEqualTo("post_num", Integer.parseInt(NUM));
+    	get.whereEqualTo("objectId", NUM);
+		get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
     	
     	List<ParseObject> objects = null;
 		try {
@@ -84,8 +94,108 @@ public class Single_Post extends ListActivity {
             // Show the Up button in the action bar.
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        
+        ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
+        ratebar.setRating((float) 0);
+        
+        try {
+			setRating();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        addRatebarListner();
+        
     }
     
+    //Sets the Avg rating textview
+   private void setRating() throws ParseException {
+		
+//	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
+	   avgRating = (TextView) findViewById(R.id.txtAvgRating);
+	   float temp = 0;
+	   temp = getRating();
+	   avgRating.setText(Float.toString(temp) + " Avg Rating");
+	   //TODO
+	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
+	   
+	   ratebar.setRating(temp);
+	}
+
+   private void addRatebarListner() {
+	    
+	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
+		
+	   ratebar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+			public void onRatingChanged(RatingBar ratingBar, float rating,
+					boolean fromUser) {
+					setNewRating(rating);
+				}
+			});
+	}
+   
+   public void setNewRating(float r){
+	   
+	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
+	   ratebar.setRating(r);
+	   
+	   Log.d("BTest","New rating of " + r + " starts");
+	   
+//	   try {
+//		setRating();
+//	   }catch (ParseException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	   }
+	   
+	   ParseUser user = ParseUser.getCurrentUser();
+	   
+	   String userid = user.getObjectId();
+	   
+	   ParseQuery pqRating = new ParseQuery("Rating");
+	   
+	   //pqRating.whereEqualTo("UserId", user.getObjectId());
+	   pqRating.whereEqualTo("PostNum", NUM);
+	   
+	   List<ParseObject> objects = null;
+	   try {
+		   objects = pqRating.find();
+	   } catch (ParseException e) {
+		   // TODO Auto-generated catch block
+		   e.printStackTrace();
+	   }
+		
+	   Log.v("Single Post", "got all parse objects");
+	   
+//	   ParseObject postObj = objects.get(0);
+	   ParseObject rateObj = ParseObject;
+	   
+	   for (ParseObject parseObject : objects) {
+		   String temp = parseObject.getString("UserId");
+		   
+		   if (temp.equals(userid.toString())){
+			   rateObj = parseObject;
+		   }
+		}
+	   
+	   if (rateObj != null){
+		   rateObj.put("Rating", (Number) r);
+		   rateObj.saveInBackground();
+	   }
+	   else{
+		   ParseObject newPORating = new ParseObject("Rating");
+		   newPORating.put("PostNum", NUM);
+		   newPORating.put("Rating", (Number) r);
+		   newPORating.put("UserId", userid);
+		   newPORating.saveInBackground();
+	   }
+	   //JEFF
+	   Intent LocationShare = new Intent(this, Single_Post.class);
+       startActivity(LocationShare);
+	   
+   }
+
    public void shareSMS(View view) {
 		// TODO Auto-generated method stub
 	   TextView title = (TextView) findViewById(R.id.singlePost_Title);
@@ -93,7 +203,6 @@ public class Single_Post extends ListActivity {
 		SMSActivity.Title=titlestr;
     	Intent SmsShare = new Intent(this, SMSActivity.class);
         startActivity(SmsShare);
-        
     }
   
    public void shareEmail(View view) {
@@ -111,9 +220,9 @@ public class Single_Post extends ListActivity {
 		   
 	   }else{
 		// TODO Auto-generated method stub
-	    TextView location = (TextView) findViewById(R.id.button5);
-		String locationstr = location.getText().toString();
-		LocateMeActivity.LocationNow =locationstr;
+	   // TextView location = (TextView) findViewById(R.id.button5);
+		//String locationstr = location.getText().toString();
+		//LocateMeActivity.LocationNow =locationstr;
 		LocateMeActivity.post_long = longitude;
 		LocateMeActivity.post_lat = latitude;
 		LocateMeActivity.post_location = true;
@@ -122,23 +231,50 @@ public class Single_Post extends ListActivity {
 	   }
       
   }
+   
+   //Gets the Avg Rating for a single post
+   public static float getRating() throws ParseException{
+	   
+	   ParseQuery get = new ParseQuery("Rating");
+	   get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
+	   get.whereEqualTo("PostNum", NUM);
+	   
+	   List<ParseObject> obj = get.find();
+	   
+	   float totalRatings = obj.size();
+	   float Ratings = 0;
+	   
+	   if(totalRatings > 0){
+		   for (ParseObject parseObject : obj) {
+			   Number temp = parseObject.getNumber("Rating");
+			   Ratings += temp.floatValue();
+		   }
+	   
+		   Ratings /= totalRatings;
+	   }
+	   
+	   return Ratings;
+	   
+   }
     
    public static void  populate_list() throws ParseException{
 	   
     	ParseQuery get = new ParseQuery("Comment");
+    	get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
     	get.whereEqualTo("postNum", NUM);
 
-    				List<ParseObject> objects = get.find();
-    				listItems.clear();
-    				
-    				for (ParseObject parseObject : objects) {
-    					ArrayList<String> temp = new ArrayList<String>();
-    					temp.add(parseObject.getString("date"));
-    					temp.add(parseObject.getString("content"));
-    					temp.add(parseObject.getString("author"));
-    					listItems.add(temp);
-    					
-					}
+		List<ParseObject> objects = get.find();
+		listItems.clear();
+		
+		for (ParseObject parseObject : objects) {
+			ArrayList<String> temp = new ArrayList<String>();
+			temp.add(parseObject.getString("date"));
+			temp.add(parseObject.getString("content"));
+			temp.add(parseObject.getString("author"));
+			temp.add(parseObject.getObjectId());
+			listItems.add(temp);
+			
+		}
 
     }
 
@@ -186,8 +322,6 @@ public class Single_Post extends ListActivity {
 	public void onResume(){
 		Log.v("List", "RESUMED List APPCLASS");
 		super.onResume();
-		//adapter0.notifyDataSetChanged();
-		
 	}
 	
 	@Override
@@ -196,6 +330,26 @@ public class Single_Post extends ListActivity {
 		Log.v("LIST", "Stopped LIST APPCLASS");
 	}
 	
-
+	public void DeleteComment(View v){
+		Button title = (Button) v.findViewById(R.id.button1);
+	 	String id =  (String) title.getHint();
+	 	if(id!= null){
+	 		ParseQuery get = new ParseQuery("Comment");
+	    	get.whereEqualTo("objectId", id);
+	    	List<ParseObject> objects = null;
+			try {
+				objects = get.find();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	ParseObject parseObject = objects.get(0);
+			parseObject.deleteEventually();		
+	 		Intent intent = new Intent(this, Single_Post.class);
+			startActivity(intent);
+	 	}
+	}
+	
 }
+
 

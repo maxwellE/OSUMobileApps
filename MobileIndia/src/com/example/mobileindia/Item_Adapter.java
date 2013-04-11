@@ -2,6 +2,9 @@ package com.example.mobileindia;
 
 import java.util.ArrayList;
 
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
@@ -62,7 +65,8 @@ public class Item_Adapter extends ArrayAdapter<ArrayList<String>> {
 			TextView summary = (TextView) v.findViewById(R.id.post_summary_list);
 			TextView author = (TextView) v.findViewById(R.id.post_author_list);
 			Button b = (Button) v.findViewById(R.id.full_post_button);
-			TextView date = (TextView) v.findViewById(R.id.post_date_list);
+			Button b1 = (Button) v.findViewById(R.id.button1);
+			TextView date = (TextView) v.findViewById(R.id.searchPostLabel);
 			
 			// check to see if each individual textview is null.
 			// if not, assign some text!
@@ -81,6 +85,9 @@ public class Item_Adapter extends ArrayAdapter<ArrayList<String>> {
 			if (b != null){
 				b.setHint(i.get(3));
 			}
+			if (b1 != null){
+				b1.setHint(i.get(3));
+			}
 			//Log.v("Post", "POST : APPCLASS hint = " + i.get(3));
 			
 			//color the post
@@ -91,6 +98,19 @@ public class Item_Adapter extends ArrayAdapter<ArrayList<String>> {
 				temp = Color.WHITE;
 			}
 			v.setBackgroundColor(temp);
+			
+			
+			
+			if(ParseUser.getCurrentUser() != null){
+	 			ParseObject obj = ParseUser.getCurrentUser();
+	 			if(!obj.getBoolean("SUPER")){
+	 				v.findViewById(R.id.button1).setVisibility(8);
+	 			}
+	 		}
+			
+			
+			
+			
 		}
 
 		// the view must be returned to our activity

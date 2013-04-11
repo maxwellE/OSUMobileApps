@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MobileIndia</string>
+    <string name="app_name">Classifieds</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="login_text_box">Login</string>
@@ -55,5 +55,15 @@
     <string name="post_date_hint">Post Date</string>
     <string name="post_keywords_hint">Post Keywords (comma separated)</string>
     <string name="post_author_hint">Post Author</string>
-    <string name="date_picker_search_button">Pick Date</string>
+	<string name="btnDelhi_Text">Delhi</string>
+    <string name="btnMumbai_Text">Mumbai</string>
+    <string name="btnKolkata_Text">Kolkata</string>
+    <string name="btnChennai_Text">Chennai</string>
+    <string name="btnBanglore_Text">Banglore</string>
+    <string name="btnPune_Text">Pune</string>
+    <string name="btnNagpur_Text">Nagpur</string>
+    <string name="btnIndore_Text">Indore</string>
+    <string name="btnJaipur_Text">Jaipur</string>
+    <string name="btnKanpur_Text">Kanpur</string>
+    <string name="btnLocMe_Text">View Map</string>
 </resources>

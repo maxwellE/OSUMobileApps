@@ -10,122 +10,135 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Single_Post" >
 
-    <TextView
-        android:id="@+id/singlePostCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Category"
-        android:textAlignment="center"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/activity_vertical_margin" >
-
-            <TextView
-                android:id="@+id/singlePost_Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                android:text="Title" >
-
-                <requestFocus />
-            </TextView>
-
-            <Button
-                android:id="@+id/button5"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="200px"
-                android:layout_height="50px"
-                android:layout_weight="1"
-                android:onClick="shareLocation"
-                android:text="Location" />
-
-        </LinearLayout>
 
         <TextView
-            android:id="@+id/singlePost_Summary"
-            android:layout_width="match_parent"
+            android:id="@+id/singlePostCategory"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textMultiLine"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:text="Summary" />
+            android:text="Category"
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/single_Post_Author"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:text="Author" />
+                android:paddingBottom="@dimen/activity_vertical_margin" >
+
+                <TextView
+                    android:id="@+id/singlePost_Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:text="Title" />
+
+                <Button
+                    android:id="@+id/button5"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="200px"
+                    android:layout_height="50px"
+                    android:layout_weight="1"
+                    android:onClick="shareLocation"
+                    android:text="Location" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/singlePost_Number"
+                android:id="@+id/singlePost_Summary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
                 android:ems="10"
-                android:text="NUmber" />
+                android:inputType="textMultiLine"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:text="Summary" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/single_Post_Author"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:text="Author" />
+
+                <TextView
+                    android:id="@+id/singlePost_Number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:ems="10"
+                    android:text="NUmber" />
+            </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
-
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" >
-
-    </ListView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <Button
-            android:id="@+id/logged_in_user_posts_button"
-            android:layout_width="wrap_content"
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="addItems"
-            android:text="Add Comment" />
+            android:layout_weight="1" >
+        </ListView>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/button2"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="shareSMS"
-                android:text="Share by SMS" />
+                android:orientation="horizontal" >
 
-            <Button
-                android:id="@+id/button3"
+                <Button
+                    android:id="@+id/logged_in_user_posts_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="addItems"
+                    android:text="Add Comment" />
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="shareSMS"
+                    android:text="SMS" />
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="shareEmail"
+                    android:text="Email" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtAvgRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="shareEmail"
-                android:text="Share by Email" />
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <RatingBar
+                android:id="@+id/rbSinglePost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5" />
         </LinearLayout>
-
     </LinearLayout>
 
 </LinearLayout>

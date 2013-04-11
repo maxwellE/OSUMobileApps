@@ -13,7 +13,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -25,7 +24,11 @@ import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
-
+/*
+ * Activity used to create users.  This activity and the login activiy share much of the 
+ * same code so you can fall back to the LoginActivity for more examples of the Parse methods
+ * in use.  
+ */
 public class CreateUserActivity extends Activity {
     private EditText mPasswordView;
     private EditText mPasswordConfirmView;
@@ -102,12 +105,12 @@ public class CreateUserActivity extends Activity {
 				cancel = true;
 		 }
 	     if (cancel) {
-			// There was an error; don't attempt login and focus the first
+			// There was an error; don't attempt creation and focus the first
 			// form field with an error.
 			focusView.requestFocus();
 		 } else {
 				// Show a progress spinner, and kick off a background task to
-				// perform the user login attempt.
+				// perform the user creation attempt.
 				mCreateUserStatusMessageView.setText(R.string.login_progress_signing_in);
 			    showProgress(true);
 			    mAuthTask = new UserCreateTask();
@@ -155,7 +158,7 @@ public class CreateUserActivity extends Activity {
 			}
 		}
 		/**
-		 * Represents an asynchronous login/registration task used to authenticate
+		 * Represents an asynchronous registration task used to authenticate
 		 * the user.
 		 */
 		public class UserCreateTask extends AsyncTask<Void, Void, Boolean> {

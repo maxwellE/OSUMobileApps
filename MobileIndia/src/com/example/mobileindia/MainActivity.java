@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
@@ -114,7 +113,9 @@ public class MainActivity extends Activity {
 	 
 	 public void viewUserPosts(View view){
 		 ListViewCategory.parsePostList = null;
+		 ListViewCategory.forceHome = true;
 		 ParseQuery query = new ParseQuery("Post");
+		 query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 		 query.whereEqualTo("user", ParseUser.getCurrentUser());
 		 try {
 			ListViewCategory.parsePostList = query.find();
@@ -138,4 +139,7 @@ public class MainActivity extends Activity {
 		 finish();
 	 }
 	 
+	 @Override
+	 public void onBackPressed() {
+	 }
 }

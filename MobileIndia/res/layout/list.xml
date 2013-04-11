@@ -59,7 +59,7 @@
             android:textIsSelectable="true" />
 
         <TextView
-            android:id="@+id/post_date_list"
+            android:id="@+id/searchPostLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -68,11 +68,24 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/full_post_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="SinglePost"
-        android:text="View Full Post" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/full_post_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="SinglePost"
+            android:text="View Full Post" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="DeletePost"
+            android:text="Delete Post" />
+
+    </LinearLayout>
 
 </LinearLayout>

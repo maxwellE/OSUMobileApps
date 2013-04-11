@@ -1,20 +1,18 @@
 package com.example.mobileindia;
 
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
-import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+
 import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 
 
 public class Add_Comment extends Activity {
@@ -64,7 +62,7 @@ public class Add_Comment extends Activity {
         Calendar cal = Calendar.getInstance(); 
 
         int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH);
+        int month = cal.get(Calendar.MONTH) + 1;
         int dayofmonth = cal.get(Calendar.DAY_OF_MONTH);
         
         String date = month + "/" + dayofmonth + "/" + year;
