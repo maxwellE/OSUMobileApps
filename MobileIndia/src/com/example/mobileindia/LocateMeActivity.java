@@ -35,7 +35,7 @@ public class LocateMeActivity extends MapActivity implements OnClickListener{
 		setContentView(R.layout.activity_locate_me);
 		
 		whereamiView = (MapView) findViewById(R.id.locateMe);
-		//whereamiView.setSatellite(true);
+		whereamiView.setSatellite(true);
 		whereamiView.setBuiltInZoomControls(true);
 		whereAmIController = whereamiView.getController();
 		
