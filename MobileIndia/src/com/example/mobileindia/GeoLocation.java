@@ -130,5 +130,4 @@ public class GeoLocation implements LocationListener{
 		// TODO Auto-generated method stub
 		
 	}
-
 }

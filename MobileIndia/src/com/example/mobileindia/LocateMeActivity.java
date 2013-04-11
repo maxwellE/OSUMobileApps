@@ -9,6 +9,7 @@ import com.example.mobileindia.GeoLocation;
 
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -84,6 +85,10 @@ public class LocateMeActivity extends MapActivity implements OnClickListener{
 			myLocationField.setText(LocationNow);
 			double latitude = myLocation.getLatitude();
 			double longitude = myLocation.getLongitude();
+			String lat = Double.toString(latitude);
+			String lon = Double.toString(longitude);
+			Log.v("Location latitude :", lat);
+			Log.v("Location longitude :", lon);
 			GeoPoint point = new GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
 			
 			MyLocationOverlay locationOverlay = new MyLocationOverlay(this, whereamiView);
@@ -100,6 +105,11 @@ public class LocateMeActivity extends MapActivity implements OnClickListener{
 			String locationName = this.locationEditableField.getText().toString();
 			
             GeoPoint point = myGeoLocator.getGeoPointFromName(locationName);
+            String lat = Integer.toString(point.getLatitudeE6());
+			String lon = Integer.toString(point.getLongitudeE6());
+			
+            Log.v("Location latitude :", lat);
+            Log.v("Location longitude :", lon);
             
             MyLocationOverlay locationOverlay = new MyLocationOverlay(this, whereamiView);
 			whereamiView.getOverlays().add(locationOverlay);
