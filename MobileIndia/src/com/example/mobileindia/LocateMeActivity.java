@@ -9,6 +9,7 @@ import com.example.mobileindia.GeoLocation;
 
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,7 +35,7 @@ public class LocateMeActivity extends MapActivity implements OnClickListener{
 		setContentView(R.layout.activity_locate_me);
 		
 		whereamiView = (MapView) findViewById(R.id.locateMe);
-		whereamiView.setSatellite(true);
+		//whereamiView.setSatellite(true);
 		whereamiView.setBuiltInZoomControls(true);
 		whereAmIController = whereamiView.getController();
 		
@@ -50,7 +51,8 @@ public class LocateMeActivity extends MapActivity implements OnClickListener{
 		
 		if(post_location){
 			post_location = false;
-			GeoPoint point = new GeoPoint((int) (post_lat * 1E6), (int) (post_long * 1E6));
+			Log.d(this.getClass().getName(), "back button pressed   " + post_long);
+			GeoPoint point = new GeoPoint((int) (post_lat * 1E6) , (int) (post_long * 1E6));
 			
 			MyLocationOverlay locationOverlay = new MyLocationOverlay(this, whereamiView);
 			whereamiView.getOverlays().add(locationOverlay);

@@ -96,31 +96,35 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/logged_in_user_posts_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="addItems"
-                android:text="Add Comment" />
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
 
                 <Button
+                    android:id="@+id/logged_in_user_posts_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="addItems"
+                    android:text="Add Comment" />
+
+                <Button
                     android:id="@+id/button2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:onClick="shareSMS"
-                    android:text="Share by SMS" />
+                    android:text="SMS" />
 
                 <Button
                     android:id="@+id/button3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:onClick="shareEmail"
-                    android:text="Share by Email" />
+                    android:text="Email" />
+
             </LinearLayout>
 
             <TextView
