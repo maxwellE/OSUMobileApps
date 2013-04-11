@@ -343,7 +343,12 @@ public class Single_Post extends ListActivity {
 				e.printStackTrace();
 			}
 	    	ParseObject parseObject = objects.get(0);
-			parseObject.deleteEventually();		
+			try {
+				parseObject.delete();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 	 		Intent intent = new Intent(this, Single_Post.class);
 			startActivity(intent);
 	 	}
