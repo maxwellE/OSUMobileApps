@@ -14,7 +14,7 @@ import android.widget.EditText;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 
-
+//This class adds posts to the back-end parse server
 public class Add_Comment extends Activity {
 
 	@SuppressLint("NewApi")
@@ -38,51 +38,38 @@ public class Add_Comment extends Activity {
 		return true;
 	}
 	
-//	  @Override
-//	    public boolean onOptionsItemSelected(MenuItem item) {
-//	        switch (item.getItemId()) {
-//	        case android.R.id.home:
-//	            NavUtils.navigateUpFromSameTask(this);
-//	            return true;
-//	        }
-//	        return super.onOptionsItemSelected(item);
-//	    }
-	
 	
 	public void AddComment(View view){
+		// creates a new comment object
 		ParseObject comment = new ParseObject("Comment");
 		String add = "";
+		// adds fields to the back-end parse object
 		add = ((EditText) findViewById(R.id.comment_author_add)).getText().toString();
-		comment.put("author", add);
-        
+		comment.put("author", add);   
         add = ((EditText) findViewById(R.id.comment_content_add)).getText().toString();    
-        comment.put("content", add);
-        
-        //add = ((EditText) findViewById(R.id.comment_date_add)).getText().toString();  
+        comment.put("content", add);    
         Calendar cal = Calendar.getInstance(); 
-
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH) + 1;
         int dayofmonth = cal.get(Calendar.DAY_OF_MONTH);
-        
         String date = month + "/" + dayofmonth + "/" + year;
         comment.put("date",date);
-        
+        //save the parse object
         comment.put("postNum", Single_Post.NUM);
-       // post.saveInBackground();
         try {
         	comment.save();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        //restart the single post view
         Intent back = new Intent(this,Single_Post.class);
         startActivity(back);
        
 	}
 	
 	public void Cancel(View view){
-		//NavUtils.navigateUpFromSameTask(this);
+		//go back to single post without adding comment
 		Intent back = new Intent(this,Single_Post.class);
         startActivity(back);
         //
