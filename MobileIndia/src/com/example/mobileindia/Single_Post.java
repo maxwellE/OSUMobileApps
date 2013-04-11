@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 
-
+//this class fills the activity_single_post xml
 public class Single_Post extends ListActivity {
 
 	private static final ParseObject ParseObject = null;
@@ -36,12 +36,13 @@ public class Single_Post extends ListActivity {
     CommentAdapter adapter0;
   
     int clickCounter=0;
-    
+    // define rating vars
     private RatingBar ratebar;
     private TextView avgRating ;
 
     @SuppressLint("NewApi")
 	@Override
+	//choose correct popluate list......
     public void onCreate(Bundle savedInstanceState) {
     	Log.v("Single Post", "made it");
     	try {
@@ -53,11 +54,11 @@ public class Single_Post extends ListActivity {
     	
         super.onCreate(savedInstanceState);      
         setContentView(R.layout.activity_single__post);
-        Log.v("Single Post", "view set");
+        //grab correct post
         ParseQuery get = new ParseQuery("Post");
     	get.whereEqualTo("objectId", NUM);
 		get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
-    	
+    	//get the object
     	List<ParseObject> objects = null;
 		try {
 			objects = get.find();
@@ -65,8 +66,7 @@ public class Single_Post extends ListActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-    	Log.v("Single Post", "got all parse objects");
+		//fill all fields
     	ParseObject parseObject = objects.get(0);
         TextView title = (TextView) findViewById(R.id.singlePost_Title);
         TextView summary = (TextView) findViewById(R.id.singlePost_Summary);
@@ -84,7 +84,7 @@ public class Single_Post extends ListActivity {
     		findViewById(R.id.button5).setVisibility(8);
     	}
 		
-		
+		// creates adapter to fill comment
        adapter0 = new CommentAdapter(this, R.layout.comment, listItems);
        setListAdapter(adapter0);
        
@@ -122,7 +122,8 @@ public class Single_Post extends ListActivity {
 	   
 	   ratebar.setRating(temp);
 	}
-
+   
+   //Listner for rating bar
    private void addRatebarListner() {
 	    
 	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
@@ -135,6 +136,7 @@ public class Single_Post extends ListActivity {
 			});
 	}
    
+   //When new rating is made
    public void setNewRating(float r){
 	   
 	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
@@ -142,20 +144,12 @@ public class Single_Post extends ListActivity {
 	   
 	   Log.d("BTest","New rating of " + r + " starts");
 	   
-//	   try {
-//		setRating();
-//	   }catch (ParseException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	   }
-	   
 	   ParseUser user = ParseUser.getCurrentUser();
 	   
 	   String userid = user.getObjectId();
 	   
 	   ParseQuery pqRating = new ParseQuery("Rating");
 	   
-	   //pqRating.whereEqualTo("UserId", user.getObjectId());
 	   pqRating.whereEqualTo("PostNum", NUM);
 	   
 	   List<ParseObject> objects = null;
@@ -168,7 +162,6 @@ public class Single_Post extends ListActivity {
 		
 	   Log.v("Single Post", "got all parse objects");
 	   
-//	   ParseObject postObj = objects.get(0);
 	   ParseObject rateObj = ParseObject;
 	   
 	   for (ParseObject parseObject : objects) {
@@ -196,6 +189,7 @@ public class Single_Post extends ListActivity {
 	   
    }
 
+   //Send a sms about the the post viewed
    public void shareSMS(View view) {
 		// TODO Auto-generated method stub
 	   TextView title = (TextView) findViewById(R.id.singlePost_Title);
@@ -205,6 +199,7 @@ public class Single_Post extends ListActivity {
         startActivity(SmsShare);
     }
   
+   //Send a sms about the the post viewed
    public void shareEmail(View view) {
 		// TODO Auto-generated method stub
 	    TextView title = (TextView) findViewById(R.id.singlePost_Title);
@@ -214,7 +209,7 @@ public class Single_Post extends ListActivity {
         startActivity(EmailShare);
        
    }
-   
+   //Share the locating of the post
    public void shareLocation(View view) {
 	   if(longitude == 0 || latitude == 0){
 		   
@@ -253,10 +248,12 @@ public class Single_Post extends ListActivity {
 		   Ratings /= totalRatings;
 	   }
 	   
-	   return Ratings;
+	   Log.d("Log", "Calc rating for list "+ NUM);
 	   
+	   return Ratings;
    }
     
+   //Build the post from the DB
    public static void  populate_list() throws ParseException{
 	   
     	ParseQuery get = new ParseQuery("Comment");
@@ -276,6 +273,7 @@ public class Single_Post extends ListActivity {
 			
 		}
 
+		Log.d("Log", "List build for post " + NUM);
     }
 
     //METHOD WHICH WILL HANDLE DYNAMIC INSERTION
@@ -299,7 +297,7 @@ public class Single_Post extends ListActivity {
         startActivity(back);
         return super.onOptionsItemSelected(item);
     }
-
+    //hide back button
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
@@ -330,6 +328,7 @@ public class Single_Post extends ListActivity {
 		Log.v("LIST", "Stopped LIST APPCLASS");
 	}
 	
+	// delete comment 
 	public void DeleteComment(View v){
 		Button title = (Button) v.findViewById(R.id.button1);
 	 	String id =  (String) title.getHint();
@@ -344,7 +343,12 @@ public class Single_Post extends ListActivity {
 				e.printStackTrace();
 			}
 	    	ParseObject parseObject = objects.get(0);
-			parseObject.deleteEventually();		
+			try {
+				parseObject.delete();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 	 		Intent intent = new Intent(this, Single_Post.class);
 			startActivity(intent);
 	 	}
