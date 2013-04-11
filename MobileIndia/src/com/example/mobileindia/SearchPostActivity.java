@@ -24,6 +24,11 @@ import com.parse.FindCallback;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+/*
+ * Activity used to handle searching posts.  There are many fields
+ * here to allow users to robustly search posts that they may be interested in.
+ * 
+ */
 public class SearchPostActivity extends Activity {
 
 	@Override
@@ -67,7 +72,15 @@ public class SearchPostActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+	/*
+	 * Main method of activity.  This method goes through each field and checks to see if it
+	 * was filled or not.  If a field is filled a ParseQuery is created and added to an or query,
+	 * we or the queries together using the ParseQuery.or method. After launching the query we will
+	 * show the ListViewCategory activity with the results.
+	 * 
+	 * This method will validate fields as well such as the date field, which must match a certain format
+	 * to be used for a search
+	 */
 	public void performSearch(View view) {
 		ListViewCategory.forceSearch = false;
 		TextView mPostDateField = (TextView) findViewById(R.id.search_post_date_field);
