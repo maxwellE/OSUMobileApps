@@ -81,24 +81,30 @@ public class CreateUserActivity extends Activity {
 		 mPhoneView = (EditText) findViewById(R.id.phone);
 		 boolean cancel = false;
 		 View focusView = null;
+		 // Make sure phone number field is villed
 		 if(TextUtils.isEmpty(mPhoneView.getText().toString())){
+			   // Set error accordingly.
 				mPhoneView.setError("A phone number is required");
 				focusView = mPhoneView;
 				cancel = true;
+		// Make sure phone number is valid
 		 }else if (!mPhoneView.getText().toString().matches("^[0-9]{10,12}$")){
 				mPhoneView.setError("phone number is invalid");
 				focusView = mPhoneView;
 				cancel = true;
 		 }
+		 // Make sure password confirm is filled.
 		 if (TextUtils.isEmpty(mPasswordConfirmView.getText().toString())){
 				mPasswordConfirmView.setError(getString(R.string.error_field_required));
 				focusView = mPasswordConfirmView;
 				cancel = true;
+		 // Make sure password confirm matches password.
 		 }else if (!TextUtils.equals(mPasswordView.getText().toString(), mPasswordConfirmView.getText().toString())){
 				mPasswordConfirmView.setError("password and password confirm must match");
 				focusView = mPasswordConfirmView;
 				cancel = true;
 		 }
+		 //  Make sure password field if filled.
 		 if (TextUtils.isEmpty(mPasswordView.getText().toString())){
 				mPasswordView.setError(getString(R.string.error_field_required));
 				focusView = mPasswordView;
@@ -165,14 +171,15 @@ public class CreateUserActivity extends Activity {
 			@Override
 			protected Boolean doInBackground(Void... params) {
 				try {
+					// Attempt to sign up user through parse
 					ParseUser user = new ParseUser();
 					user.setUsername(mPhoneView.getText().toString());
 					user.setPassword(mPasswordView.getText().toString());
 					user.signUp();
 					CreateUserActivity.createUserSuccess = true;
 				} catch (ParseException e) {
-					Log.d("PARSE","Signup FAILED");
-					Log.d("PARSE", "ERROR CODE: " + String.valueOf(e.getCode()));
+					// Could not create user
+					CreateUserActivity.createUserSuccess = false;
 					CreateUserActivity.createUserErrorCode = e.getCode();
 				}
 				return CreateUserActivity.createUserSuccess;
@@ -182,21 +189,27 @@ public class CreateUserActivity extends Activity {
 			protected void onPostExecute(final Boolean success) {
 				mAuthTask = null;
 				showProgress(false);
+				// If signup succeded.
 				if (success) {
 					finish();
 					Context context = getApplicationContext();
 					Intent i = new Intent(context, MainActivity.class);
 			        startActivity(i); 
 					int duration = Toast.LENGTH_LONG;
+					//Notify user 
 					Toast toast = Toast.makeText(context, "Successfully signed up!", duration);
 					toast.show();
+				// If signup failed.
 				} else {
+					// Notify user accordingly.
 					switch (CreateUserActivity.createUserErrorCode) {
 					case ParseException.USERNAME_TAKEN:
 						mPhoneView.setError("An account with this phone number already exists!");
 						mPhoneView.requestFocus();
 						break;
 					default:
+						mPhoneView.setError("There was an error encountered while contacting the server, please try again.");
+						mPhoneView.requestFocus();
 						break;
 					}
 				}
