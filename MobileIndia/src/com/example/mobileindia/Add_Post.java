@@ -95,7 +95,6 @@ public class Add_Post extends Activity {
         
 	    post.saveEventually();
 	    
-	    
         Intent back = new Intent(this,ListViewCategory.class);
         startActivity(back);
        

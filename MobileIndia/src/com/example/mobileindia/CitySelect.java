@@ -66,8 +66,8 @@ public class CitySelect extends Activity implements OnClickListener {
 		
 	 }
 	
+	//Launch LocateMe, Pass location
 	public void LocateMe(View v) {
-		// TODO Auto-generated method stub
 		Intent i = new Intent(this, LocateMeActivity.class);
 		
 		String cityName = "";

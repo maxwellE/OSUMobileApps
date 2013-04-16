@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 
-
+//this class fills the activity_single_post xml
 public class Single_Post extends ListActivity {
 
 	private static final ParseObject ParseObject = null;
@@ -36,28 +36,27 @@ public class Single_Post extends ListActivity {
     CommentAdapter adapter0;
   
     int clickCounter=0;
-    
     private RatingBar ratebar;
     private TextView avgRating ;
 
     @SuppressLint("NewApi")
 	@Override
+	//choose correct popluate list......
     public void onCreate(Bundle savedInstanceState) {
     	Log.v("Single Post", "made it");
     	try {
 			populate_list();
 		} catch (ParseException e) {
-			/// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
         super.onCreate(savedInstanceState);      
         setContentView(R.layout.activity_single__post);
-        Log.v("Single Post", "view set");
+        //grab correct post
         ParseQuery get = new ParseQuery("Post");
     	get.whereEqualTo("objectId", NUM);
 		get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
-    	
+    	//get the object
     	List<ParseObject> objects = null;
 		try {
 			objects = get.find();
@@ -65,8 +64,7 @@ public class Single_Post extends ListActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-    	Log.v("Single Post", "got all parse objects");
+		//fill all fields
     	ParseObject parseObject = objects.get(0);
         TextView title = (TextView) findViewById(R.id.singlePost_Title);
         TextView summary = (TextView) findViewById(R.id.singlePost_Summary);
@@ -83,8 +81,8 @@ public class Single_Post extends ListActivity {
     	if(longitude == 0 || latitude == 0){
     		findViewById(R.id.button5).setVisibility(8);
     	}
-		
-		
+
+		// creates adapter to fill comment
        adapter0 = new CommentAdapter(this, R.layout.comment, listItems);
        setListAdapter(adapter0);
        
@@ -95,9 +93,11 @@ public class Single_Post extends ListActivity {
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
         
+        //Setup rating bar
         ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
         ratebar.setRating((float) 0);
         
+        //Set average rating
         try {
 			setRating();
 		} catch (ParseException e) {
@@ -105,29 +105,29 @@ public class Single_Post extends ListActivity {
 			e.printStackTrace();
 		}
         
+        //Add listner to ratebar
         addRatebarListner();
         
     }
     
-    //Sets the Avg rating textview
+    //Sets the Avg rating into a textview
    private void setRating() throws ParseException {
-		
-//	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
+
 	   avgRating = (TextView) findViewById(R.id.txtAvgRating);
 	   float temp = 0;
 	   temp = getRating();
 	   avgRating.setText(Float.toString(temp) + " Avg Rating");
 	   //TODO
 	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
-	   
+
 	   ratebar.setRating(temp);
 	}
    
    //Listner for rating bar
    private void addRatebarListner() {
-	    
+
 	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
-		
+
 	   ratebar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 			public void onRatingChanged(RatingBar ratingBar, float rating,
 					boolean fromUser) {
@@ -136,22 +136,21 @@ public class Single_Post extends ListActivity {
 			});
 	}
    
-   //When new rating is made
+   //When new rating is made this is fired
    public void setNewRating(float r){
-	   
+
 	   ratebar = (RatingBar) findViewById(R.id.rbSinglePost);
 	   ratebar.setRating(r);
-	   
-	   Log.d("BTest","New rating of " + r + " starts");
-	   
+
+	   Log.v("Log","New rating of " + r + " starts");
+
+	   //Sends the rating to the DB
+	   //If user already rated the update else add new rating
 	   ParseUser user = ParseUser.getCurrentUser();
-	   
 	   String userid = user.getObjectId();
-	   
 	   ParseQuery pqRating = new ParseQuery("Rating");
-	   
 	   pqRating.whereEqualTo("PostNum", NUM);
-	   
+
 	   List<ParseObject> objects = null;
 	   try {
 		   objects = pqRating.find();
@@ -159,19 +158,17 @@ public class Single_Post extends ListActivity {
 		   // TODO Auto-generated catch block
 		   e.printStackTrace();
 	   }
-		
-	   Log.v("Single Post", "got all parse objects");
-	   
+
 	   ParseObject rateObj = ParseObject;
-	   
+
 	   for (ParseObject parseObject : objects) {
 		   String temp = parseObject.getString("UserId");
-		   
+
 		   if (temp.equals(userid.toString())){
 			   rateObj = parseObject;
 		   }
 		}
-	   
+
 	   if (rateObj != null){
 		   rateObj.put("Rating", (Number) r);
 		   rateObj.saveInBackground();
@@ -183,10 +180,11 @@ public class Single_Post extends ListActivity {
 		   newPORating.put("UserId", userid);
 		   newPORating.saveInBackground();
 	   }
-	   //JEFF
+	  
+	   
 	   Intent LocationShare = new Intent(this, Single_Post.class);
        startActivity(LocationShare);
-	   
+
    }
 
    //Send a sms about the the post viewed
@@ -212,7 +210,7 @@ public class Single_Post extends ListActivity {
    //Share the locating of the post
    public void shareLocation(View view) {
 	   if(longitude == 0 || latitude == 0){
-		   
+
 	   }else{
 		// TODO Auto-generated method stub
 	   // TextView location = (TextView) findViewById(R.id.button5);
@@ -229,40 +227,40 @@ public class Single_Post extends ListActivity {
    
    //Gets the Avg Rating for a single post
    public static float getRating() throws ParseException{
-	   
+
 	   ParseQuery get = new ParseQuery("Rating");
 	   get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 	   get.whereEqualTo("PostNum", NUM);
-	   
+
 	   List<ParseObject> obj = get.find();
-	   
+
 	   float totalRatings = obj.size();
 	   float Ratings = 0;
-	   
+
 	   if(totalRatings > 0){
 		   for (ParseObject parseObject : obj) {
 			   Number temp = parseObject.getNumber("Rating");
 			   Ratings += temp.floatValue();
 		   }
-	   
+
 		   Ratings /= totalRatings;
 	   }
-	   
-	   Log.d("Log", "Calc rating for list "+ NUM);
-	   
+
+	   Log.v("Log", "Calc rating for list "+ NUM);
+
 	   return Ratings;
    }
     
    //Build the post from the DB
    public static void  populate_list() throws ParseException{
-	   
+
     	ParseQuery get = new ParseQuery("Comment");
     	get.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
     	get.whereEqualTo("postNum", NUM);
 
 		List<ParseObject> objects = get.find();
 		listItems.clear();
-		
+
 		for (ParseObject parseObject : objects) {
 			ArrayList<String> temp = new ArrayList<String>();
 			temp.add(parseObject.getString("date"));
@@ -270,10 +268,10 @@ public class Single_Post extends ListActivity {
 			temp.add(parseObject.getString("author"));
 			temp.add(parseObject.getObjectId());
 			listItems.add(temp);
-			
+
 		}
 
-		Log.d("Log", "List build for post " + NUM);
+		Log.v("Log", "List build for post " + NUM);
     }
 
     //METHOD WHICH WILL HANDLE DYNAMIC INSERTION
@@ -297,7 +295,7 @@ public class Single_Post extends ListActivity {
         startActivity(back);
         return super.onOptionsItemSelected(item);
     }
-
+    //hide back button
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
@@ -315,19 +313,20 @@ public class Single_Post extends ListActivity {
 		Log.v("LIST", "PAUSED LIST APPCLASS");
 
 	}
-	
+
 	@Override
 	public void onResume(){
 		Log.v("List", "RESUMED List APPCLASS");
 		super.onResume();
 	}
-	
+
 	@Override
 	public void onStop(){
 		super.onStop();
 		Log.v("LIST", "Stopped LIST APPCLASS");
 	}
-	
+
+	// delete comment 
 	public void DeleteComment(View v){
 		Button title = (Button) v.findViewById(R.id.button1);
 	 	String id =  (String) title.getHint();
@@ -342,12 +341,15 @@ public class Single_Post extends ListActivity {
 				e.printStackTrace();
 			}
 	    	ParseObject parseObject = objects.get(0);
-			parseObject.deleteEventually();		
+			try {
+				parseObject.delete();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 	 		Intent intent = new Intent(this, Single_Post.class);
 			startActivity(intent);
 	 	}
 	}
-	
+
 }
-
-
