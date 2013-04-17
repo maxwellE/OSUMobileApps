@@ -184,19 +184,16 @@ public class MainActivity extends Activity {
 		Intent i = new Intent(this,SearchPostActivity.class);
 		startActivity(i);
 	 }
-<<<<<<< HEAD
 	 
 	 public void exitApp(View view){
 		 finish();
 	 }
-	 
-=======
+
 	 /*
 	  * Do not allow back button on home menu.
 	  * (non-Javadoc)
 	  * @see android.app.Activity#onBackPressed()
 	  */
->>>>>>> 2faae71da3ee59af09f23b5e86873bc8729dc492
 	 @Override
 	 public void onBackPressed() {
 	 }
