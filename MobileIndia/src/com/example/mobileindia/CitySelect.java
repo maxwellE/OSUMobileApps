@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 
@@ -68,7 +69,6 @@ public class CitySelect extends Activity implements OnClickListener {
 	
 	public void LocateMe(View v) {
 		// TODO Auto-generated method stub
-		Intent i = new Intent(this, LocateMeActivity.class);
 		
 		String cityName = "";
 		try{
@@ -80,20 +80,20 @@ public class CitySelect extends Activity implements OnClickListener {
 		ListViewCategory.CITY = cityName;
 		
 		cityLocal(v);
-		
+		Log.v("Location longitude 0:", latitude + "App Class");
+		Log.v("Location longitude 0:", longitude + "App Class");
 		if(longitude == 0 || latitude == 0){
-			   
-		   }else{
-			// TODO Auto-generated method stub
-			 
+			Toast.makeText(getBaseContext(),"Cannot locate the city. ", Toast.LENGTH_LONG).show();   
+		   }else{			 
 			String locationstr = v.getTag().toString();
 			LocateMeActivity.LocationNow =locationstr;
 			LocateMeActivity.post_long = longitude;
 			LocateMeActivity.post_lat = latitude;
 			LocateMeActivity.post_location = true;
-			
+			Toast.makeText(getBaseContext(), cityName, Toast.LENGTH_LONG).show();
+			Intent i = new Intent(this, LocateMeActivity.class);
+			startActivity(i);
 		   }
-		startActivity(i);
 	}
 
 	@Override
@@ -107,35 +107,35 @@ public class CitySelect extends Activity implements OnClickListener {
 		String cityName = v.getTag().toString();
 		
 		if (cityName.equals("Delhi")){
-			longitude = 29.0167;
-			latitude = 77.3833;
+			latitude  = 28.635308;
+			longitude    = 77.224960;
 		}else if(cityName.equals("Mumbai")){
-			longitude = 18.9647;
-			latitude = 72.8258;
+			 latitude = 18.9647;
+			 longitude = 72.8258;
 		}else if(cityName.equals("Kolkata")){
-			longitude = 22.5697;
-			latitude = 88.3697;
+			 latitude = 22.5697;
+			 longitude = 88.3697;
 		}else if(cityName.equals("Chennai")){
-			longitude = 13.0810;
-			latitude = 80.2740;
+			 latitude = 13.0810;
+			 longitude = 80.2740;
 		}else if(cityName.equals("Banglore")){
-			longitude = 12.9833;
-			latitude = 77.5833;
+			 latitude = 12.9833;
+			 longitude = 77.5833;
 		}else if(cityName.equals("Pune")){
-			longitude = 18.5236;
-			latitude = 73.8478;
+			latitude = 18.5236;
+			longitude = 73.8478;
 		}else if(cityName.equals("Nagpur")){
-			longitude = 21.1438;
-			latitude = 79.0926;
+			latitude = 21.1438;
+			longitude = 79.0926;
 		}else if(cityName.equals("Indore")){
-			longitude = 22.7287;
-			latitude = 75.8654;
+			 latitude = 22.7287;
+			 longitude = 75.8654;
 		}else if(cityName.equals("Jaipur")){
-			longitude = 26.9200;
-			latitude = 75.8200;
+			 latitude = 26.9200;
+			 longitude= 75.8200;
 		}else if(cityName.equals("Kanpur")){
-			longitude = 26.4583;
-			latitude = 80.3173;
+			 latitude= 26.4583;
+			 longitude = 80.3173;
 		}
 		else{
 			longitude = 0;

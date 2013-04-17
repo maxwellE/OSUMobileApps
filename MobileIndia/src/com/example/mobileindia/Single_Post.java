@@ -215,9 +215,9 @@ public class Single_Post extends ListActivity {
 		   
 	   }else{
 		// TODO Auto-generated method stub
-	   // TextView location = (TextView) findViewById(R.id.button5);
-		//String locationstr = location.getText().toString();
-		//LocateMeActivity.LocationNow =locationstr;
+	    TextView location = (TextView) findViewById(R.id.button5);
+		String locationstr = location.getText().toString();
+		LocateMeActivity.LocationNow =locationstr;
 		LocateMeActivity.post_long = longitude;
 		LocateMeActivity.post_lat = latitude;
 		LocateMeActivity.post_location = true;

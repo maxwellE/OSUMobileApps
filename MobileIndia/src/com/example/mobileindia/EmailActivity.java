@@ -32,16 +32,17 @@ public class EmailActivity extends Activity {
 		});
 	}
 
+	// method executed to share a post by Email 
+	//uses the inbuilt Email service of the phone after it is setup with the user email id. 
 	protected void sendEmail(String message) {
-		// TODO Auto-generated method stub
 		EditText toId = (EditText)findViewById(R.id.EmailTo);
 		String Emailto = toId.getText().toString();
-		String[] to = new String[]{Emailto};
+		String[] to = new String[]{Emailto}; 
 		String subject = ("Mail from your app!") ;
 		Intent emailIntent = new Intent(Intent.ACTION_SEND);
 		emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
 		emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-		message = message + Title;
+		message = " Hey check out this post titled :  " + Title + message; // actual message that will be sent
 		emailIntent.putExtra(Intent.EXTRA_TEXT, message);
 		emailIntent.setType("message/rfc822");
 		startActivity(Intent.createChooser(emailIntent, "Email"));
