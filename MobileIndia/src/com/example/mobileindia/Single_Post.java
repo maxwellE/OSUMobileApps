@@ -36,6 +36,7 @@ public class Single_Post extends ListActivity {
     CommentAdapter adapter0;
   
     int clickCounter=0;
+    // define rating vars
     private RatingBar ratebar;
     private TextView avgRating ;
 
@@ -81,7 +82,6 @@ public class Single_Post extends ListActivity {
     	if(longitude == 0 || latitude == 0){
     		findViewById(R.id.button5).setVisibility(8);
     	}
-
 		// creates adapter to fill comment
        adapter0 = new CommentAdapter(this, R.layout.comment, listItems);
        setListAdapter(adapter0);
@@ -325,7 +325,7 @@ public class Single_Post extends ListActivity {
 		super.onStop();
 		Log.v("LIST", "Stopped LIST APPCLASS");
 	}
-
+	
 	// delete comment 
 	public void DeleteComment(View v){
 		Button title = (Button) v.findViewById(R.id.button1);

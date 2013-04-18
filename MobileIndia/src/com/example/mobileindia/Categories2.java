@@ -70,19 +70,13 @@ public class Categories2 extends Activity {
 			final String NameOfCat = catName[i];
 			Button catButton = new Button(this);
 			catButton.setText(NameOfCat);
-			
 			String passVal = "";
-			
 			Bundle extras = getIntent().getExtras();
 			if (extras != null) {
 			    String extraText = extras.getString("CityName");
-			    
 			    Context context = getApplicationContext();
-			    
-			    passVal = NameOfCat + "|" + extraText;
-			    
+			    passVal = NameOfCat + "|" + extraText;   
 			}
-			
 			catButton.setOnClickListener(new Button.OnClickListener() {
 				
 			    public void onClick(View v) {
@@ -96,10 +90,9 @@ public class Categories2 extends Activity {
 			
 			i++;
 		}
-		
-		
 	}
 	
+	//Goto the listview screen
 	public void gotoPost(View v, String passVal){
 		 ListViewCategory.CATEGORY = passVal;
          Intent i = new Intent(this, ListViewCategory.class);
@@ -113,21 +106,14 @@ public class Categories2 extends Activity {
 		 startActivity(i);
 	}
 	
+	//Set the header
 	public void setHeader(){
 		String headerText = "";
 		
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 		    String extraText = extras.getString("CityName");
-
-		    Context context = getApplicationContext();
-//		    CharSequence text = "Categories For " + extraText;
-		    
 		    headerText = "Categories For " + extraText;
-		    
-//		    int duration = Toast.LENGTH_LONG;
-//		    Toast toast = Toast.makeText(context, text, duration);
-//		    toast.show();
 		    
 		}
 		
@@ -143,6 +129,7 @@ public class Categories2 extends Activity {
 		
 	}
 	
+	//Name of buttons
 	public String[] getCats(){
 		String[] cats;
 		cats = new String[10];
@@ -156,8 +143,7 @@ public class Categories2 extends Activity {
 		cats[6] = "Want To Buy";
 		cats[7] = "Help Wanted";
 		cats[8] = "Other";
-		cats[9] = "";
-		
+		cats[9] = "Random";
 		
 		return cats;
 		

@@ -31,8 +31,6 @@ import com.parse.ParseUser;
 public class LoginActivity extends Activity {
 	private static boolean loginSuccess = false;
 	private static int loginErrorCode;
-	// USERNAME IS PHONE NUMBER
-    // CREDENTIALS: username: '1111111', password: 'my pass'
 	/**
 	 * The default email to populate the email field with.
 	 */
@@ -127,12 +125,12 @@ public class LoginActivity extends Activity {
 			cancel = true;
 		}
 
-		// Check for a valid email address.
+		// Check for a valid phone number.
 		if (TextUtils.isEmpty(mUsername)) {
 			mUsernameView.setError(getString(R.string.error_field_required));
 			focusView = mUsernameView;
 			cancel = true;
-		}else if(!PhoneNumberUtils.isGlobalPhoneNumber(mUsername)){
+		}else if(!PhoneNumberUtils.isGlobalPhoneNumber(mUsername) || !mUsername.matches("^[0-9]{10,12}$")){
 			mUsernameView.setError("Not a valid phone number!");
 			focusView = mUsernameView;
 			cancel = true;
@@ -202,9 +200,12 @@ public class LoginActivity extends Activity {
 		protected Boolean doInBackground(Void... params) {
 			LoginActivity.loginSuccess = false;
 			try {
+				// Attempt parse login
 				ParseUser.logIn(mUsername, mPassword);
+				// Login success
 				LoginActivity.loginSuccess = true;
 			} catch (ParseException e) {
+				// Parse login failed
 				Log.d("PARSE","Signup FAILED");
 				Log.d("PARSE", "ERROR CODE: " + String.valueOf(e.getCode()));
 				LoginActivity.loginErrorCode = e.getCode();
@@ -217,14 +218,17 @@ public class LoginActivity extends Activity {
 			mAuthTask = null;
 			showProgress(false);
 			if (success) {
+				// Parse Login worked
 				finish();
 				Context context = getApplicationContext();
 				Intent i = new Intent(context, MainActivity.class);
 		        startActivity(i); 
 				int duration = Toast.LENGTH_LONG;
+				// Toast to tell user they are logged in
 				Toast toast = Toast.makeText(context, "Successfully logged in!", duration);
 				toast.show();
 			} else {
+				// Login error, invalid arguments.
 				switch (LoginActivity.loginErrorCode) {
 				case ParseException.VALIDATION_ERROR:
 					mPasswordView.setError("Invalid password.");

@@ -22,15 +22,12 @@ public class CitySelect extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_city_select);
-//		addCityButtons();
 
 	}
 	@Override
 	protected void onPostCreate (Bundle savedInstanceState)
 	{
 		super.onPostCreate(savedInstanceState);
-		//TextView labelUser = (TextView) findViewById(R.id.loginUserLabelCity);
-		//labelUser.setText(ParseUser.getCurrentUser().getUsername());
 	}
 
 	@Override
@@ -51,16 +48,17 @@ public class CitySelect extends Activity implements OnClickListener {
         return super.onKeyDown(keyCode, event);
     }
 	
-	//City selected
+	//City click to next screen
 	public void CatAct(View v){
 		Intent i = new Intent(this, Categories2.class);
 		String cityName = "";
+		//Gets name of city from the tag attribute of the button
 		try{
 			cityName = (String) v.getTag();
 		} catch(Exception e){
 			Log.e("catAct", "Error getting city name");
 		}
-		Log.d("BTest","Clicked " + cityName);
+		Log.v("BTest","Clicked " + cityName);
 		ListViewCategory.CITY = cityName;
 		startActivity(i);
 		
@@ -71,6 +69,7 @@ public class CitySelect extends Activity implements OnClickListener {
 		Intent i = new Intent(this, LocateMeActivity.class);
 		
 		String cityName = "";
+		//Gets name of city from the tag attribute of the button
 		try{
 			cityName = (String) v.getTag();
 		} catch(Exception e){
@@ -79,12 +78,13 @@ public class CitySelect extends Activity implements OnClickListener {
 		Log.d("BTest","Clicked Locate" + cityName);
 		ListViewCategory.CITY = cityName;
 		
+		//Get Lat Lon
 		cityLocal(v);
 		
+		//Setup for locate me
 		if(longitude == 0 || latitude == 0){
 			   
 		   }else{
-			// TODO Auto-generated method stub
 			 
 			String locationstr = v.getTag().toString();
 			LocateMeActivity.LocationNow =locationstr;
@@ -102,10 +102,10 @@ public class CitySelect extends Activity implements OnClickListener {
 		startActivity(intent);				
 	}
 	
-	//Cords for city
+	//Lat lon for city
 	public void cityLocal(View v){
 		String cityName = v.getTag().toString();
-		
+		Log.d("BTest", cityName);
 		if (cityName.equals("Delhi")){
 			longitude = 29.0167;
 			latitude = 77.3833;
@@ -141,6 +141,7 @@ public class CitySelect extends Activity implements OnClickListener {
 			longitude = 0;
 			latitude = 0;
 		}
+		Log.d("BTest", longitude + " " + latitude);
 	}
 
 }

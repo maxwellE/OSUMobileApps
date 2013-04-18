@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+//This class dynamically fills the fields in comment.xml
 public class CommentAdapter extends ArrayAdapter<ArrayList<String>> {
 
 	// declaring our ArrayList of items
@@ -76,6 +77,7 @@ public class CommentAdapter extends ArrayAdapter<ArrayList<String>> {
 			if (author != null){
 				author.setText(i.get(2));
 			}
+			// needed to set the button hint because the view becomes unreachable
 			if (b != null){
 				b.setHint(i.get(3));
 			}
@@ -90,6 +92,7 @@ public class CommentAdapter extends ArrayAdapter<ArrayList<String>> {
 			}
 			v.setBackgroundColor(temp);
 			
+			// hide delete button if not super user
 			if(ParseUser.getCurrentUser() != null){
 	 			ParseObject obj = ParseUser.getCurrentUser();
 	 			
