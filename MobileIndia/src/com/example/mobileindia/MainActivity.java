@@ -184,6 +184,11 @@ public class MainActivity extends Activity {
 		Intent i = new Intent(this,SearchPostActivity.class);
 		startActivity(i);
 	 }
+	 
+	 public void exitApp(View view){
+		 finish();
+	 }
+
 	 /*
 	  * Do not allow back button on home menu.
 	  * (non-Javadoc)

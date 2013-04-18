@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LocateMeActivity extends MapActivity implements OnClickListener{
 
@@ -43,6 +44,8 @@ public class LocateMeActivity extends MapActivity implements OnClickListener{
 		View buttonLocateMe = findViewById(R.id.button_locate_me);
 		buttonLocateMe.setOnClickListener(this);
 		
+		myLocationField.setText(LocationNow);
+		
 		locationEditableField= (EditText)findViewById(R.id.location);
 		View buttonLocate = findViewById(R.id.button_locate);
 		buttonLocate.setOnClickListener(this);
@@ -51,7 +54,7 @@ public class LocateMeActivity extends MapActivity implements OnClickListener{
 		
 		if(post_location){
 			post_location = false;
-			Log.d(this.getClass().getName(), "back button pressed   " + post_long);
+			Log.d(this.getClass().getName(), "back button pressed   " + post_long + "Äpp Class");
 			GeoPoint point = new GeoPoint((int) (post_lat * 1E6) , (int) (post_long * 1E6));
 			
 			MyLocationOverlay locationOverlay = new MyLocationOverlay(this, whereamiView);
@@ -78,16 +81,24 @@ public class LocateMeActivity extends MapActivity implements OnClickListener{
 	case R.id.button_locate_me:
 			
 		Location myLocation=null;
-		myLocation = myGeoLocator.getBestCurrentLocation();
+		myLocation = myGeoLocator.getBestCurrentLocation();   // gets d latest searched location by user 
 		if(myLocation == null){
 		myLocationField.setText(" Current Location not available.");
 		}else{
-			
-			myLocationField.setText(LocationNow);
+			Toast.makeText(getBaseContext(), "Current Location", Toast.LENGTH_LONG).show();
+			myLocationField.setText("Current Location");
 			double latitude = myLocation.getLatitude();
 			double longitude = myLocation.getLongitude();
+			String lat = Double.toString(latitude);
+			String lon = Double.toString(longitude);
+			Log.v("Location latitude 1 :", lat);
+			Log.v("Location longitude 1:", lon);
+			Log.v("Location latitude 2 :" + latitude, "");
+			Log.v("Location longitude 2:"+ longitude,"");
+			
 			GeoPoint point = new GeoPoint((int) (latitude * 1E6), (int) (longitude * 1E6));
 			
+			//set a pointer over the current user location 
 			MyLocationOverlay locationOverlay = new MyLocationOverlay(this, whereamiView);
 			whereamiView.getOverlays().add(locationOverlay);
 			locationOverlay.enableMyLocation();
@@ -101,8 +112,18 @@ public class LocateMeActivity extends MapActivity implements OnClickListener{
 	try{
 			String locationName = this.locationEditableField.getText().toString();
 			
+			//finds the location according to the location specified by user
             GeoPoint point = myGeoLocator.getGeoPointFromName(locationName);
+            double lat = point.getLatitudeE6()/1E6;
+			double lon = point.getLongitudeE6()/1E6;
+			
+            Log.v("Location latitude find button:", lat+ "");
+            Log.v("Location longitude find button :", lon+ "");
+            //Log.v("Location latitude :" + latitude, "");
+			//Log.v("Location longitude :"+ longitude,"");
             
+            Toast.makeText(getBaseContext(), locationName, Toast.LENGTH_LONG).show();
+            //set a pointer over the specified user location
             MyLocationOverlay locationOverlay = new MyLocationOverlay(this, whereamiView);
 			whereamiView.getOverlays().add(locationOverlay);
 			locationOverlay.enableMyLocation();
@@ -122,6 +143,4 @@ public class LocateMeActivity extends MapActivity implements OnClickListener{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-
 }
