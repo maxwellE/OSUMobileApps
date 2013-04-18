@@ -67,12 +67,7 @@ public class CitySelect extends Activity implements OnClickListener {
 	
 	//Launch LocateMe, Pass location
 	public void LocateMe(View v) {
-<<<<<<< HEAD
-		// TODO Auto-generated method stub
-=======
-		Intent i = new Intent(this, LocateMeActivity.class);
->>>>>>> 862f4e196c871388944742405e1c78f1c55125c3
-		
+		// TODO Auto-generated method stub		
 		String cityName = "";
 		//Gets name of city from the tag attribute of the button
 		try{
@@ -85,28 +80,23 @@ public class CitySelect extends Activity implements OnClickListener {
 		
 		//Get Lat Lon
 		cityLocal(v);
-<<<<<<< HEAD
+
 		Log.v("Location longitude 0:", latitude + "App Class");
 		Log.v("Location longitude 0:", longitude + "App Class");
-		if(longitude == 0 || latitude == 0){
-			Toast.makeText(getBaseContext(),"Cannot locate the city. ", Toast.LENGTH_LONG).show();   
-		   }else{			 
-=======
-		
+	
 		//Setup for locate me
 		if(longitude == 0 || latitude == 0){
-			   
+			Toast.makeText(getBaseContext(),"Cannot locate the city. ", Toast.LENGTH_LONG).show();			   
 		   }else{
 			 
->>>>>>> 862f4e196c871388944742405e1c78f1c55125c3
 			String locationstr = v.getTag().toString();
 			LocateMeActivity.LocationNow =locationstr;
 			LocateMeActivity.post_long = longitude;
 			LocateMeActivity.post_lat = latitude;
 			LocateMeActivity.post_location = true;
 			Toast.makeText(getBaseContext(), cityName, Toast.LENGTH_LONG).show();
-			Intent i = new Intent(this, LocateMeActivity.class);
-			startActivity(i);
+			Intent i1 = new Intent(this, LocateMeActivity.class);
+			startActivity(i1);
 		   }
 	}
 
