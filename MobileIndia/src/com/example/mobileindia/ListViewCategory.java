@@ -72,7 +72,7 @@ public class ListViewCategory extends ListActivity {
  		}
     }
     
-    /// choose between correct list (ask Maxwell)
+    /// choose between correct list filling function. Either for post search or regular post list
    public static void  populate_list(List<ParseObject> parsePostList2) throws ParseException{
 	    if(parsePostList2 == null){
 	    	defaultPopulateList();
@@ -102,7 +102,7 @@ private static void defaultPopulateList() throws ParseException {
 				}
 }
 
-//Maxwell.......
+//Populates List with posts that were searched for
 private static void populateYourPosts(List<ParseObject> parsePostList2) {
 	listItems.clear();
 	for (ParseObject parseObject : parsePostList2) {
@@ -195,7 +195,12 @@ private static void populateYourPosts(List<ParseObject> parsePostList2) {
 				e.printStackTrace();
 			}
 	    	ParseObject parseObject = objects.get(0);
-			parseObject.deleteEventually();		
+			try {
+				parseObject.delete();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
 	 		Intent intent = new Intent(this, ListViewCategory.class);
 			startActivity(intent);
 	 	}
