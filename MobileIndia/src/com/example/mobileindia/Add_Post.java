@@ -74,7 +74,7 @@ public class Add_Post extends Activity {
         
 		// save next time there is Internet
 	    post.saveEventually();
-	    
+	   
 	    //launch list of posts
         Intent back = new Intent(this,ListViewCategory.class);
         startActivity(back);
