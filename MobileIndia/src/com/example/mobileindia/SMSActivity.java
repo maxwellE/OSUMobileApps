@@ -36,7 +36,8 @@ public class SMSActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				
+				 // actual message that will be sent
 				String myMsg = " Hey check out this post titled :" + "   "+ Title +"  "+ msg.getText().toString();
 				String myNo = pnumber.getText().toString();
 				
@@ -45,6 +46,7 @@ public class SMSActivity extends Activity {
 		});
 	}
 
+	// method executed to share a post by SMS
 	protected void sendMsg(String myNo, String myMsg) {
 	
 		String SENT = "Message sent";
@@ -53,6 +55,7 @@ public class SMSActivity extends Activity {
 		PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, new Intent(SENT), 0);
 		PendingIntent deliPI = PendingIntent.getBroadcast(this, 0, new Intent(DELIVERED), 0);
 		
+		//sends a Broadcast of message through Intent for Message sending
 		registerReceiver(new BroadcastReceiver() {
 			
 			@Override
@@ -74,7 +77,8 @@ public class SMSActivity extends Activity {
 			}
 		},new IntentFilter(SENT));
 		
-registerReceiver(new BroadcastReceiver() {
+		//sends a Broadcast of message through Intent for Message delivering
+		registerReceiver(new BroadcastReceiver() {
 			
 			@Override
 			public void onReceive(Context context, Intent intent) {
@@ -93,11 +97,8 @@ registerReceiver(new BroadcastReceiver() {
 			}
 		},new IntentFilter(DELIVERED));
 		
-		
-	//	Toast.makeText(getBaseContext(), "Hello",Toast.LENGTH_LONG).show();
 		SmsManager sms = SmsManager.getDefault();
-		sms.sendTextMessage(myNo, null, myMsg, sentPI, deliPI);
-	///	Toast.makeText(getBaseContext(), "Generic Failure",Toast.LENGTH_LONG).show();
+		sms.sendTextMessage(myNo, null, myMsg, sentPI, deliPI); //uses the SMSManager method to send the SMS to the specified cell number
 	}
 	
 	@Override
@@ -111,5 +112,4 @@ registerReceiver(new BroadcastReceiver() {
 	{
 		super.onResume();
 	}
-
 }
